@@ -69,13 +69,14 @@ namespace KSP_Setup
 
                     //다운로드 디렉토리를 삭제한다.
                     Directory.Delete(CkanDownloadDir, true);
-
-                    //웹 브라우저 객체의 리소스를 해제한다.
-                    web.Dispose();
                 }
                 catch (Exception e)
                 {
                     WriteLine("오류: " + e.Message);
+                }
+                finally
+                {
+                    //웹 브라우저 객체의 리소스를 해제한다.
                     web.Dispose();
                 }
             };
@@ -176,18 +177,20 @@ namespace KSP_Setup
                     //한글패치 적용을 완료했다고 알린다.
                     WriteLine("Breaking Ground DLC 한글패치 완료.");
                 }
-
-                //다운로드 디렉토리를 삭제한다.
-                Directory.Delete(KoreanDownloadDir, true);
             }
             catch (Exception e)
             {
                 WriteLine("오류: " + e.Message);
                 return 2;
             }
+            finally
+            {
+                //다운로드 디렉토리를 삭제한다.
+                Directory.Delete(KoreanDownloadDir, true);
 
-            //칸 띄우기
-            WriteLine("");
+                //칸 띄우기
+                WriteLine("");
+            }
 
             return 0;
         }
