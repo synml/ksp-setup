@@ -61,7 +61,9 @@ namespace KSP_Setup
 
                     //파일을 KSP 디렉토리로 이동한다. (이미 파일이 존재하면 덮어씌운다.)
                     if (File.Exists(KspDirectory + "/ckan.exe"))
+                    {
                         File.Delete(KspDirectory + "/ckan.exe");
+                    }
                     File.Move(CkanDownloadDir + "ckan.exe", KspDirectory + "/ckan.exe");
 
                     //CKAN 설치를 완료했다고 알린다.
@@ -229,7 +231,9 @@ namespace KSP_Setup
             //한글패치 적용을 시작한다.
             retval = KoreanPatch();
             if (retval != 0)
+            {
                 WriteLine("한글패치의 전체 또는 일부를 실패했습니다.");
+            }
 
             //CKAN 설치에 체크했으면 CKAN을 설치한다.
             if (chkbox_ckan.IsChecked == true)
