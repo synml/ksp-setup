@@ -1,5 +1,7 @@
 # KSP-Setup
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c9046a1de9294e898124eef55e3d0dfe)](https://app.codacy.com/app/Lulin-Pollux/KSP-Setup?utm_source=github.com&utm_medium=referral&utm_content=LulinPollux/KSP-Setup&utm_campaign=Badge_Grade_Dashboard)
+
 > ksp의 초기 설정을 빠르게 해주는 프로그램입니다.
 
 제목만으로도 어떤 기술을 사용하여 무슨(What) 프로젝트를 만들었는지 상대방이 이해할 수 있게 직관적으로 작성한다. 리포지토리 페이지에는 프로젝트 소개 웹 사이트, 태그를 추가한다.
