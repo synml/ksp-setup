@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.ComponentModel;
+using System.IO;
 using System.Net;
 using System.Windows;
 using System.Windows.Forms;
@@ -27,7 +28,7 @@ namespace KSP_Setup
 
         private void WriteLine(string str)
         {
-            txtbox_log.AppendText(str);
+            txtbox_log.AppendText(str + "\n");
             txtbox_log.ScrollToEnd();
         }
 
@@ -155,7 +156,7 @@ namespace KSP_Setup
             OpenFileDialog openFileDlg = new OpenFileDialog
             {
                 Multiselect = false,
-                Filter = "모든 파일(*.*)|*.*",
+                Filter = "KSP_x64.exe|KSP_x64.exe",
                 Title = "KSP_x64.exe를 선택해주세요."
             };
             DialogResult result = openFileDlg.ShowDialog();
