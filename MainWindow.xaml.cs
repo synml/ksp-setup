@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Net;
 using System.Windows;
 using System.Windows.Forms;
@@ -94,6 +93,7 @@ namespace KSP_Setup
             //다운로드 디렉토리를 만든다.
             Directory.CreateDirectory(KoreanDownloadDir);
 
+            //체크박스 체크 유무에 따라 설치를 진행한다.
             if (chkbox_vanilla.IsChecked == true)
             {
                 //한글패치 파일을 다운로드한다.
