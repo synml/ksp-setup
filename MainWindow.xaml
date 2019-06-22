@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KSP_Setup"
         mc:Ignorable="d"
-        Title="KSP 설정" Height="300" Width="500">
+        Title="KSP 설정" Height="300" Width="500" ResizeMode="NoResize">
     <Grid>
         <Label Content="KSP 디렉터리: " HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" VerticalAlignment="Top" Width="89"/>
         <TextBox x:Name="txtbox_kspDir" HorizontalAlignment="Left" Height="30" Margin="104,10,0,0" TextWrapping="Wrap" Text="KSP_x64.exe가 있는 디렉터리를 입력하세요." VerticalAlignment="Top" Width="300" IsReadOnly="True"/>
@@ -14,11 +14,11 @@
         <CheckBox x:Name="chkbox_vanilla" Content="바닐라" HorizontalAlignment="Left" Height="20" Margin="104,51,0,0" VerticalAlignment="Top" Width="66" RenderTransformOrigin="0.139,1.11" IsChecked="True"/>
         <CheckBox x:Name="chkbox_dlc1" Content="Making History DLC" HorizontalAlignment="Left" Height="20" Margin="175,51,0,0" VerticalAlignment="Top" Width="135" RenderTransformOrigin="0.139,1.11" IsChecked="True"/>
         <CheckBox x:Name="chkbox_dlc2" Content="Breaking Ground DLC" HorizontalAlignment="Left" Height="20" Margin="315,51,0,0" VerticalAlignment="Top" Width="140" RenderTransformOrigin="0.139,1.11" IsChecked="True"/>
-        <Button x:Name="btn_Setup" Content="설정 시작" Margin="327,232,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77" Click="Btn_Setup_Click"/>
+        <Button x:Name="btn_Setup" Content="설정 시작" Margin="327,232,0,0" Click="Btn_Setup_Click" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
         <Button x:Name="btn_Exit" Content="종료" Margin="409,232,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="75" Click="Btn_Exit_Click"/>
         <Label Content="옵션: " HorizontalAlignment="Left" Height="30" Margin="10,74,0,0" VerticalAlignment="Top" Width="69"/>
         <CheckBox x:Name="chkbox_ckan" Content="CKAN 설치" HorizontalAlignment="Left" Height="20" Margin="104,80,0,0" VerticalAlignment="Top" Width="89" IsChecked="True"/>
-        <RichTextBox x:Name="txtbox_log" HorizontalAlignment="Left" Height="123" Margin="10,104,0,0" VerticalAlignment="Top" Width="474" IsReadOnly="True">
+        <RichTextBox x:Name="txtbox_log" HorizontalAlignment="Left" Height="123" Margin="10,104,0,0" VerticalAlignment="Top" Width="474" IsReadOnly="True" VerticalScrollBarVisibility="Auto">
             <FlowDocument/>
         </RichTextBox>
     </Grid>

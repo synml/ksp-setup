@@ -25,6 +25,12 @@ namespace KSP_Setup
             InitializeComponent();
         }
 
+        private void WriteLine(string str)
+        {
+            txtbox_log.AppendText(str);
+            txtbox_log.ScrollToEnd();
+        }
+
         //CKAN을 설치하는 메소드
         private void CkanInstall()
         {
@@ -41,14 +47,14 @@ namespace KSP_Setup
                 string url = web.Url.ToString();
                 string latestVersion = url.Substring(url.LastIndexOf('/') + 1);
                 string ckanUrl = "https://github.com/KSP-CKAN/CKAN/releases/download/" + latestVersion + "/ckan.exe";
-                txtbox_log.AppendText("CKAN 다운로드 URL: " + ckanUrl);
+                WriteLine("CKAN 다운로드 URL: " + ckanUrl);
 
                 //파일을 다운로드한다.
                 using (WebClient webClient = new WebClient())
                 {
                     webClient.DownloadFile(ckanUrl, CkanDownloadDir + "ckan.exe");
                 }
-                txtbox_log.AppendText("CKAN 다운로드 완료.");
+                WriteLine("CKAN 다운로드 완료.");
 
                 //파일을 KSP 디렉토리로 이동한다. (이미 파일이 존재하면 덮어씌운다.)
                 if (File.Exists(KspDirectory + "/ckan.exe"))
@@ -56,7 +62,7 @@ namespace KSP_Setup
                 File.Move(CkanDownloadDir + "ckan.exe", KspDirectory + "/ckan.exe");
 
                 //CKAN 설치를 완료했다고 알린다.
-                txtbox_log.AppendText("CKAN 설치 완료.");
+                WriteLine("CKAN 설치 완료.");
 
                 //다운로드 디렉토리를 삭제한다.
                 Directory.Delete(CkanDownloadDir, true);
@@ -83,7 +89,7 @@ namespace KSP_Setup
                         webClient.DownloadFile("http://cfile224.uf.daum.net/attach/998AF4355D028BC6012A69", KoreanDownloadDir + fileName);
                         break;
                     default:
-                        txtbox_log.AppendText("잘못된 다운로드 모드 설정입니다.");
+                        WriteLine("잘못된 다운로드 모드 설정입니다.");
                         break;
                 }
             }
@@ -108,7 +114,7 @@ namespace KSP_Setup
                 File.Move(sourceFileName, destFileName);
 
                 //한글패치 적용을 완료했다고 알린다.
-                txtbox_log.AppendText("바닐라 한글패치 완료.");
+                WriteLine("바닐라 한글패치 완료.");
             }
             if (chkbox_dlc1.IsChecked == true)
             {
@@ -122,7 +128,7 @@ namespace KSP_Setup
                 File.Move(sourceFileName, destFileName);
 
                 //한글패치 적용을 완료했다고 알린다.
-                txtbox_log.AppendText("Making History DLC 한글패치 완료.");
+                WriteLine("Making History DLC 한글패치 완료.");
             }
             if (chkbox_dlc2.IsChecked == true)
             {
@@ -136,7 +142,7 @@ namespace KSP_Setup
                 File.Move(sourceFileName, destFileName);
 
                 //한글패치 적용을 완료했다고 알린다.
-                txtbox_log.AppendText("Breaking Ground DLC 한글패치 완료.");
+                WriteLine("Breaking Ground DLC 한글패치 완료.");
             }
 
             //다운로드 디렉토리를 삭제한다.
