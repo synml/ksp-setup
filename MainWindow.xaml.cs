@@ -1,9 +1,7 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Net;
 using System.Windows;
 using System.Windows.Forms;
-using System.Windows.Threading;
 
 namespace KSP_Setup
 {
@@ -29,11 +27,8 @@ namespace KSP_Setup
 
         private void WriteLine(string str)
         {
-            Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate
-            {
-                txtbox_log.AppendText(str + "\n");
-                txtbox_log.ScrollToEnd();
-            }));
+            txtbox_log.AppendText(str + "\n");
+            txtbox_log.ScrollToEnd();
         }
 
         //CKAN을 설치하는 메소드
@@ -152,6 +147,9 @@ namespace KSP_Setup
 
             //다운로드 디렉토리를 삭제한다.
             Directory.Delete(KoreanDownloadDir, true);
+
+            //칸 띄우기
+            WriteLine("");
         }
 
         //KSP가 설치된 디렉터리를 탐색하는 버튼을 클릭한 경우의 이벤트 메소드
