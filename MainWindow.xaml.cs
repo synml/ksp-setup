@@ -66,13 +66,27 @@ namespace KSP_Setup
         }
 
         //한글패치 파일을 다운로드하는 메소드
-        private void KoreanFileDownload(string fileName)
+        private void KoreanFileDownload(int downloadMode, string fileName)
         {
             Directory.CreateDirectory(KoreanDownloadDir);
 
             using (WebClient webClient = new WebClient())
             {
-
+                switch (downloadMode)
+                {
+                    case 1:
+                        webClient.DownloadFile("http://cfile239.uf.daum.net/attach/998A94355D028BBA0109E9", KoreanDownloadDir + fileName);
+                        break;
+                    case 2:
+                        webClient.DownloadFile("http://cfile231.uf.daum.net/attach/998AF0355D028BC1011CCB", KoreanDownloadDir + fileName);
+                        break;
+                    case 3:
+                        webClient.DownloadFile("http://cfile224.uf.daum.net/attach/998AF4355D028BC6012A69", KoreanDownloadDir + fileName);
+                        break;
+                    default:
+                        txtbox_log.AppendText("잘못된 다운로드 모드 설정입니다. \n");
+                        break;
+                }
             }
         }
 
@@ -82,7 +96,7 @@ namespace KSP_Setup
             if (chkbox_vanilla.IsChecked == true)
             {
                 //한글패치 파일을 다운로드한다.
-                KoreanFileDownload("바닐라.cfg");
+                KoreanFileDownload(0, "바닐라.cfg");
 
                 //파일을 이동한다.
                 string sourceFileName = KoreanDownloadDir + "바닐라.cfg";
@@ -92,7 +106,7 @@ namespace KSP_Setup
             if (chkbox_dlc1.IsChecked == true)
             {
                 //한글패치 파일을 다운로드한다.
-                KoreanFileDownload("Making_History_DLC.cfg");
+                KoreanFileDownload(1, "Making_History_DLC.cfg");
 
                 //파일을 이동한다.
                 string sourceFileName = KoreanDownloadDir + "Making_History_DLC.cfg";
@@ -102,7 +116,7 @@ namespace KSP_Setup
             if (chkbox_dlc2.IsChecked == true)
             {
                 //한글패치 파일을 다운로드한다.
-                KoreanFileDownload("Breaking_Ground_DLC.cfg");
+                KoreanFileDownload(2, "Breaking_Ground_DLC.cfg");
 
                 //파일을 이동한다.
                 string sourceFileName = KoreanDownloadDir + "Breaking_Ground_DLC.cfg";
