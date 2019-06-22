@@ -226,7 +226,7 @@ namespace KSP_Setup
             //한글패치 적용을 시작한다.
             retval = KoreanPatch();
             if (retval != 0)
-                WriteLine("한글패치를 전체 또는 일부 실패했습니다.");
+                WriteLine("한글패치의 전체 또는 일부를 실패했습니다.");
 
             //CKAN 설치에 체크했으면 CKAN을 설치한다.
             if (chkbox_ckan.IsChecked == true)
