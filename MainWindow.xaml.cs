@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net;
 using System.Windows;
 using System.Windows.Forms;
@@ -25,6 +26,7 @@ namespace KSP_Setup
             InitializeComponent();
         }
 
+        //로그를 기록하는 메소드
         private void WriteLine(string str)
         {
             txtbox_log.AppendText(str + "\n");
@@ -75,83 +77,111 @@ namespace KSP_Setup
         }
 
         //한글패치 파일을 다운로드하는 메소드
-        private void KoreanFileDownload(int downloadMode, string fileName)
+        private int KoreanFileDownload(int downloadMode, string fileName)
         {
-            using (WebClient webClient = new WebClient())
+            try
             {
-                switch (downloadMode)
+                using (WebClient webClient = new WebClient())
                 {
-                    case 0:
-                        webClient.DownloadFile("http://cfile239.uf.daum.net/attach/998A94355D028BBA0109E9", KoreanDownloadDir + fileName);
-                        break;
-                    case 1:
-                        webClient.DownloadFile("http://cfile231.uf.daum.net/attach/998AF0355D028BC1011CCB", KoreanDownloadDir + fileName);
-                        break;
-                    case 2:
-                        webClient.DownloadFile("http://cfile224.uf.daum.net/attach/998AF4355D028BC6012A69", KoreanDownloadDir + fileName);
-                        break;
-                    default:
-                        WriteLine("잘못된 다운로드 모드 설정입니다.");
-                        break;
+                    switch (downloadMode)
+                    {
+                        case 0:
+                            webClient.DownloadFile("http://cfile239.uf.daum.net/attach/998A94355D028BBA0109E9", KoreanDownloadDir + fileName);
+                            break;
+                        case 1:
+                            webClient.DownloadFile("http://cfile231.uf.daum.net/attach/998AF0355D028BC1011CCB", KoreanDownloadDir + fileName);
+                            break;
+                        case 2:
+                            webClient.DownloadFile("http://cfile224.uf.daum.net/attach/998AF4355D028BC6012A69", KoreanDownloadDir + fileName);
+                            break;
+                        default:
+                            WriteLine("잘못된 다운로드 모드 설정입니다.");
+                            return 1;
+                    }
                 }
             }
+            catch (Exception e)
+            {
+                WriteLine("오류: " + e.Message);
+                return 2;
+            }
+
+            return 0;
         }
 
         //한글패치를 적용하는 메소드
-        private void KoreanPatch()
+        private int KoreanPatch()
         {
-            //다운로드 디렉토리를 만든다.
-            Directory.CreateDirectory(KoreanDownloadDir);
+            int retval;
 
-            //체크박스 체크 유무에 따라 설치를 진행한다.
-            if (chkbox_vanilla.IsChecked == true)
+            try
             {
-                //한글패치 파일을 다운로드한다.
-                KoreanFileDownload(0, "바닐라.cfg");
+                //다운로드 디렉토리를 만든다.
+                Directory.CreateDirectory(KoreanDownloadDir);
 
-                //파일을 이동한다.
-                string sourceFileName = KoreanDownloadDir + "바닐라.cfg";
-                string destFileName = KspDirectory + "/GameData/Squad/Localization/dictionary.cfg";
-                File.Delete(destFileName);
-                File.Move(sourceFileName, destFileName);
+                //체크박스 체크 유무에 따라 설치를 진행한다.
+                if (chkbox_vanilla.IsChecked == true)
+                {
+                    //한글패치 파일을 다운로드한다.
+                    retval = KoreanFileDownload(0, "바닐라.cfg");
+                    if (retval != 0)
+                        return 1;
 
-                //한글패치 적용을 완료했다고 알린다.
-                WriteLine("바닐라 한글패치 완료.");
+                    //파일을 이동한다.
+                    string sourceFileName = KoreanDownloadDir + "바닐라.cfg";
+                    string destFileName = KspDirectory + "/GameData/Squad/Localization/dictionary.cfg";
+                    File.Delete(destFileName);
+                    File.Move(sourceFileName, destFileName);
+
+                    //한글패치 적용을 완료했다고 알린다.
+                    WriteLine("바닐라 한글패치 완료.");
+                }
+                if (chkbox_dlc1.IsChecked == true)
+                {
+                    //한글패치 파일을 다운로드한다.
+                    retval = KoreanFileDownload(1, "Making_History_DLC.cfg");
+                    if (retval != 0)
+                        return 1;
+
+                    //파일을 이동한다.
+                    string sourceFileName = KoreanDownloadDir + "Making_History_DLC.cfg";
+                    string destFileName = KspDirectory + "/GameData/SquadExpansion/MakingHistory/Localization/dictionary.cfg";
+                    File.Delete(destFileName);
+                    File.Move(sourceFileName, destFileName);
+
+                    //한글패치 적용을 완료했다고 알린다.
+                    WriteLine("Making History DLC 한글패치 완료.");
+                }
+                if (chkbox_dlc2.IsChecked == true)
+                {
+                    //한글패치 파일을 다운로드한다.
+                    retval = KoreanFileDownload(2, "Breaking_Ground_DLC.cfg");
+                    if (retval != 0)
+                        return 1;
+
+                    //파일을 이동한다.
+                    string sourceFileName = KoreanDownloadDir + "Breaking_Ground_DLC.cfg";
+                    string destFileName = KspDirectory + "/GameData/SquadExpansion/Serenity/Localization/dictionary.cfg";
+                    File.Delete(destFileName);
+                    File.Move(sourceFileName, destFileName);
+
+                    //한글패치 적용을 완료했다고 알린다.
+                    WriteLine("Breaking Ground DLC 한글패치 완료.");
+                }
+
+                //다운로드 디렉토리를 삭제한다.
+                Directory.Delete(KoreanDownloadDir, true);
             }
-            if (chkbox_dlc1.IsChecked == true)
+            catch (Exception e)
             {
-                //한글패치 파일을 다운로드한다.
-                KoreanFileDownload(1, "Making_History_DLC.cfg");
-
-                //파일을 이동한다.
-                string sourceFileName = KoreanDownloadDir + "Making_History_DLC.cfg";
-                string destFileName = KspDirectory + "/GameData/SquadExpansion/MakingHistory/Localization/dictionary.cfg";
-                File.Delete(destFileName);
-                File.Move(sourceFileName, destFileName);
-
-                //한글패치 적용을 완료했다고 알린다.
-                WriteLine("Making History DLC 한글패치 완료.");
+                WriteLine("오류: " + e.Message);
+                return 2;
             }
-            if (chkbox_dlc2.IsChecked == true)
-            {
-                //한글패치 파일을 다운로드한다.
-                KoreanFileDownload(2, "Breaking_Ground_DLC.cfg");
-
-                //파일을 이동한다.
-                string sourceFileName = KoreanDownloadDir + "Breaking_Ground_DLC.cfg";
-                string destFileName = KspDirectory + "/GameData/SquadExpansion/Serenity/Localization/dictionary.cfg";
-                File.Delete(destFileName);
-                File.Move(sourceFileName, destFileName);
-
-                //한글패치 적용을 완료했다고 알린다.
-                WriteLine("Breaking Ground DLC 한글패치 완료.");
-            }
-
-            //다운로드 디렉토리를 삭제한다.
-            Directory.Delete(KoreanDownloadDir, true);
 
             //칸 띄우기
             WriteLine("");
+
+            return 0;
         }
 
         //KSP가 설치된 디렉터리를 탐색하는 버튼을 클릭한 경우의 이벤트 메소드
@@ -176,6 +206,8 @@ namespace KSP_Setup
         //설정 시작 버튼을 클릭한 경우의 이벤트 메소드
         private void Btn_Setup_Click(object sender, RoutedEventArgs e)
         {
+            int retval;
+
             //오류 제어
             if (KspDirectory == null)
             {
@@ -184,7 +216,9 @@ namespace KSP_Setup
             }
 
             //한글패치 적용을 시작한다.
-            KoreanPatch();
+            retval = KoreanPatch();
+            if (retval != 0)
+                WriteLine("한글패치를 전체 또는 일부 실패했습니다.");
 
             //CKAN 설치에 체크했으면 CKAN을 설치한다.
             if (chkbox_ckan.IsChecked == true)
