@@ -29,58 +29,56 @@ namespace KSP_Setup
         //CKAN을 설치하는 메소드
         private void CkanInstall()
         {
-            //다운로드한 파일을 저장할 디렉토리를 만든다.
-            Directory.CreateDirectory(CkanDownloadDir);
+            //웹 브라우저 객체를 생성한다.
+            WebBrowser web = new WebBrowser();
 
-            using (WebBrowser web = new WebBrowser())
+            //이벤트를 등록한다.
+            web.Navigated += delegate
             {
-                //이벤트를 등록한다.
-                web.Navigated += delegate
+                //다운로드 디렉토리를 만든다.
+                Directory.CreateDirectory(CkanDownloadDir);
+
+                //CKAN의 최신버전을 다운로드할 수 있는 URL을 만든다.
+                string url = web.Url.ToString();
+                string latestVersion = url.Substring(url.LastIndexOf('/') + 1);
+                string ckanUrl = "https://github.com/KSP-CKAN/CKAN/releases/download/" + latestVersion + "/ckan.exe";
+                txtbox_log.AppendText("CKAN 다운로드 URL: " + ckanUrl + '\n');
+
+                //파일을 다운로드한다.
+                using (WebClient webClient = new WebClient())
                 {
-                    //CKAN의 최신버전을 다운로드할 수 있는 URL을 만든다.
-                    string url = web.Url.ToString();
-                    string latestVersion = url.Substring(url.LastIndexOf('/') + 1);
-                    string ckanUrl = "https://github.com/KSP-CKAN/CKAN/releases/download/" + latestVersion + "/ckan.exe";
-                    txtbox_log.AppendText("CKAN 다운로드 URL: " + ckanUrl + '\n');
+                    webClient.DownloadFile(ckanUrl, CkanDownloadDir + "ckan.exe");
+                }
+                txtbox_log.AppendText("CKAN 다운로드 완료. \n");
 
-                    //파일을 다운로드한다.
-                    using (WebClient webClient = new WebClient())
-                    {
-                        webClient.DownloadFile(new Uri(ckanUrl), CkanDownloadDir + "ckan.exe");
-                    }
-                    txtbox_log.AppendText("CKAN 다운로드 중... \n");
+                //파일을 KSP 디렉토리로 이동한다.
+                File.Move(CkanDownloadDir + "ckan.exe", KspDirectory + "ckan.exe");
 
-                    //파일을 KSP 디렉토리로 이동한다.
-                    File.Move(CkanDownloadDir + "ckan.exe", KspDirectory + "ckan.exe");
+                //CKAN 설치를 완료했다고 알린다.
+                txtbox_log.AppendText("CKAN 설치 완료. \n");
 
-                    //다운로드 디렉토리를 삭제한다.
-                    Directory.Delete(CkanDownloadDir, true);
+                //다운로드 디렉토리를 삭제한다.
+                Directory.Delete(CkanDownloadDir, true);
+            };
 
-                    //CKAN 설치를 완료했다고 알린다.
-                    txtbox_log.AppendText("CKAN 설치 완료. \n");
-                };
-
-                //CKAN의 최신버전이 릴리즈된 곳으로 이동한다.
-                web.Navigate("https://github.com/KSP-CKAN/CKAN/releases/latest");
-            }
+            //CKAN의 최신버전이 릴리즈된 곳으로 이동한다.
+            web.Navigate("https://github.com/KSP-CKAN/CKAN/releases/latest");
         }
 
         //한글패치 파일을 다운로드하는 메소드
         private void KoreanFileDownload(int downloadMode, string fileName)
         {
-            Directory.CreateDirectory(KoreanDownloadDir);
-
             using (WebClient webClient = new WebClient())
             {
                 switch (downloadMode)
                 {
-                    case 1:
+                    case 0:
                         webClient.DownloadFile("http://cfile239.uf.daum.net/attach/998A94355D028BBA0109E9", KoreanDownloadDir + fileName);
                         break;
-                    case 2:
+                    case 1:
                         webClient.DownloadFile("http://cfile231.uf.daum.net/attach/998AF0355D028BC1011CCB", KoreanDownloadDir + fileName);
                         break;
-                    case 3:
+                    case 2:
                         webClient.DownloadFile("http://cfile224.uf.daum.net/attach/998AF4355D028BC6012A69", KoreanDownloadDir + fileName);
                         break;
                     default:
@@ -93,6 +91,9 @@ namespace KSP_Setup
         //한글패치를 적용하는 메소드
         private void KoreanPatch()
         {
+            //다운로드 디렉토리를 만든다.
+            Directory.CreateDirectory(KoreanDownloadDir);
+
             if (chkbox_vanilla.IsChecked == true)
             {
                 //한글패치 파일을 다운로드한다.
