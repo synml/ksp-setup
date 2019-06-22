@@ -210,7 +210,7 @@ namespace KSP_Setup
             if (result.ToString() == "OK")
             {
                 string filePath = openFileDlg.FileName;
-                string directory = filePath.Substring(0, filePath.LastIndexOf("\\"));
+                string directory = filePath.Substring(0, filePath.LastIndexOf("\\", StringComparison.InvariantCulture));
                 KspDirectory = directory;
                 txtbox_kspDir.Text = directory;
             }
