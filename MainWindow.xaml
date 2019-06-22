@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KSP_Setup"
         mc:Ignorable="d"
-        Title="KSP 초기 설정" Height="300" Width="500">
+        Title="KSP 설정" Height="300" Width="500">
     <Grid>
         <Label Content="KSP 디렉터리: " HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" VerticalAlignment="Top" Width="89"/>
         <TextBox x:Name="txtbox_kspDir" HorizontalAlignment="Left" Height="30" Margin="104,10,0,0" TextWrapping="Wrap" Text="ksp.exe가 있는 디렉터리를 입력하세요." VerticalAlignment="Top" Width="300"/>
@@ -17,8 +17,8 @@
         <Button x:Name="btn_Setup" Content="설정 시작" Margin="327,232,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77" Click="Btn_Setup_Click"/>
         <Button x:Name="btn_Exit" Content="종료" Margin="409,232,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="75" Click="Btn_Exit_Click"/>
         <Label Content="옵션: " HorizontalAlignment="Left" Height="30" Margin="10,74,0,0" VerticalAlignment="Top" Width="69"/>
-        <CheckBox x:Name="chkbox_ckan" Content="CKAN 복사" HorizontalAlignment="Left" Height="20" Margin="104,80,0,0" VerticalAlignment="Top" Width="89" IsChecked="True"/>
-        <RichTextBox HorizontalAlignment="Left" Height="123" Margin="10,104,0,0" VerticalAlignment="Top" Width="474">
+        <CheckBox x:Name="chkbox_ckan" Content="CKAN 설치" HorizontalAlignment="Left" Height="20" Margin="104,80,0,0" VerticalAlignment="Top" Width="89" IsChecked="True"/>
+        <RichTextBox x:Name="txtbox_log" HorizontalAlignment="Left" Height="123" Margin="10,104,0,0" VerticalAlignment="Top" Width="474">
             <FlowDocument>
                 <Paragraph>
                     <Run Text="Console"/>
