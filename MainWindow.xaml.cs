@@ -47,7 +47,6 @@ namespace KSP_Setup
                 string url = web.Url.ToString();
                 string latestVersion = url.Substring(url.LastIndexOf('/') + 1);
                 string ckanUrl = "https://github.com/KSP-CKAN/CKAN/releases/download/" + latestVersion + "/ckan.exe";
-                WriteLine("CKAN 다운로드 URL: " + ckanUrl);
 
                 //파일을 다운로드한다.
                 using (WebClient webClient = new WebClient())
@@ -66,6 +65,9 @@ namespace KSP_Setup
 
                 //다운로드 디렉토리를 삭제한다.
                 Directory.Delete(CkanDownloadDir, true);
+
+                //웹 브라우저 객체의 리소스를 해제한다.
+                web.Dispose();
             };
 
             //CKAN의 최신버전이 릴리즈된 곳으로 이동한다.
@@ -186,7 +188,10 @@ namespace KSP_Setup
 
             //CKAN 설치에 체크했으면 CKAN을 설치한다.
             if (chkbox_ckan.IsChecked == true)
+            {
+                WriteLine("CKAN 설치 시작.");
                 CkanInstall();
+            }
         }
 
         //종료 버튼을 클릭한 경우의 이벤트 메소드
