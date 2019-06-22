@@ -136,7 +136,7 @@ namespace KSP_Setup
             {
                 Multiselect = false,
                 Filter = "모든 파일(*.*)|*.*",
-                Title = "KSP.exe를 선택해주세요."
+                Title = "KSP_x64.exe를 선택해주세요."
             };
             DialogResult result = openFileDlg.ShowDialog();
             if (result.ToString() == "OK")

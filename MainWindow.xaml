@@ -8,7 +8,7 @@
         Title="KSP 설정" Height="300" Width="500">
     <Grid>
         <Label Content="KSP 디렉터리: " HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" VerticalAlignment="Top" Width="89"/>
-        <TextBox x:Name="txtbox_kspDir" HorizontalAlignment="Left" Height="30" Margin="104,10,0,0" TextWrapping="Wrap" Text="ksp.exe가 있는 디렉터리를 입력하세요." VerticalAlignment="Top" Width="300" IsReadOnly="True"/>
+        <TextBox x:Name="txtbox_kspDir" HorizontalAlignment="Left" Height="30" Margin="104,10,0,0" TextWrapping="Wrap" Text="KSP_x64.exe가 있는 디렉터리를 입력하세요." VerticalAlignment="Top" Width="300" IsReadOnly="True"/>
         <Button x:Name="btn_kspDir" Content="폴더 탐색" HorizontalAlignment="Left" Height="30" Margin="409,10,0,0" VerticalAlignment="Top" Width="75" Click="Btn_kspDir_Click"/>
         <Label Content="한글패치 선택: " HorizontalAlignment="Left" Height="30" Margin="10,45,0,0" VerticalAlignment="Top" Width="89"/>
         <CheckBox x:Name="chkbox_vanilla" Content="바닐라" HorizontalAlignment="Left" Height="20" Margin="104,51,0,0" VerticalAlignment="Top" Width="66" RenderTransformOrigin="0.139,1.11" IsChecked="True"/>
