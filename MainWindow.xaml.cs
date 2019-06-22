@@ -1,7 +1,9 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net;
 using System.Windows;
 using System.Windows.Forms;
+using System.Windows.Threading;
 
 namespace KSP_Setup
 {
@@ -27,8 +29,11 @@ namespace KSP_Setup
 
         private void WriteLine(string str)
         {
-            txtbox_log.AppendText(str + "\n");
-            txtbox_log.ScrollToEnd();
+            Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate
+            {
+                txtbox_log.AppendText(str + "\n");
+                txtbox_log.ScrollToEnd();
+            }));
         }
 
         //CKAN을 설치하는 메소드
