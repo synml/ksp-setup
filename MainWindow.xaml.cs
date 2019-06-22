@@ -42,34 +42,42 @@ namespace KSP_Setup
             //이벤트를 등록한다.
             web.Navigated += delegate
             {
-                //다운로드 디렉토리를 만든다.
-                Directory.CreateDirectory(CkanDownloadDir);
-
-                //CKAN의 최신버전을 다운로드할 수 있는 URL을 만든다.
-                string url = web.Url.ToString();
-                string latestVersion = url.Substring(url.LastIndexOf('/') + 1);
-                string ckanUrl = "https://github.com/KSP-CKAN/CKAN/releases/download/" + latestVersion + "/ckan.exe";
-
-                //파일을 다운로드한다.
-                using (WebClient webClient = new WebClient())
+                try
                 {
-                    webClient.DownloadFile(ckanUrl, CkanDownloadDir + "ckan.exe");
+                    //다운로드 디렉토리를 만든다.
+                    Directory.CreateDirectory(CkanDownloadDir);
+
+                    //CKAN의 최신버전을 다운로드할 수 있는 URL을 만든다.
+                    string url = web.Url.ToString();
+                    string latestVersion = url.Substring(url.LastIndexOf('/') + 1);
+                    string ckanUrl = "https://github.com/KSP-CKAN/CKAN/releases/download/" + latestVersion + "/ckan.exe";
+
+                    //파일을 다운로드한다.
+                    using (WebClient webClient = new WebClient())
+                    {
+                        webClient.DownloadFile(ckanUrl, CkanDownloadDir + "ckan.exe");
+                    }
+                    WriteLine("CKAN 다운로드 완료.");
+
+                    //파일을 KSP 디렉토리로 이동한다. (이미 파일이 존재하면 덮어씌운다.)
+                    if (File.Exists(KspDirectory + "/ckan.exe"))
+                        File.Delete(KspDirectory + "/ckan.exe");
+                    File.Move(CkanDownloadDir + "ckan.exe", KspDirectory + "/ckan.exe");
+
+                    //CKAN 설치를 완료했다고 알린다.
+                    WriteLine("CKAN 설치 완료.");
+
+                    //다운로드 디렉토리를 삭제한다.
+                    Directory.Delete(CkanDownloadDir, true);
+
+                    //웹 브라우저 객체의 리소스를 해제한다.
+                    web.Dispose();
                 }
-                WriteLine("CKAN 다운로드 완료.");
-
-                //파일을 KSP 디렉토리로 이동한다. (이미 파일이 존재하면 덮어씌운다.)
-                if (File.Exists(KspDirectory + "/ckan.exe"))
-                    File.Delete(KspDirectory + "/ckan.exe");
-                File.Move(CkanDownloadDir + "ckan.exe", KspDirectory + "/ckan.exe");
-
-                //CKAN 설치를 완료했다고 알린다.
-                WriteLine("CKAN 설치 완료.");
-
-                //다운로드 디렉토리를 삭제한다.
-                Directory.Delete(CkanDownloadDir, true);
-
-                //웹 브라우저 객체의 리소스를 해제한다.
-                web.Dispose();
+                catch (Exception e)
+                {
+                    WriteLine("오류: " + e.Message);
+                    web.Dispose();
+                }
             };
 
             //CKAN의 최신버전이 릴리즈된 곳으로 이동한다.
