@@ -19,11 +19,7 @@
         <Label Content="옵션: " HorizontalAlignment="Left" Height="30" Margin="10,74,0,0" VerticalAlignment="Top" Width="69"/>
         <CheckBox x:Name="chkbox_ckan" Content="CKAN 설치" HorizontalAlignment="Left" Height="20" Margin="104,80,0,0" VerticalAlignment="Top" Width="89" IsChecked="True"/>
         <RichTextBox x:Name="txtbox_log" HorizontalAlignment="Left" Height="123" Margin="10,104,0,0" VerticalAlignment="Top" Width="474">
-            <FlowDocument>
-                <Paragraph>
-                    <Run Text="Console"/>
-                </Paragraph>
-            </FlowDocument>
+            <FlowDocument/>
         </RichTextBox>
     </Grid>
 </Window>

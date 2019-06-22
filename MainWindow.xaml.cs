@@ -34,22 +34,28 @@ namespace KSP_Setup
 
             using (WebBrowser web = new WebBrowser())
             {
+                //이벤트를 등록한다.
                 web.Navigated += delegate
                 {
                     //CKAN의 최신버전을 다운로드할 수 있는 URL을 만든다.
                     string url = web.Url.ToString();
                     string latestVersion = url.Substring(url.LastIndexOf('/') + 1);
                     string ckanUrl = "https://github.com/KSP-CKAN/CKAN/releases/download/" + latestVersion + "/ckan.exe";
+                    txtbox_log.AppendText("CKAN 다운로드 URL: " + ckanUrl + '\n');
 
-                    //만든 URL을 사용하여 파일을 다운로드한다.
+                    //파일을 다운로드한다.
                     WebClient ckanDownload = new WebClient();
-                    ckanDownload.DownloadFile(ckanUrl, CkanDownloadDir + "ckan.exe");
+                    ckanDownload.DownloadFile(new Uri(ckanUrl), CkanDownloadDir + "ckan.exe");
+                    txtbox_log.AppendText("CKAN 다운로드 중... \n");
 
-                    //다운로드한 파일을 KSP 디렉토리로 이동한다.
+                    //파일을 KSP 디렉토리로 이동한다.
                     File.Move(CkanDownloadDir + "ckan.exe", KspDirectory + "ckan.exe");
 
-                    //CKAN을 다운로드했던 디렉토리를 삭제한다.
+                    //다운로드 디렉토리를 삭제한다.
                     Directory.Delete(CkanDownloadDir, true);
+
+                    //CKAN 설치를 완료했다고 알린다.
+                    txtbox_log.AppendText("CKAN 설치 완료. \n");
                 };
 
                 //CKAN의 최신버전이 릴리즈된 곳으로 이동한다.
@@ -66,11 +72,14 @@ namespace KSP_Setup
         //한글패치를 적용하는 메소드
         private void KoreanPatch()
         {
-            //파일 다운로드
-            KoreanFileDownload("바닐라");
-            KoreanFileDownload("Making_History_DLC");
-            KoreanFileDownload("Breaking_Ground_DLC");
+            //한글패치 파일을 다운로드한다.
+            KoreanFileDownload(KoreanDownloadDir + "바닐라");
+            KoreanFileDownload(KoreanDownloadDir + "Making_History_DLC");
+            KoreanFileDownload(KoreanDownloadDir + "Breaking_Ground_DLC");
 
+            //파일을 이동한다.
+
+            //다운로드 디렉토리를 삭제한다.
         }
 
         //KSP가 설치된 디렉터리를 탐색하는 버튼을 클릭한 경우의 이벤트 메소드

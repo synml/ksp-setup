@@ -10,9 +10,9 @@ using System.Windows;
 [assembly: AssemblyTitle("KSP-Setup")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Labbit Lulin")]
 [assembly: AssemblyProduct("KSP-Setup")]
-[assembly: AssemblyCopyright("Copyright ©  2019")]
+[assembly: AssemblyCopyright("MIT License")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
