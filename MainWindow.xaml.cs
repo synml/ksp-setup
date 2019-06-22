@@ -44,8 +44,10 @@ namespace KSP_Setup
                     txtbox_log.AppendText("CKAN 다운로드 URL: " + ckanUrl + '\n');
 
                     //파일을 다운로드한다.
-                    WebClient ckanDownload = new WebClient();
-                    ckanDownload.DownloadFile(new Uri(ckanUrl), CkanDownloadDir + "ckan.exe");
+                    using (WebClient webClient = new WebClient())
+                    {
+                        webClient.DownloadFile(new Uri(ckanUrl), CkanDownloadDir + "ckan.exe");
+                    }
                     txtbox_log.AppendText("CKAN 다운로드 중... \n");
 
                     //파일을 KSP 디렉토리로 이동한다.
@@ -64,22 +66,52 @@ namespace KSP_Setup
         }
 
         //한글패치 파일을 다운로드하는 메소드
-        private void KoreanFileDownload(string download_dir)
+        private void KoreanFileDownload(string fileName)
         {
-            Directory.CreateDirectory(download_dir);
+            Directory.CreateDirectory(KoreanDownloadDir);
+
+            using (WebClient webClient = new WebClient())
+            {
+
+            }
         }
 
         //한글패치를 적용하는 메소드
         private void KoreanPatch()
         {
-            //한글패치 파일을 다운로드한다.
-            KoreanFileDownload(KoreanDownloadDir + "바닐라");
-            KoreanFileDownload(KoreanDownloadDir + "Making_History_DLC");
-            KoreanFileDownload(KoreanDownloadDir + "Breaking_Ground_DLC");
+            if (chkbox_vanilla.IsChecked == true)
+            {
+                //한글패치 파일을 다운로드한다.
+                KoreanFileDownload("바닐라.cfg");
 
-            //파일을 이동한다.
+                //파일을 이동한다.
+                string sourceFileName = KoreanDownloadDir + "바닐라.cfg";
+                string destFileName = KspDirectory + "/GameData/Squad/Localization/dictionary.cfg";
+                File.Move(sourceFileName, destFileName);
+            }
+            if (chkbox_dlc1.IsChecked == true)
+            {
+                //한글패치 파일을 다운로드한다.
+                KoreanFileDownload("Making_History_DLC.cfg");
+
+                //파일을 이동한다.
+                string sourceFileName = KoreanDownloadDir + "Making_History_DLC.cfg";
+                string destFileName = KspDirectory + "/GameData/SquadExpansion/MakingHistory/Localization/dictionary.cfg";
+                File.Move(sourceFileName, destFileName);
+            }
+            if (chkbox_dlc2.IsChecked == true)
+            {
+                //한글패치 파일을 다운로드한다.
+                KoreanFileDownload("Breaking_Ground_DLC.cfg");
+
+                //파일을 이동한다.
+                string sourceFileName = KoreanDownloadDir + "Breaking_Ground_DLC.cfg";
+                string destFileName = KspDirectory + "/GameData/SquadExpansion/Serenity/Localization/dictionary.cfg";
+                File.Move(sourceFileName, destFileName);
+            }
 
             //다운로드 디렉토리를 삭제한다.
+            Directory.Delete(KoreanDownloadDir, true);
         }
 
         //KSP가 설치된 디렉터리를 탐색하는 버튼을 클릭한 경우의 이벤트 메소드
