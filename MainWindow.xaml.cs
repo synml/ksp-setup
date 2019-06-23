@@ -16,7 +16,7 @@ namespace KSP_Setup
         public string CkanDownloadDir { get; set; }     //CKAN의 다운로드 파일이 저장된 디렉토리를 저장한다.
         public string HangulDownloadDir { get; set; }   //한글패치 파일이 저장된 디렉토리를 저장한다.
         public string KspDirectory { get; set; }    //KSP가 설치된 디렉토리를 저장한다.
-        public int Ksp_version { get; set; }    //사용자가 설정한 ksp 버전을 저장한다.
+        public int KspVersion { get; set; }    //사용자가 설정한 ksp 버전을 저장한다.
 
         //각 버전별 다운로드 URL을 저장하는 배열을 선언한다. (행: 버전, 열: 항목)
         //3행: 1.7.2, 2행: 1.7.1, 1행: 1.7.0, 0행: 1.6.1
@@ -163,13 +163,13 @@ namespace KSP_Setup
                     switch (downloadMode)
                     {
                         case 0:
-                            webClient.DownloadFile(downloadURL[Ksp_version, 0], HangulDownloadDir + "바닐라.cfg");
+                            webClient.DownloadFile(downloadURL[KspVersion, 0], HangulDownloadDir + "바닐라.cfg");
                             break;
                         case 1:
-                            webClient.DownloadFile(downloadURL[Ksp_version, 1], HangulDownloadDir + "Making_History_DLC.cfg");
+                            webClient.DownloadFile(downloadURL[KspVersion, 1], HangulDownloadDir + "Making_History_DLC.cfg");
                             break;
                         case 2:
-                            webClient.DownloadFile(downloadURL[Ksp_version, 2], HangulDownloadDir + "Breaking_Ground_DLC.cfg");
+                            webClient.DownloadFile(downloadURL[KspVersion, 2], HangulDownloadDir + "Breaking_Ground_DLC.cfg");
                             break;
                         default:
                             WriteLine("잘못된 다운로드 모드입니다.");
@@ -331,19 +331,19 @@ namespace KSP_Setup
             //KSP 버전 선택에 따라 필드의 값을 변경한다.
             if (ksp_version_172.IsSelected == true)
             {
-                Ksp_version = 3;
+                KspVersion = 3;
             }
             else if (ksp_version_171.IsSelected == true)
             {
-                Ksp_version = 2;
+                KspVersion = 2;
             }
             else if (ksp_version_170.IsSelected == true)
             {
-                Ksp_version = 1;
+                KspVersion = 1;
             }
             else if (ksp_version_161.IsSelected == true)
             {
-                Ksp_version = 0;
+                KspVersion = 0;
             }
             else
             {
