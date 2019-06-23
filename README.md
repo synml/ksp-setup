@@ -31,7 +31,12 @@
 
 ## 사용 방법, 예제
 
-작성 중...
+![Instruction](https://github.com/LulinPollux/KSP-Setup/blob/master/img/instruction.gif)
+
+1. '폴더 탐색' 버튼을 눌러 KSP_x64.exe를 선택한다.
+2. 한글패치할 것들과 옵션을 선택한다.
+3. '설정 시작' 버튼을 누른다.
+4. KSP 폴더를 열거나 프로그램을 종료한다.
 
 ## 기능
 
