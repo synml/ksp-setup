@@ -14,7 +14,7 @@ namespace KSP_Setup
     {
         //필드 목록
         public string CkanDownloadDir { get; set; }     //CKAN의 다운로드 파일이 저장된 디렉토리를 저장한다.
-        public string KoreanDownloadDir { get; set; }   //한글패치 파일이 저장된 디렉토리를 저장한다.
+        public string HangulDownloadDir { get; set; }   //한글패치 파일이 저장된 디렉토리를 저장한다.
         public string KspDirectory { get; set; }    //KSP가 설치된 디렉토리를 저장한다.
 
         //각 버전별 다운로드 URL을 저장하는 배열을 선언한다.
@@ -30,7 +30,7 @@ namespace KSP_Setup
         {
             //디렉토리 필드를 초기화한다.
             CkanDownloadDir = "./CKAN/";
-            KoreanDownloadDir = "./한글패치/";
+            HangulDownloadDir = "./한글패치/";
             KspDirectory = null;
 
             //한글패치 다운로드 링크를 초기화한다.
@@ -114,7 +114,7 @@ namespace KSP_Setup
         }
 
         //한글패치 파일을 다운로드하는 메소드 (모드 0번: 바닐라, 1번: Making DLC, 2번: Breaking DLC)
-        private int KoreanFileDownload(string downloadUrl, int downloadMode, string fileName)
+        private int HangulFileDownload(string downloadUrl, int downloadMode, string fileName)
         {
             try
             {
@@ -123,13 +123,13 @@ namespace KSP_Setup
                     switch (downloadMode)
                     {
                         case 0:
-                            webClient.DownloadFile(downloadUrl, KoreanDownloadDir + fileName);
+                            webClient.DownloadFile(downloadUrl, HangulDownloadDir + fileName);
                             break;
                         case 1:
-                            webClient.DownloadFile(downloadUrl, KoreanDownloadDir + fileName);
+                            webClient.DownloadFile(downloadUrl, HangulDownloadDir + fileName);
                             break;
                         case 2:
-                            webClient.DownloadFile(downloadUrl, KoreanDownloadDir + fileName);
+                            webClient.DownloadFile(downloadUrl, HangulDownloadDir + fileName);
                             break;
                         default:
                             WriteLine("잘못된 다운로드 모드입니다.");
@@ -147,25 +147,25 @@ namespace KSP_Setup
         }
 
         //한글패치를 적용하는 메소드
-        private int KoreanPatch()
+        private int HangulPatch()
         {
             try
             {
                 int retval;
 
                 //다운로드 디렉토리를 만든다.
-                Directory.CreateDirectory(KoreanDownloadDir);
+                Directory.CreateDirectory(HangulDownloadDir);
 
                 //체크박스 체크 유무에 따라 설치를 진행한다.
                 if (chkbox_vanilla.IsChecked == true)
                 {
                     //한글패치 파일을 다운로드한다.
-                    retval = KoreanFileDownload(downloadUrl_172[0], 0, "바닐라.cfg");
+                    retval = HangulFileDownload(downloadUrl_172[0], 0, "바닐라.cfg");
                     if (retval != 0)
                         return 1;
 
                     //파일을 이동한다.
-                    string sourceFileName = KoreanDownloadDir + "바닐라.cfg";
+                    string sourceFileName = HangulDownloadDir + "바닐라.cfg";
                     string destFileName = KspDirectory + "/GameData/Squad/Localization/dictionary.cfg";
                     File.Delete(destFileName);
                     File.Move(sourceFileName, destFileName);
@@ -176,12 +176,12 @@ namespace KSP_Setup
                 if (chkbox_dlc1.IsChecked == true)
                 {
                     //한글패치 파일을 다운로드한다.
-                    retval = KoreanFileDownload(downloadUrl_172[1], 1, "Making_History_DLC.cfg");
+                    retval = HangulFileDownload(downloadUrl_172[1], 1, "Making_History_DLC.cfg");
                     if (retval != 0)
                         return 1;
 
                     //파일을 이동한다.
-                    string sourceFileName = KoreanDownloadDir + "Making_History_DLC.cfg";
+                    string sourceFileName = HangulDownloadDir + "Making_History_DLC.cfg";
                     string destFileName = KspDirectory + "/GameData/SquadExpansion/MakingHistory/Localization/dictionary.cfg";
                     File.Delete(destFileName);
                     File.Move(sourceFileName, destFileName);
@@ -192,12 +192,12 @@ namespace KSP_Setup
                 if (chkbox_dlc2.IsChecked == true)
                 {
                     //한글패치 파일을 다운로드한다.
-                    retval = KoreanFileDownload(downloadUrl_172[2], 2, "Breaking_Ground_DLC.cfg");
+                    retval = HangulFileDownload(downloadUrl_172[2], 2, "Breaking_Ground_DLC.cfg");
                     if (retval != 0)
                         return 1;
 
                     //파일을 이동한다.
-                    string sourceFileName = KoreanDownloadDir + "Breaking_Ground_DLC.cfg";
+                    string sourceFileName = HangulDownloadDir + "Breaking_Ground_DLC.cfg";
                     string destFileName = KspDirectory + "/GameData/SquadExpansion/Serenity/Localization/dictionary.cfg";
                     File.Delete(destFileName);
                     File.Move(sourceFileName, destFileName);
@@ -214,7 +214,7 @@ namespace KSP_Setup
             finally
             {
                 //다운로드 디렉토리를 삭제한다.
-                Directory.Delete(KoreanDownloadDir, true);
+                Directory.Delete(HangulDownloadDir, true);
 
                 //칸 띄우기
                 WriteLine("");
@@ -251,7 +251,7 @@ namespace KSP_Setup
             int retval;
 
             //한글패치 적용을 시작한다.
-            retval = KoreanPatch();
+            retval = HangulPatch();
             if (retval != 0)
             {
                 WriteLine("한글패치의 전체 또는 일부를 실패했습니다.");
