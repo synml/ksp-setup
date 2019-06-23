@@ -146,7 +146,53 @@ namespace KSP_Setup
             return 0;
         }
 
-        //한글패치를 적용하는 메소드
+        //한글파일을 적용하는 메소드 (모드 0번: 바닐라, 1번: Making DLC, 2번: Breaking DLC)
+        private int HangulFileApply(int applyMode)
+        {
+            string sourceFileName, destFileName;
+
+            switch (applyMode)
+            {
+                case 0:
+                    //한글파일을 이동시킨다.
+                    sourceFileName = HangulDownloadDir + "바닐라.cfg";
+                    destFileName = KspDirectory + "/GameData/Squad/Localization/dictionary.cfg";
+                    break;
+                case 1:
+                    sourceFileName = HangulDownloadDir + "Making_History_DLC.cfg";
+                    destFileName = KspDirectory + "/GameData/SquadExpansion/MakingHistory/Localization/dictionary.cfg";
+                    break;
+                case 2:
+                    //파일을 이동한다.
+                    sourceFileName = HangulDownloadDir + "Breaking_Ground_DLC.cfg";
+                    destFileName = KspDirectory + "/GameData/SquadExpansion/Serenity/Localization/dictionary.cfg";
+                    break;
+                default:
+                    WriteLine("잘못된 적용 모드입니다.");
+                    return 1;
+            }
+
+            try
+            {
+                //파일이 존재하지 않으면 
+                if (!File.Exists(destFileName))
+                {
+                    WriteLine(destFileName + "가 존재하지 않습니다.");
+                    return 2;
+                }
+                File.Delete(destFileName);
+                File.Move(sourceFileName, destFileName);
+            }
+            catch (Exception e)
+            {
+                WriteLine("오류: " + e.Message);
+                return 3;
+            }
+
+            return 0;
+        }
+
+        //한글패치를 하는 메소드
         private int HangulPatch()
         {
             try
@@ -159,48 +205,45 @@ namespace KSP_Setup
                 //체크박스 체크 유무에 따라 설치를 진행한다.
                 if (chkbox_vanilla.IsChecked == true)
                 {
-                    //한글패치 파일을 다운로드한다.
+                    //한글파일을 다운로드한다.
                     retval = HangulFileDownload(downloadUrl_172[0], 0, "바닐라.cfg");
                     if (retval != 0)
                         return 1;
 
-                    //파일을 이동한다.
-                    string sourceFileName = HangulDownloadDir + "바닐라.cfg";
-                    string destFileName = KspDirectory + "/GameData/Squad/Localization/dictionary.cfg";
-                    File.Delete(destFileName);
-                    File.Move(sourceFileName, destFileName);
+                    //한글파일을 적용한다.
+                    retval = HangulFileApply(0);
+                    if (retval != 0)
+                        return 1;
 
                     //한글패치 적용을 완료했다고 알린다.
                     WriteLine("바닐라 한글패치 완료.");
                 }
                 if (chkbox_dlc1.IsChecked == true)
                 {
-                    //한글패치 파일을 다운로드한다.
+                    //한글파일을 다운로드한다.
                     retval = HangulFileDownload(downloadUrl_172[1], 1, "Making_History_DLC.cfg");
                     if (retval != 0)
                         return 1;
 
-                    //파일을 이동한다.
-                    string sourceFileName = HangulDownloadDir + "Making_History_DLC.cfg";
-                    string destFileName = KspDirectory + "/GameData/SquadExpansion/MakingHistory/Localization/dictionary.cfg";
-                    File.Delete(destFileName);
-                    File.Move(sourceFileName, destFileName);
+                    //한글파일을 적용한다.
+                    retval = HangulFileApply(1);
+                    if (retval != 0)
+                        return 1;
 
                     //한글패치 적용을 완료했다고 알린다.
                     WriteLine("Making History DLC 한글패치 완료.");
                 }
                 if (chkbox_dlc2.IsChecked == true)
                 {
-                    //한글패치 파일을 다운로드한다.
+                    //한글파일을 다운로드한다.
                     retval = HangulFileDownload(downloadUrl_172[2], 2, "Breaking_Ground_DLC.cfg");
                     if (retval != 0)
                         return 1;
 
-                    //파일을 이동한다.
-                    string sourceFileName = HangulDownloadDir + "Breaking_Ground_DLC.cfg";
-                    string destFileName = KspDirectory + "/GameData/SquadExpansion/Serenity/Localization/dictionary.cfg";
-                    File.Delete(destFileName);
-                    File.Move(sourceFileName, destFileName);
+                    //한글파일을 적용한다.
+                    retval = HangulFileApply(2);
+                    if (retval != 0)
+                        return 1;
 
                     //한글패치 적용을 완료했다고 알린다.
                     WriteLine("Breaking Ground DLC 한글패치 완료.");
