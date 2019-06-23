@@ -16,6 +16,7 @@ namespace KSP_Setup
         public string CkanDownloadDir { get; set; }     //CKAN의 다운로드 파일이 저장된 디렉토리를 저장한다.
         public string HangulDownloadDir { get; set; }   //한글패치 파일이 저장된 디렉토리를 저장한다.
         public string KspDirectory { get; set; }    //KSP가 설치된 디렉토리를 저장한다.
+        public int Ksp_version { get; set; }    //사용자가 설정한 ksp 버전을 저장한다.
 
         //각 버전별 다운로드 URL을 저장하는 배열을 선언한다.
         //0번: 바닐라, 1번: Making History DLC, 2번: Breaking Ground DLC
@@ -282,6 +283,15 @@ namespace KSP_Setup
         {
             int retval;
 
+            //설정 중에 컴포넌트의 속성을 바꾸지 못하게 한다.
+            btn_kspDir.IsEnabled = false;
+            btn_Setup.IsEnabled = false;
+            ksp_version_selector.IsEnabled = false;
+            chkbox_vanilla.IsEnabled = false;
+            chkbox_dlc1.IsEnabled = false;
+            chkbox_dlc2.IsEnabled = false;
+            chkbox_ckan.IsEnabled = false;
+
             //한글패치 적용을 시작한다.
             retval = HangulPatch();
             if (retval != 0)
@@ -297,6 +307,15 @@ namespace KSP_Setup
             {
                 CkanInstall();
             }
+
+            //설정이 끝나면 컴포넌트의 속성을 바꿀 수 있도록 한다.
+            btn_kspDir.IsEnabled = true;
+            btn_Setup.IsEnabled = true;
+            ksp_version_selector.IsEnabled = true;
+            chkbox_vanilla.IsEnabled = true;
+            chkbox_dlc1.IsEnabled = true;
+            chkbox_dlc2.IsEnabled = true;
+            chkbox_ckan.IsEnabled = true;
         }
 
         //KSP 디렉토리를 여는 버튼을 클릭한 경우의 이벤트 메소드
@@ -309,9 +328,10 @@ namespace KSP_Setup
         //종료 버튼을 클릭한 경우의 이벤트 메소드
         private void Btn_Exit_Click(object sender, RoutedEventArgs e) => Close();
 
-        //콤보박스의 드롭다운을 닫았을 때의 이벤트 메소드
-        private void ComboBox_DropDownClosed(object sender, EventArgs e)
+        //KSP 버전 선택기의 드롭다운을 닫았을 때의 이벤트 메소드
+        private void Ksp_version_selector_DropDownClosed(object sender, EventArgs e)
         {
+            //1.7.0과 1.6.1은 Breaking Ground DLC 한글파일이 없으므로 체크하지 못하게 한다.
             if ((ksp_version_170.IsSelected == true) || (ksp_version_161.IsSelected == true))
             {
                 chkbox_dlc2.IsChecked = false;
@@ -321,6 +341,28 @@ namespace KSP_Setup
             {
                 chkbox_dlc2.IsChecked = true;
                 chkbox_dlc2.IsEnabled = true;
+            }
+
+            //KSP 버전 선택에 따라 필드의 값을 변경한다.
+            if (ksp_version_172.IsSelected == true)
+            {
+                Ksp_version = 172;
+            }
+            else if (ksp_version_171.IsSelected == true)
+            {
+                Ksp_version = 171;
+            }
+            else if (ksp_version_170.IsSelected == true)
+            {
+                Ksp_version = 170;
+            }
+            else if (ksp_version_161.IsSelected == true)
+            {
+                Ksp_version = 161;
+            }
+            else
+            {
+                WriteLine("잘못된 버전을 선택했습니다.");
             }
         }
     }
