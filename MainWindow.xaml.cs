@@ -158,7 +158,6 @@ namespace KSP_Setup
             switch (applyMode)
             {
                 case 0:
-                    //한글파일을 이동시킨다.
                     sourceFileName = HangulDownloadDir + "바닐라.cfg";
                     destFileName = KspDirectory + "/GameData/Squad/Localization/dictionary.cfg";
                     break;
@@ -167,7 +166,6 @@ namespace KSP_Setup
                     destFileName = KspDirectory + "/GameData/SquadExpansion/MakingHistory/Localization/dictionary.cfg";
                     break;
                 case 2:
-                    //파일을 이동한다.
                     sourceFileName = HangulDownloadDir + "Breaking_Ground_DLC.cfg";
                     destFileName = KspDirectory + "/GameData/SquadExpansion/Serenity/Localization/dictionary.cfg";
                     break;
