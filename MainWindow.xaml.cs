@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Windows;
@@ -235,6 +236,9 @@ namespace KSP_Setup
                 WriteLine("CKAN 설치 시작.");
                 CkanInstall();
             }
+
+            //KSP 디렉토리를 연다.
+            Process.Start(KspDirectory);
         }
 
         //종료 버튼을 클릭한 경우의 이벤트 메소드
