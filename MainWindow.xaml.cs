@@ -214,7 +214,9 @@ namespace KSP_Setup
                 string directory = filePath.Substring(0, filePath.LastIndexOf("\\", StringComparison.InvariantCulture));
                 KspDirectory = directory;
                 txtbox_kspDir.Text = directory;
+
                 btn_Setup.IsEnabled = true;
+                btn_OpenKspDir.IsEnabled = true;
             }
         }
 
@@ -236,7 +238,11 @@ namespace KSP_Setup
                 WriteLine("CKAN 설치 시작.");
                 CkanInstall();
             }
+        }
 
+        //KSP 디렉토리를 여는 버튼을 클릭한 경우의 이벤트 메소드
+        private void Btn_OpenKspDir_Click(object sender, RoutedEventArgs e)
+        {
             //KSP 디렉토리를 연다.
             Process.Start(KspDirectory);
         }
