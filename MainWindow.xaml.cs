@@ -113,7 +113,7 @@ namespace KSP_Setup
             web.Navigate("https://github.com/KSP-CKAN/CKAN/releases/latest");
         }
 
-        //한글패치 파일을 다운로드하는 메소드
+        //한글패치 파일을 다운로드하는 메소드 (모드 0번: 바닐라, 1번: Making DLC, 2번: Breaking DLC)
         private int KoreanFileDownload(string downloadUrl, int downloadMode, string fileName)
         {
             try
@@ -132,7 +132,7 @@ namespace KSP_Setup
                             webClient.DownloadFile(downloadUrl, KoreanDownloadDir + fileName);
                             break;
                         default:
-                            WriteLine("잘못된 다운로드 모드 설정입니다.");
+                            WriteLine("잘못된 다운로드 모드입니다.");
                             return 1;
                     }
                 }
