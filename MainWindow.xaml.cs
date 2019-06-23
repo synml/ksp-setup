@@ -94,6 +94,7 @@ namespace KSP_Setup
 
                     //CKAN 설치를 완료했다고 알린다.
                     WriteLine("CKAN 설치 완료.");
+                    WriteLine("");
 
                     //다운로드 디렉토리를 삭제한다.
                     Directory.Delete(CkanDownloadDir, true);
