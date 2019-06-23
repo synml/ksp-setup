@@ -213,6 +213,7 @@ namespace KSP_Setup
                 string directory = filePath.Substring(0, filePath.LastIndexOf("\\", StringComparison.InvariantCulture));
                 KspDirectory = directory;
                 txtbox_kspDir.Text = directory;
+                btn_Setup.IsEnabled = true;
             }
         }
 
@@ -220,13 +221,6 @@ namespace KSP_Setup
         private void Btn_Setup_Click(object sender, RoutedEventArgs e)
         {
             int retval;
-
-            //오류 제어
-            if (KspDirectory == null)
-            {
-                System.Windows.MessageBox.Show("먼저 KSP가 설치된 디렉토리를 입력하세요.", "오류");
-                return;
-            }
 
             //한글패치 적용을 시작한다.
             retval = KoreanPatch();

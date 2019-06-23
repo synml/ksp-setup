@@ -12,7 +12,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Labbit Lulin")]
 [assembly: AssemblyProduct("KSP-Setup")]
-[assembly: AssemblyCopyright("MIT License")]
+[assembly: AssemblyCopyright("Copyright ⓒ 2019 Lulin Pollux")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
