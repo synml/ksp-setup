@@ -103,7 +103,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="res\folder.ico" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="res\icon.ico" />
   </ItemGroup>
