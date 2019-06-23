@@ -274,5 +274,20 @@ namespace KSP_Setup
 
         //종료 버튼을 클릭한 경우의 이벤트 메소드
         private void Btn_Exit_Click(object sender, RoutedEventArgs e) => Close();
+
+        //콤보박스의 드롭다운을 닫았을 때의 이벤트 메소드
+        private void ComboBox_DropDownClosed(object sender, EventArgs e)
+        {
+            if ((ksp_version_170.IsSelected == true) || (ksp_version_161.IsSelected == true))
+            {
+                chkbox_dlc2.IsChecked = false;
+                chkbox_dlc2.IsEnabled = false;
+            }
+            else
+            {
+                chkbox_dlc2.IsChecked = true;
+                chkbox_dlc2.IsEnabled = true;
+            }
+        }
     }
 }
