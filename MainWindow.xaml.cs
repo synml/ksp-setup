@@ -117,7 +117,7 @@ namespace KSP_Setup
         }
 
         //한글패치 파일을 다운로드하는 메소드 (모드 0번: 바닐라, 1번: Making DLC, 2번: Breaking DLC)
-        private int HangulFileDownload(int downloadMode, string[,] downloadUrl)
+        private int HangulFileDownload(int downloadMode)
         {
             try
             {
@@ -126,13 +126,13 @@ namespace KSP_Setup
                     switch (downloadMode)
                     {
                         case 0:
-                            webClient.DownloadFile(downloadUrl[Ksp_version, 0], HangulDownloadDir + "바닐라.cfg");
+                            webClient.DownloadFile(downloadURL[Ksp_version, 0], HangulDownloadDir + "바닐라.cfg");
                             break;
                         case 1:
-                            webClient.DownloadFile(downloadUrl[Ksp_version, 1], HangulDownloadDir + "Making_History_DLC.cfg");
+                            webClient.DownloadFile(downloadURL[Ksp_version, 1], HangulDownloadDir + "Making_History_DLC.cfg");
                             break;
                         case 2:
-                            webClient.DownloadFile(downloadUrl[Ksp_version, 2], HangulDownloadDir + "Breaking_Ground_DLC.cfg");
+                            webClient.DownloadFile(downloadURL[Ksp_version, 2], HangulDownloadDir + "Breaking_Ground_DLC.cfg");
                             break;
                         default:
                             WriteLine("잘못된 다운로드 모드입니다.");
@@ -205,7 +205,7 @@ namespace KSP_Setup
             if (chkbox_vanilla.IsChecked == true)
             {
                 //한글파일을 다운로드한다.
-                retval = HangulFileDownload(0, downloadURL);
+                retval = HangulFileDownload(0);
                 if (retval != 0)
                     return 1;
 
@@ -220,7 +220,7 @@ namespace KSP_Setup
             if (chkbox_dlc1.IsChecked == true)
             {
                 //한글파일을 다운로드한다.
-                retval = HangulFileDownload(1, downloadURL);
+                retval = HangulFileDownload(1);
                 if (retval != 0)
                     return 1;
 
@@ -235,7 +235,7 @@ namespace KSP_Setup
             if (chkbox_dlc2.IsChecked == true)
             {
                 //한글파일을 다운로드한다.
-                retval = HangulFileDownload(2, downloadURL);
+                retval = HangulFileDownload(2);
                 if (retval != 0)
                     return 1;
 
