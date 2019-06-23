@@ -51,13 +51,6 @@ namespace KSP_Setup
             InitializeComponent();
         }
 
-        //로그를 기록하는 메소드
-        private void WriteLine(string str)
-        {
-            txtbox_log.AppendText(str + "\n");
-            txtbox_log.ScrollToEnd();
-        }
-
         //CKAN을 설치하는 메소드
         private void CkanInstall()
         {
@@ -116,39 +109,6 @@ namespace KSP_Setup
             WriteLine("CKAN 다운로드 중. . .");
         }
 
-        //한글패치 파일을 다운로드하는 메소드 (모드 0번: 바닐라, 1번: Making DLC, 2번: Breaking DLC)
-        private int HangulFileDownload(int downloadMode)
-        {
-            try
-            {
-                using (WebClient webClient = new WebClient())
-                {
-                    switch (downloadMode)
-                    {
-                        case 0:
-                            webClient.DownloadFile(downloadURL[Ksp_version, 0], HangulDownloadDir + "바닐라.cfg");
-                            break;
-                        case 1:
-                            webClient.DownloadFile(downloadURL[Ksp_version, 1], HangulDownloadDir + "Making_History_DLC.cfg");
-                            break;
-                        case 2:
-                            webClient.DownloadFile(downloadURL[Ksp_version, 2], HangulDownloadDir + "Breaking_Ground_DLC.cfg");
-                            break;
-                        default:
-                            WriteLine("잘못된 다운로드 모드입니다.");
-                            return 1;
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                WriteLine("오류: " + e.Message);
-                return 2;
-            }
-
-            return 0;
-        }
-
         //한글파일을 적용하는 메소드 (모드 0번: 바닐라, 1번: Making DLC, 2번: Breaking DLC)
         private int HangulFileApply(int applyMode)
         {
@@ -193,10 +153,46 @@ namespace KSP_Setup
             return 0;
         }
 
+        //한글패치 파일을 다운로드하는 메소드 (모드 0번: 바닐라, 1번: Making DLC, 2번: Breaking DLC)
+        private int HangulFileDownload(int downloadMode)
+        {
+            try
+            {
+                using (WebClient webClient = new WebClient())
+                {
+                    switch (downloadMode)
+                    {
+                        case 0:
+                            webClient.DownloadFile(downloadURL[Ksp_version, 0], HangulDownloadDir + "바닐라.cfg");
+                            break;
+                        case 1:
+                            webClient.DownloadFile(downloadURL[Ksp_version, 1], HangulDownloadDir + "Making_History_DLC.cfg");
+                            break;
+                        case 2:
+                            webClient.DownloadFile(downloadURL[Ksp_version, 2], HangulDownloadDir + "Breaking_Ground_DLC.cfg");
+                            break;
+                        default:
+                            WriteLine("잘못된 다운로드 모드입니다.");
+                            return 1;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                WriteLine("오류: " + e.Message);
+                return 2;
+            }
+
+            return 0;
+        }
+
         //한글패치를 하는 메소드
         private int HangulPatch()
         {
             int retval;
+
+            //어떤 버전의 한글패치를 적용하는지 알린다.
+            
 
             //다운로드 디렉토리를 만든다.
             Directory.CreateDirectory(HangulDownloadDir);
@@ -254,6 +250,18 @@ namespace KSP_Setup
             return 0;
         }
 
+        //로그를 기록하는 메소드
+        private void WriteLine(string str)
+        {
+            txtbox_log.AppendText(str + "\n");
+            txtbox_log.ScrollToEnd();
+        }
+
+        //-----------------------------------------------------------------------------------------
+
+        //종료 버튼을 클릭한 경우의 이벤트 메소드
+        private void Btn_Exit_Click(object sender, RoutedEventArgs e) => Close();
+
         //KSP가 설치된 디렉터리를 탐색하는 버튼을 클릭한 경우의 이벤트 메소드
         private void Btn_kspDir_Click(object sender, RoutedEventArgs e)
         {
@@ -274,6 +282,13 @@ namespace KSP_Setup
                 btn_Setup.IsEnabled = true;
                 btn_OpenKspDir.IsEnabled = true;
             }
+        }
+
+        //KSP 디렉토리를 여는 버튼을 클릭한 경우의 이벤트 메소드
+        private void Btn_OpenKspDir_Click(object sender, RoutedEventArgs e)
+        {
+            //KSP 디렉토리를 연다.
+            Process.Start(KspDirectory);
         }
 
         //설정 시작 버튼을 클릭한 경우의 이벤트 메소드
@@ -297,16 +312,6 @@ namespace KSP_Setup
                 CkanInstall();
             }
         }
-
-        //KSP 디렉토리를 여는 버튼을 클릭한 경우의 이벤트 메소드
-        private void Btn_OpenKspDir_Click(object sender, RoutedEventArgs e)
-        {
-            //KSP 디렉토리를 연다.
-            Process.Start(KspDirectory);
-        }
-
-        //종료 버튼을 클릭한 경우의 이벤트 메소드
-        private void Btn_Exit_Click(object sender, RoutedEventArgs e) => Close();
 
         //KSP 버전 선택기의 드롭다운을 닫았을 때의 이벤트 메소드
         private void Ksp_version_selector_DropDownClosed(object sender, EventArgs e)
