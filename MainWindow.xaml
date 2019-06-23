@@ -5,20 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KSP_Setup"
         mc:Ignorable="d"
-        Title="KSP 설정" Height="350" Width="600" Icon="res/icon.ico" ResizeMode="CanResize">
+        Title="KSP 설정" Height="350" Width="600" Icon="res/icon.ico" ResizeMode="CanResize" MinHeight="330" MinWidth="550">
     <Grid>
-        <Label Content="KSP 디렉터리: " HorizontalAlignment="Left" Height="25" Margin="10,10,0,0" VerticalAlignment="Top" Width="89"/>
-        <TextBox x:Name="txtbox_kspDir" Margin="104,10,84.6,0" TextWrapping="Wrap" Text="KSP_x64.exe를 선택하세요." IsReadOnly="True" Height="25" VerticalAlignment="Top"/>
-        <Button x:Name="btn_kspDir" Content="폴더 탐색" Height="25" Margin="0,10,9.6,0" VerticalAlignment="Top" Click="Btn_kspDir_Click" HorizontalAlignment="Right" Width="70"/>
-        <Label Content="한글패치 선택: " HorizontalAlignment="Left" Height="25" Margin="10,45,0,0" VerticalAlignment="Top" Width="89"/>
-        <CheckBox x:Name="chkbox_vanilla" Content="바닐라" HorizontalAlignment="Left" Height="20" Margin="104,51,0,0" VerticalAlignment="Top" Width="66" RenderTransformOrigin="0.139,1.11" IsChecked="True"/>
-        <CheckBox x:Name="chkbox_dlc1" Content="Making History DLC" HorizontalAlignment="Left" Height="20" Margin="175,51,0,0" VerticalAlignment="Top" Width="140" RenderTransformOrigin="0.139,1.11" IsChecked="True"/>
-        <CheckBox x:Name="chkbox_dlc2" Content="Breaking Ground DLC" HorizontalAlignment="Left" Height="20" Margin="320,51,0,0" VerticalAlignment="Top" Width="145" RenderTransformOrigin="0.139,1.11" IsChecked="True"/>
-        <Button x:Name="btn_Setup" Content="설정 시작" Margin="0,0,84.6,9.8" Click="Btn_Setup_Click" IsEnabled="False" RenderTransformOrigin="-0.099,0.48" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75"/>
-        <Button x:Name="btn_Exit" Content="종료" Margin="0,0,9.6,9.8" Click="Btn_Exit_Click" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="70"/>
-        <Label Content="옵션: " HorizontalAlignment="Left" Height="25" Margin="10,74,0,0" VerticalAlignment="Top" Width="69"/>
-        <CheckBox x:Name="chkbox_ckan" Content="CKAN 설치" HorizontalAlignment="Left" Height="20" Margin="104,80,0,0" VerticalAlignment="Top" Width="89" IsChecked="True"/>
-        <TextBox x:Name="txtbox_log" Margin="10,104,9.6,39.8" TextWrapping="Wrap" Text="" IsReadOnly="True" VerticalScrollBarVisibility="Auto"/>
-        <Button x:Name="btn_OpenKspDir" Content="KSP 폴더 열기" Margin="10,0,0,9.8" HorizontalAlignment="Left" Width="89" IsEnabled="False" Click="Btn_OpenKspDir_Click" Height="25" VerticalAlignment="Bottom"/>
+        <Label Content="KSP 폴더: " HorizontalAlignment="Left" Height="27" Margin="10,10,0,0" VerticalAlignment="Top" Width="89" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="txtbox_kspDir" Margin="104,10,84.6,0" TextWrapping="Wrap" Text="KSP_x64.exe를 선택하세요." IsReadOnly="True" Height="27" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
+        <Button x:Name="btn_kspDir" Content="폴더 탐색" Height="27" Margin="0,10,9.6,0" VerticalAlignment="Top" Click="Btn_kspDir_Click" HorizontalAlignment="Right" Width="70"/>
+        <Label Content="한글패치 선택: " HorizontalAlignment="Left" Height="27" Margin="10,45,0,0" VerticalAlignment="Top" Width="89" VerticalContentAlignment="Center"/>
+        <CheckBox x:Name="chkbox_vanilla" Content="바닐라" HorizontalAlignment="Left" Height="27" Margin="104,45,0,0" VerticalAlignment="Top" Width="66" RenderTransformOrigin="0.139,1.11" IsChecked="True" VerticalContentAlignment="Center"/>
+        <CheckBox x:Name="chkbox_dlc1" Content="Making History DLC" HorizontalAlignment="Left" Height="27" Margin="175,45,0,0" VerticalAlignment="Top" Width="140" RenderTransformOrigin="0.139,1.11" IsChecked="True" VerticalContentAlignment="Center"/>
+        <CheckBox x:Name="chkbox_dlc2" Content="Breaking Ground DLC" HorizontalAlignment="Left" Height="27" Margin="320,45,0,0" VerticalAlignment="Top" Width="145" RenderTransformOrigin="0.139,1.11" IsChecked="True" VerticalContentAlignment="Center"/>
+        <Button x:Name="btn_Setup" Content="설정 시작" Margin="0,0,84.6,9.8" Click="Btn_Setup_Click" IsEnabled="False" RenderTransformOrigin="-0.099,0.48" Height="27" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75"/>
+        <Button x:Name="btn_Exit" Content="종료" Margin="0,0,9.6,9.8" Click="Btn_Exit_Click" Height="27" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="70"/>
+        <Label Content="옵션: " HorizontalAlignment="Left" Height="27" Margin="10,74,0,0" VerticalAlignment="Top" Width="89" VerticalContentAlignment="Center"/>
+        <CheckBox x:Name="chkbox_ckan" Content="CKAN 설치" HorizontalAlignment="Left" Height="27" Margin="104,74,0,0" VerticalAlignment="Top" Width="89" IsChecked="True" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="txtbox_log" Margin="10,104,9.6,41.8" TextWrapping="Wrap" Text="" IsReadOnly="True" VerticalScrollBarVisibility="Auto"/>
+        <Button x:Name="btn_OpenKspDir" Content="KSP 폴더 열기" Margin="10,0,0,9.8" HorizontalAlignment="Left" Width="90" IsEnabled="False" Click="Btn_OpenKspDir_Click" Height="27" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>
