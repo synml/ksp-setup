@@ -17,13 +17,38 @@ namespace KSP_Setup
         public string KoreanDownloadDir { get; set; }   //한글패치 파일이 저장된 디렉토리를 저장한다.
         public string KspDirectory { get; set; }    //KSP가 설치된 디렉토리를 저장한다.
 
+        //각 버전별 다운로드 URL을 저장하는 배열을 선언한다.
+        //0번: 바닐라, 1번: Making History DLC, 2번: Breaking Ground DLC
+        private readonly string[] downloadUrl_172 = new string[3];
+        private readonly string[] downloadUrl_171 = new string[3];
+        private readonly string[] downloadUrl_170 = new string[2];
+        private readonly string[] downloadUrl_161 = new string[2];
+
 
         //메인 메소드
         public MainWindow()
         {
+            //디렉토리 필드를 초기화한다.
             CkanDownloadDir = "./CKAN/";
             KoreanDownloadDir = "./한글패치/";
             KspDirectory = null;
+
+            //한글패치 다운로드 링크를 초기화한다.
+            downloadUrl_172[0] = "http://cfile239.uf.daum.net/attach/998A94355D028BBA0109E9";
+            downloadUrl_172[1] = "http://cfile231.uf.daum.net/attach/998AF0355D028BC1011CCB";
+            downloadUrl_172[2] = "http://cfile224.uf.daum.net/attach/998AF4355D028BC6012A69";
+
+            downloadUrl_171[0] = "http://cfile203.uf.daum.net/attach/9980C4385CF6B215046670";
+            downloadUrl_171[1] = "http://cfile201.uf.daum.net/attach/9981EB385CF6B21A0424CB";
+            downloadUrl_171[2] = "http://cfile228.uf.daum.net/attach/997753385CF6B21E051470";
+
+            downloadUrl_170[0] = "http://cfile234.uf.daum.net/attach/9902DC505CBE00E60343A0";
+            downloadUrl_170[1] = "http://cfile229.uf.daum.net/attach/990378505CBE00EA0315DC";
+
+            downloadUrl_161[0] = "http://cfile234.uf.daum.net/attach/99B08C355C3DEAFA27BF73";
+            downloadUrl_161[1] = "http://cfile217.uf.daum.net/attach/9960B2355C3DEAFE36D20B";
+
+            //창 띄우기
             InitializeComponent();
         }
 
@@ -89,7 +114,7 @@ namespace KSP_Setup
         }
 
         //한글패치 파일을 다운로드하는 메소드
-        private int KoreanFileDownload(int downloadMode, string fileName)
+        private int KoreanFileDownload(string downloadUrl, int downloadMode, string fileName)
         {
             try
             {
@@ -98,13 +123,13 @@ namespace KSP_Setup
                     switch (downloadMode)
                     {
                         case 0:
-                            webClient.DownloadFile("http://cfile239.uf.daum.net/attach/998A94355D028BBA0109E9", KoreanDownloadDir + fileName);
+                            webClient.DownloadFile(downloadUrl, KoreanDownloadDir + fileName);
                             break;
                         case 1:
-                            webClient.DownloadFile("http://cfile231.uf.daum.net/attach/998AF0355D028BC1011CCB", KoreanDownloadDir + fileName);
+                            webClient.DownloadFile(downloadUrl, KoreanDownloadDir + fileName);
                             break;
                         case 2:
-                            webClient.DownloadFile("http://cfile224.uf.daum.net/attach/998AF4355D028BC6012A69", KoreanDownloadDir + fileName);
+                            webClient.DownloadFile(downloadUrl, KoreanDownloadDir + fileName);
                             break;
                         default:
                             WriteLine("잘못된 다운로드 모드 설정입니다.");
@@ -124,10 +149,10 @@ namespace KSP_Setup
         //한글패치를 적용하는 메소드
         private int KoreanPatch()
         {
-            int retval;
-
             try
             {
+                int retval;
+
                 //다운로드 디렉토리를 만든다.
                 Directory.CreateDirectory(KoreanDownloadDir);
 
@@ -135,7 +160,7 @@ namespace KSP_Setup
                 if (chkbox_vanilla.IsChecked == true)
                 {
                     //한글패치 파일을 다운로드한다.
-                    retval = KoreanFileDownload(0, "바닐라.cfg");
+                    retval = KoreanFileDownload(downloadUrl_172[0], 0, "바닐라.cfg");
                     if (retval != 0)
                         return 1;
 
@@ -151,7 +176,7 @@ namespace KSP_Setup
                 if (chkbox_dlc1.IsChecked == true)
                 {
                     //한글패치 파일을 다운로드한다.
-                    retval = KoreanFileDownload(1, "Making_History_DLC.cfg");
+                    retval = KoreanFileDownload(downloadUrl_172[1], 1, "Making_History_DLC.cfg");
                     if (retval != 0)
                         return 1;
 
@@ -167,7 +192,7 @@ namespace KSP_Setup
                 if (chkbox_dlc2.IsChecked == true)
                 {
                     //한글패치 파일을 다운로드한다.
-                    retval = KoreanFileDownload(2, "Breaking_Ground_DLC.cfg");
+                    retval = KoreanFileDownload(downloadUrl_172[2], 2, "Breaking_Ground_DLC.cfg");
                     if (retval != 0)
                         return 1;
 
