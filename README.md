@@ -22,11 +22,11 @@
 
 ## Build Status
 
-![GitHub release](https://img.shields.io/github/release/LulinPollux/KSP-Setup.svg?style=popout-square) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/abf7f34ff7564bb8879b6e9a8c6ffb7a)](https://www.codacy.com/app/Lulin-Pollux/KSP-Setup?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=LulinPollux/KSP-Setup&amp;utm_campaign=Badge_Grade) ![GitHub last commit](https://img.shields.io/github/last-commit/LulinPollux/KSP-Setup.svg?style=popout-square) ![GitHub All Releases](https://img.shields.io/github/downloads/LulinPollux/KSP-Setup/total.svg?style=popout-square) ![GitHub](https://img.shields.io/github/license/LulinPollux/KSP-Setup.svg?style=popout-square) 
+[![GitHub release](https://img.shields.io/github/release/LulinPollux/KSP-Setup.svg?style=popout-square)](https://github.com/LulinPollux/KSP-Setup/releases/latest) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/abf7f34ff7564bb8879b6e9a8c6ffb7a)](https://www.codacy.com/app/Lulin-Pollux/KSP-Setup?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=LulinPollux/KSP-Setup&amp;utm_campaign=Badge_Grade) ![GitHub last commit](https://img.shields.io/github/last-commit/LulinPollux/KSP-Setup.svg?style=popout-square) ![GitHub All Releases](https://img.shields.io/github/downloads/LulinPollux/KSP-Setup/total.svg?style=popout-square) ![GitHub](https://img.shields.io/github/license/LulinPollux/KSP-Setup.svg?style=popout-square) 
 
 ## 설치 방법
 
-1. 위의 Release 뱃지를 클릭하거나 Release 링크를 클릭한다.
+1. 위의 Release 뱃지를 클릭하거나 [Release 링크](https://github.com/LulinPollux/KSP-Setup/releases/latest)를 클릭한다.
 2. 가장 최신 버전을 다운로드한다. (Latest Release)
 
 ## 사용 방법, 예제
