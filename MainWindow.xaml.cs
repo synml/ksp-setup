@@ -168,7 +168,7 @@ namespace KSP_Setup
                 File.Copy(sourceFileName, destFileName, true);
 
                 //한글패치 적용을 완료했다고 알린다.
-                WriteLine(name + " 한글패치 완료.");
+                WriteLine(name + " 영어패치 완료.");
             }
             catch (Exception e)
             {
@@ -220,7 +220,7 @@ namespace KSP_Setup
             try
             {
                 //다운로드 디렉토리를 만든다.
-                Directory.CreateDirectory(HangulDownloadDir);
+                Directory.CreateDirectory(EnglishDownloadDir);
 
                 //영어패치를 한다.
                 for (int i = 0; i <= 2; i++)
@@ -241,7 +241,7 @@ namespace KSP_Setup
                 }
 
                 //다운로드 디렉토리를 삭제한다.
-                Directory.Delete(HangulDownloadDir, true);
+                Directory.Delete(EnglishDownloadDir, true);
             }
             catch (Exception e)
             {
