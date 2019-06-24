@@ -207,49 +207,37 @@ namespace KSP_Setup
         {
             int retval;
 
-            //다운로드 디렉토리를 만든다.
-            Directory.CreateDirectory(HangulDownloadDir);
-
-            //체크박스 체크 유무에 따라 설치를 진행한다.
-            if (chkbox_vanilla.IsChecked == true)
+            try
             {
-                //한글파일을 다운로드한다.
-                retval = HangulFileDownload(0);
-                if (retval != 0)
-                    return 1;
+                //다운로드 디렉토리를 만든다.
+                Directory.CreateDirectory(HangulDownloadDir);
 
-                //한글파일을 적용한다.
-                retval = HangulFileApply(0);
-                if (retval != 0)
-                    return 1;
+                //한글패치를 한다.
+                for (int i = 0; i <= 2; i++)
+                {
+                    //1.7.0과 1.6.1은 Breaking DLC 한글패치 적용안함.
+                    if ((KspVersion <= 1) && (i == 2))
+                        break;
+
+                    //한글파일을 다운로드한다.
+                    retval = HangulFileDownload(i);
+                    if (retval != 0)
+                        return 1;
+
+                    //한글파일을 적용한다.
+                    retval = HangulFileApply(i);
+                    if (retval != 0)
+                        return 1;
+                }
+
+                //다운로드 디렉토리를 삭제한다.
+                Directory.Delete(HangulDownloadDir, true);
             }
-            if (chkbox_dlc1.IsChecked == true)
+            catch (Exception e)
             {
-                //한글파일을 다운로드한다.
-                retval = HangulFileDownload(1);
-                if (retval != 0)
-                    return 1;
-
-                //한글파일을 적용한다.
-                retval = HangulFileApply(1);
-                if (retval != 0)
-                    return 1;
+                WriteLine("오류: " + e.Message);
+                return 2;
             }
-            if (chkbox_dlc2.IsChecked == true)
-            {
-                //한글파일을 다운로드한다.
-                retval = HangulFileDownload(2);
-                if (retval != 0)
-                    return 1;
-
-                //한글파일을 적용한다.
-                retval = HangulFileApply(2);
-                if (retval != 0)
-                    return 1;
-            }
-
-            //다운로드 디렉토리를 삭제한다.
-            Directory.Delete(HangulDownloadDir, true);
 
             return 0;
         }
@@ -303,9 +291,7 @@ namespace KSP_Setup
             //한글패치 적용을 시작한다.
             retval = HangulPatch();
             if (retval != 0)
-            {
-                WriteLine("한글패치의 전체 또는 일부를 실패했습니다.");
-            }
+                return;
 
             //칸 띄우기
             WriteLine("");
