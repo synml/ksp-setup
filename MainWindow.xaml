@@ -9,21 +9,21 @@
     <Grid>
         <Label Content="KSP 폴더: " HorizontalAlignment="Left" Height="27" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" VerticalContentAlignment="Center" ToolTip="KSP가 설치된 폴더입니다."/>
         <TextBox x:Name="txtbox_kspDir" Margin="95,10,84.6,0" TextWrapping="Wrap" Text="KSP_x64.exe를 선택하세요." IsReadOnly="True" Height="27" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
-        <Button x:Name="btn_kspDir" Content="폴더 탐색" Height="27" Margin="0,10,9.6,0" VerticalAlignment="Top" Click="Btn_kspDir_Click" HorizontalAlignment="Right" Width="70"/>
-        <Label Content="지역화 설정: " HorizontalAlignment="Left" Height="27" Margin="10,42,0,0" VerticalAlignment="Top" Width="80" VerticalContentAlignment="Center" ToolTip="한글패치할 항목입니다."/>
+        <Button x:Name="btn_kspDir" Content="폴더 탐색" Height="27" Margin="0,10,9.6,0" VerticalAlignment="Top" Click="Btn_kspDir_Click" HorizontalAlignment="Right" Width="70" ToolTip="탐색기를 엽니다."/>
+        <Label Content="지역화 작업: " HorizontalAlignment="Left" Height="27" Margin="10,42,0,0" VerticalAlignment="Top" Width="80" VerticalContentAlignment="Center" ToolTip="지역화의 옵션을 선택하세요."/>
         <Button x:Name="btn_Setup" Content="설정 시작" Margin="0,0,84.6,9.8" Click="Btn_Setup_Click" IsEnabled="False" RenderTransformOrigin="-0.099,0.48" Height="27" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75"/>
         <Button x:Name="btn_Exit" Content="종료" Margin="0,0,9.6,9.8" Click="Btn_Exit_Click" Height="27" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="70"/>
-        <Label Content="추가 설정: " HorizontalAlignment="Left" Height="27" Margin="10,74,0,0" VerticalAlignment="Top" Width="80" VerticalContentAlignment="Center" ToolTip="추가로 작업할 항목입니다."/>
-        <CheckBox x:Name="chkbox_ckan" Content="CKAN 설치" HorizontalAlignment="Left" Height="27" Margin="95,74,0,0" VerticalAlignment="Top" Width="89" IsChecked="True" VerticalContentAlignment="Center"/>
+        <Label Content="추가 작업: " HorizontalAlignment="Left" Height="27" Margin="10,74,0,0" VerticalAlignment="Top" Width="80" VerticalContentAlignment="Center" ToolTip="추가로 작업할 항목입니다."/>
+        <CheckBox x:Name="chkbox_ckan" Content="CKAN 설치" HorizontalAlignment="Left" Height="27" Margin="95,74,0,0" VerticalAlignment="Top" Width="89" IsChecked="True" VerticalContentAlignment="Center" ToolTip="모드 관리자인 CKAN을 설치합니다."/>
         <TextBox x:Name="txtbox_log" Margin="10,106,9.6,41.8" TextWrapping="Wrap" Text="" IsReadOnly="True" VerticalScrollBarVisibility="Auto"/>
         <Button x:Name="btn_OpenKspDir" Content="KSP 폴더 열기" Margin="10,0,0,9.8" HorizontalAlignment="Left" Width="90" IsEnabled="False" Click="Btn_OpenKspDir_Click" Height="27" VerticalAlignment="Bottom" ToolTip="KSP가 설치된 폴더를 엽니다."/>
-        <ComboBox x:Name="ksp_version_selector" HorizontalAlignment="Left" Height="24" Margin="95,45,0,0" VerticalAlignment="Top" Width="65" ToolTip="한글패치를 적용할 KSP의 버전을 선택하세요." DropDownClosed="Ksp_version_selector_DropDownClosed">
+        <ComboBox x:Name="ksp_version_selector" HorizontalAlignment="Left" Height="24" Margin="95,45,0,0" VerticalAlignment="Top" Width="65" ToolTip="지역화를 적용할 KSP의 버전을 선택하세요." DropDownClosed="Ksp_version_selector_DropDownClosed">
             <ComboBoxItem x:Name="ksp_version_172" Content="1.7.2" IsSelected="True"/>
             <ComboBoxItem x:Name="ksp_version_171" Content="1.7.1"/>
             <ComboBoxItem x:Name="ksp_version_170" Content="1.7.0"/>
             <ComboBoxItem x:Name="ksp_version_161" Content="1.6.1"/>
         </ComboBox>
-        <ComboBox HorizontalAlignment="Left" Height="24" Margin="180,45,0,0" VerticalAlignment="Top" Width="70">
+        <ComboBox HorizontalAlignment="Left" Height="24" Margin="180,45,0,0" VerticalAlignment="Top" Width="70" ToolTip="KSP를 어떤 언어로 플레이할지 선택하세요.">
             <ComboBoxItem Content="한국어" IsSelected="True"/>
             <ComboBoxItem Content="영어"/>
         </ComboBox>
