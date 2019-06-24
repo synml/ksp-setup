@@ -109,7 +109,7 @@ namespace KSP_Setup
         //한글파일을 적용하는 메소드 (모드 0번: 바닐라, 1번: Making DLC, 2번: Breaking DLC)
         private int HangulFileApply(int applyMode)
         {
-            string sourceFileName, destFileName;
+            string name, sourceFileName, destFileName;
 
             try
             {
@@ -117,14 +117,17 @@ namespace KSP_Setup
                 switch (applyMode)
                 {
                     case 0:
+                        name = "바닐라";
                         sourceFileName = Path.Combine(HangulDownloadDir, "바닐라.cfg");
                         destFileName = Path.Combine(KspDirectory, "GameData\\Squad\\Localization\\dictionary.cfg");
                         break;
                     case 1:
+                        name = "Making History DLC";
                         sourceFileName = Path.Combine(HangulDownloadDir, "Making_History_DLC.cfg");
                         destFileName = Path.Combine(KspDirectory, "GameData\\SquadExpansion\\MakingHistory\\Localization\\dictionary.cfg");
                         break;
                     case 2:
+                        name = "Breaking Ground DLC";
                         sourceFileName = Path.Combine(HangulDownloadDir, "Breaking_Ground_DLC.cfg");
                         destFileName = Path.Combine(KspDirectory, "GameData\\SquadExpansion\\Serenity\\Localization\\dictionary.cfg");
                         break;
@@ -136,7 +139,7 @@ namespace KSP_Setup
                 //파일이 존재하지 않으면 중단한다.
                 if (!File.Exists(destFileName))
                 {
-                    WriteLine(sourceFileName.Substring(sourceFileName.LastIndexOf('\\') + 1) + "가 존재하지 않습니다.");
+                    WriteLine(name + "가 존재하지 않습니다.");
                     return 2;
                 }
 
@@ -144,21 +147,7 @@ namespace KSP_Setup
                 File.Copy(sourceFileName, destFileName, true);
 
                 //한글패치 적용을 완료했다고 알린다.
-                switch (applyMode)
-                {
-                    case 0:
-                        WriteLine("바닐라 한글패치 완료.");
-                        break;
-                    case 1:
-                        WriteLine("Making History DLC 한글패치 완료.");
-                        break;
-                    case 2:
-                        WriteLine("Breaking Ground DLC 한글패치 완료.");
-                        break;
-                    default:
-                        WriteLine("잘못된 적용 모드입니다.");
-                        return 1;
-                }
+                WriteLine(name + " 한글패치 완료.");
             }
             catch (Exception e)
             {
