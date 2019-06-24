@@ -306,18 +306,6 @@ namespace KSP_Setup
         //KSP 버전 선택기의 드롭다운을 닫았을 때의 이벤트 메소드
         private void Ksp_version_selector_DropDownClosed(object sender, EventArgs e)
         {
-            //1.7.0과 1.6.1은 Breaking Ground DLC 한글파일이 없으므로 체크하지 못하게 한다.
-            if ((ksp_version_170.IsSelected == true) || (ksp_version_161.IsSelected == true))
-            {
-                chkbox_dlc2.IsChecked = false;
-                chkbox_dlc2.IsEnabled = false;
-            }
-            else
-            {
-                chkbox_dlc2.IsChecked = true;
-                chkbox_dlc2.IsEnabled = true;
-            }
-
             //KSP 버전 선택에 따라 필드의 값을 변경한다.
             if (ksp_version_172.IsSelected == true)
             {
