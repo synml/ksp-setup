@@ -111,27 +111,28 @@ namespace KSP_Setup
         {
             string sourceFileName, destFileName;
 
-            switch (applyMode)
-            {
-                case 0:
-                    sourceFileName = Path.Combine(HangulDownloadDir, "바닐라.cfg");
-                    destFileName = Path.Combine(KspDirectory, "GameData\\Squad\\Localization\\dictionary.cfg");
-                    break;
-                case 1:
-                    sourceFileName = Path.Combine(HangulDownloadDir, "Making_History_DLC.cfg");
-                    destFileName = Path.Combine(KspDirectory, "GameData\\SquadExpansion\\MakingHistory\\Localization\\dictionary.cfg");
-                    break;
-                case 2:
-                    sourceFileName = Path.Combine(HangulDownloadDir, "Breaking_Ground_DLC.cfg");
-                    destFileName = Path.Combine(KspDirectory, "GameData\\SquadExpansion\\Serenity\\Localization\\dictionary.cfg");
-                    break;
-                default:
-                    WriteLine("잘못된 적용 모드입니다.");
-                    return 1;
-            }
-
             try
             {
+                //원본, 대상 파일의 경로를 설정한다.
+                switch (applyMode)
+                {
+                    case 0:
+                        sourceFileName = Path.Combine(HangulDownloadDir, "바닐라.cfg");
+                        destFileName = Path.Combine(KspDirectory, "GameData\\Squad\\Localization\\dictionary.cfg");
+                        break;
+                    case 1:
+                        sourceFileName = Path.Combine(HangulDownloadDir, "Making_History_DLC.cfg");
+                        destFileName = Path.Combine(KspDirectory, "GameData\\SquadExpansion\\MakingHistory\\Localization\\dictionary.cfg");
+                        break;
+                    case 2:
+                        sourceFileName = Path.Combine(HangulDownloadDir, "Breaking_Ground_DLC.cfg");
+                        destFileName = Path.Combine(KspDirectory, "GameData\\SquadExpansion\\Serenity\\Localization\\dictionary.cfg");
+                        break;
+                    default:
+                        WriteLine("잘못된 적용 모드입니다.");
+                        return 1;
+                }
+
                 //파일이 존재하지 않으면 중단한다.
                 if (!File.Exists(destFileName))
                 {
@@ -141,6 +142,23 @@ namespace KSP_Setup
 
                 //파일을 복사하여 덮어쓴다.
                 File.Copy(sourceFileName, destFileName, true);
+
+                //한글패치 적용을 완료했다고 알린다.
+                switch (applyMode)
+                {
+                    case 0:
+                        WriteLine("바닐라 한글패치 완료.");
+                        break;
+                    case 1:
+                        WriteLine("Making History DLC 한글패치 완료.");
+                        break;
+                    case 2:
+                        WriteLine("Breaking Ground DLC 한글패치 완료.");
+                        break;
+                    default:
+                        WriteLine("잘못된 적용 모드입니다.");
+                        return 1;
+                }
             }
             catch (Exception e)
             {
@@ -204,9 +222,6 @@ namespace KSP_Setup
                 retval = HangulFileApply(0);
                 if (retval != 0)
                     return 1;
-
-                //한글패치 적용을 완료했다고 알린다.
-                WriteLine("바닐라 한글패치 완료.");
             }
             if (chkbox_dlc1.IsChecked == true)
             {
@@ -219,9 +234,6 @@ namespace KSP_Setup
                 retval = HangulFileApply(1);
                 if (retval != 0)
                     return 1;
-
-                //한글패치 적용을 완료했다고 알린다.
-                WriteLine("Making History DLC 한글패치 완료.");
             }
             if (chkbox_dlc2.IsChecked == true)
             {
@@ -234,9 +246,6 @@ namespace KSP_Setup
                 retval = HangulFileApply(2);
                 if (retval != 0)
                     return 1;
-
-                //한글패치 적용을 완료했다고 알린다.
-                WriteLine("Breaking Ground DLC 한글패치 완료.");
             }
 
             //다운로드 디렉토리를 삭제한다.
