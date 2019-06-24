@@ -33,6 +33,7 @@ namespace KSP_Setup
             CkanDownloadDir = ".\\CKAN";
             EnglishDownloadDir = ".\\영어패치";
             HangulDownloadDir = ".\\한글패치";
+            Localization = "korean";
             KspDirectory = null;
             KspVersion = 3;
 
