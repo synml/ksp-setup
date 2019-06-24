@@ -13,7 +13,7 @@ namespace KSP_Setup
     public partial class MainWindow : Window
     {
         public string CkanDownloadDir { get; set; }     //CKAN의 다운로드 파일이 저장된 디렉토리를 저장한다.
-        public string EnglishDownloadDir { get; set; }  //영어파일이 저정된 디렉토리를 저장한다.
+        public string EnglishDownloadDir { get; set; }  //영문파일이 저정된 디렉토리를 저장한다.
         public string HangulDownloadDir { get; set; }   //한글파일이 저장된 디렉토리를 저장한다.
         public string Localization { get; set; }      //지역화 설정을 저장한다.
         public string KspDirectory { get; set; }    //KSP가 설치된 디렉토리를 저장한다.
@@ -29,9 +29,9 @@ namespace KSP_Setup
         //생성자
         public MainWindow()
         {
-            //디렉토리 필드를 초기화한다.
+            //필드를 초기화한다.
             CkanDownloadDir = ".\\CKAN";
-            EnglishDownloadDir = ".\\영어패치";
+            EnglishDownloadDir = ".\\영문패치";
             HangulDownloadDir = ".\\한글패치";
             Localization = "korean";
             KspDirectory = null;
@@ -53,7 +53,7 @@ namespace KSP_Setup
             hangulUrl[0, 1] = "http://cfile217.uf.daum.net/attach/9960B2355C3DEAFE36D20B";
             //---------------------------------------------------------------------------------
 
-            //영어파일 다운로드 링크를 초기화한다.
+            //영문파일 다운로드 링크를 초기화한다.
             englishUrl[3, 0] = "http://cfile202.uf.daum.net/attach/99E4A0415D028D3202B879";
             englishUrl[3, 1] = "http://cfile228.uf.daum.net/attach/99E4F3415D028D360221C4";
             englishUrl[3, 2] = "http://cfile201.uf.daum.net/attach/99E55D415D028D3B02F25B";
@@ -127,7 +127,7 @@ namespace KSP_Setup
             WriteLine("CKAN 다운로드 중. . .");
         }
 
-        //영어파일을 적용하는 메소드 (모드 0번: 바닐라, 1번: Making DLC, 2번: Breaking DLC)
+        //영문파일을 적용하는 메소드 (모드 0번: 바닐라, 1번: Making DLC, 2번: Breaking DLC)
         private int EnglishFileApply(int applyMode)
         {
             string name, sourceFileName, destFileName;
@@ -167,8 +167,8 @@ namespace KSP_Setup
                 //파일을 복사하여 덮어쓴다.
                 File.Copy(sourceFileName, destFileName, true);
 
-                //한글패치 적용을 완료했다고 알린다.
-                WriteLine(name + " 영어패치 완료.");
+                //영문패치 적용을 완료했다고 알린다.
+                WriteLine(name + " 영문패치 완료.");
             }
             catch (Exception e)
             {
@@ -179,7 +179,7 @@ namespace KSP_Setup
             return 0;
         }
 
-        //영어파일을 다운로드하는 메소드 (모드 0번: 바닐라, 1번: Making DLC, 2번: Breaking DLC)
+        //영문파일을 다운로드하는 메소드 (모드 0번: 바닐라, 1번: Making DLC, 2번: Breaking DLC)
         private int EnglishFileDownload(int downloadMode)
         {
             try
@@ -212,7 +212,7 @@ namespace KSP_Setup
             return 0;
         }
 
-        //영어패치를 하는 메소드
+        //영문패치를 하는 메소드
         private int EnglishPatch()
         {
             int retval;
@@ -222,19 +222,19 @@ namespace KSP_Setup
                 //다운로드 디렉토리를 만든다.
                 Directory.CreateDirectory(EnglishDownloadDir);
 
-                //영어패치를 한다.
+                //영문패치를 한다.
                 for (int i = 0; i <= 2; i++)
                 {
-                    //1.7.0과 1.6.1은 Breaking DLC 영어패치 적용안함.
+                    //1.7.0과 1.6.1은 Breaking DLC 영문패치 적용안함.
                     if ((KspVersion <= 1) && (i == 2))
                         break;
 
-                    //영어파일을 다운로드한다.
+                    //영문파일을 다운로드한다.
                     retval = EnglishFileDownload(i);
                     if (retval != 0)
                         return 1;
 
-                    //영어파일을 적용한다.
+                    //영문파일을 적용한다.
                     retval = EnglishFileApply(i);
                     if (retval != 0)
                         return 1;
@@ -432,7 +432,7 @@ namespace KSP_Setup
             }
             else if (Localization == "english")
             {
-                //영어패치를 한다.
+                //영문패치를 한다.
                 retval = EnglishPatch();
                 if (retval != 0)
                     return;
