@@ -18,10 +18,11 @@ namespace KSP_Setup
         public string KspDirectory { get; set; }    //KSP가 설치된 디렉토리를 저장한다.
         public int KspVersion { get; set; }    //사용자가 설정한 ksp 버전을 저장한다.
 
-        //각 버전별 다운로드 URL을 저장하는 배열을 선언한다. (행: 버전, 열: 항목)
+        //지역화 파일의 다운로드 URL을 저장하는 2차원 배열을 선언한다. (행: 버전, 열: 항목)
         //3행: 1.7.2, 2행: 1.7.1, 1행: 1.7.0, 0행: 1.6.1
         //0열: 바닐라, 1열: Making History DLC, 2열: Breaking Ground DLC
-        private readonly string[,] downloadUrl = new string[4, 3];
+        private readonly string[,] hangulUrl = new string[4, 3];
+        private readonly string[,] englishUrl = new string[4, 3];
 
 
         //생성자
@@ -34,19 +35,36 @@ namespace KSP_Setup
             KspVersion = 3;
 
             //한글패치 다운로드 링크를 초기화한다.
-            downloadUrl[3, 0] = "http://cfile239.uf.daum.net/attach/998A94355D028BBA0109E9";
-            downloadUrl[3, 1] = "http://cfile231.uf.daum.net/attach/998AF0355D028BC1011CCB";
-            downloadUrl[3, 2] = "http://cfile224.uf.daum.net/attach/998AF4355D028BC6012A69";
+            hangulUrl[3, 0] = "http://cfile239.uf.daum.net/attach/998A94355D028BBA0109E9";
+            hangulUrl[3, 1] = "http://cfile231.uf.daum.net/attach/998AF0355D028BC1011CCB";
+            hangulUrl[3, 2] = "http://cfile224.uf.daum.net/attach/998AF4355D028BC6012A69";
 
-            downloadUrl[2, 0] = "http://cfile203.uf.daum.net/attach/9980C4385CF6B215046670";
-            downloadUrl[2, 1] = "http://cfile201.uf.daum.net/attach/9981EB385CF6B21A0424CB";
-            downloadUrl[2, 2] = "http://cfile228.uf.daum.net/attach/997753385CF6B21E051470";
+            hangulUrl[2, 0] = "http://cfile203.uf.daum.net/attach/9980C4385CF6B215046670";
+            hangulUrl[2, 1] = "http://cfile201.uf.daum.net/attach/9981EB385CF6B21A0424CB";
+            hangulUrl[2, 2] = "http://cfile228.uf.daum.net/attach/997753385CF6B21E051470";
 
-            downloadUrl[1, 0] = "http://cfile234.uf.daum.net/attach/9902DC505CBE00E60343A0";
-            downloadUrl[1, 1] = "http://cfile229.uf.daum.net/attach/990378505CBE00EA0315DC";
+            hangulUrl[1, 0] = "http://cfile234.uf.daum.net/attach/9902DC505CBE00E60343A0";
+            hangulUrl[1, 1] = "http://cfile229.uf.daum.net/attach/990378505CBE00EA0315DC";
 
-            downloadUrl[0, 0] = "http://cfile234.uf.daum.net/attach/99B08C355C3DEAFA27BF73";
-            downloadUrl[0, 1] = "http://cfile217.uf.daum.net/attach/9960B2355C3DEAFE36D20B";
+            hangulUrl[0, 0] = "http://cfile234.uf.daum.net/attach/99B08C355C3DEAFA27BF73";
+            hangulUrl[0, 1] = "http://cfile217.uf.daum.net/attach/9960B2355C3DEAFE36D20B";
+            //---------------------------------------------------------------------------------
+
+            //영어패치 다운로드 링크를 초기화한다.
+            englishUrl[3, 0] = "http://cfile202.uf.daum.net/attach/99E4A0415D028D3202B879";
+            englishUrl[3, 1] = "http://cfile228.uf.daum.net/attach/99E4F3415D028D360221C4";
+            englishUrl[3, 2] = "http://cfile201.uf.daum.net/attach/99E55D415D028D3B02F25B";
+
+            englishUrl[2, 0] = "http://cfile202.uf.daum.net/attach/99691D405CF6B24304E219";
+            englishUrl[2, 1] = "http://cfile213.uf.daum.net/attach/996925405CF6B24B04C068";
+            englishUrl[2, 2] = "http://cfile227.uf.daum.net/attach/996935405CF6B25104636B";
+
+            englishUrl[1, 0] = "http://cfile219.uf.daum.net/attach/99039F505CBE011D039E03";
+            englishUrl[1, 1] = "http://cfile202.uf.daum.net/attach/990400505CBE012803C2C5";
+
+            englishUrl[0, 0] = "http://cfile215.uf.daum.net/attach/9915E2355C3DEB04188C58";
+            englishUrl[0, 1] = "http://cfile215.uf.daum.net/attach/99D69D355C3DEB0725BB68";
+            //---------------------------------------------------------------------------------
 
             //창 띄우기
             InitializeComponent();
@@ -168,13 +186,13 @@ namespace KSP_Setup
                     switch (downloadMode)
                     {
                         case 0:
-                            webClient.DownloadFile(downloadUrl[KspVersion, 0], Path.Combine(HangulDownloadDir, "바닐라.cfg"));
+                            webClient.DownloadFile(hangulUrl[KspVersion, 0], Path.Combine(HangulDownloadDir, "바닐라.cfg"));
                             break;
                         case 1:
-                            webClient.DownloadFile(downloadUrl[KspVersion, 1], Path.Combine(HangulDownloadDir, "Making_History_DLC.cfg"));
+                            webClient.DownloadFile(hangulUrl[KspVersion, 1], Path.Combine(HangulDownloadDir, "Making_History_DLC.cfg"));
                             break;
                         case 2:
-                            webClient.DownloadFile(downloadUrl[KspVersion, 2], Path.Combine(HangulDownloadDir, "Breaking_Ground_DLC.cfg"));
+                            webClient.DownloadFile(hangulUrl[KspVersion, 2], Path.Combine(HangulDownloadDir, "Breaking_Ground_DLC.cfg"));
                             break;
                         default:
                             WriteLine("잘못된 다운로드 모드입니다.");
