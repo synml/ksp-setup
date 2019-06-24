@@ -12,9 +12,9 @@ namespace KSP_Setup
     /// </summary>
     public partial class MainWindow : Window
     {
-        //필드 목록
         public string CkanDownloadDir { get; set; }     //CKAN의 다운로드 파일이 저장된 디렉토리를 저장한다.
         public string HangulDownloadDir { get; set; }   //한글패치 파일이 저장된 디렉토리를 저장한다.
+        public string Localization { get; set; }       //지역화 설정을 저장한다.
         public string KspDirectory { get; set; }    //KSP가 설치된 디렉토리를 저장한다.
         public int KspVersion { get; set; }    //사용자가 설정한 ksp 버전을 저장한다.
 
@@ -24,7 +24,7 @@ namespace KSP_Setup
         private readonly string[,] downloadUrl = new string[4, 3];
 
 
-        //메인 메소드
+        //생성자
         public MainWindow()
         {
             //디렉토리 필드를 초기화한다.
@@ -326,6 +326,23 @@ namespace KSP_Setup
             else
             {
                 WriteLine("잘못된 버전을 선택했습니다.");
+            }
+        }
+
+        //지역화 선택기의 드롭다운을 닫았을 때의 이벤트 메소드
+        private void Localization_selector_DropDownClosed(object sender, EventArgs e)
+        {
+            if (localization_korean.IsSelected == true)
+            {
+                Localization = "korean";
+            }
+            else if (localization_english.IsSelected == true)
+            {
+                Localization = "english";
+            }
+            else
+            {
+                WriteLine("잘못된 언어를 선택했습니다.");
             }
         }
     }

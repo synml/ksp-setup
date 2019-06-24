@@ -23,9 +23,9 @@
             <ComboBoxItem x:Name="ksp_version_170" Content="1.7.0"/>
             <ComboBoxItem x:Name="ksp_version_161" Content="1.6.1"/>
         </ComboBox>
-        <ComboBox HorizontalAlignment="Left" Height="24" Margin="180,45,0,0" VerticalAlignment="Top" Width="70" ToolTip="KSP를 어떤 언어로 플레이할지 선택하세요.">
-            <ComboBoxItem Content="한국어" IsSelected="True"/>
-            <ComboBoxItem Content="영어"/>
+        <ComboBox x:Name="localization_selector" HorizontalAlignment="Left" Height="24" Margin="180,45,0,0" VerticalAlignment="Top" Width="70" ToolTip="KSP를 어떤 언어로 플레이할지 선택하세요." DropDownClosed="Localization_selector_DropDownClosed">
+            <ComboBoxItem x:Name="localization_korean" Content="한국어" IsSelected="True"/>
+            <ComboBoxItem x:Name="localization_english" Content="영어"/>
         </ComboBox>
     </Grid>
 </Window>
