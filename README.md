@@ -74,9 +74,9 @@
 ## 기여 방법
 
 1. [이 프로젝트](https://github.com/LulinPollux/KSP-Setup)를 포크합니다.
-2. GitHub Desktop에서 새 브랜치를 만들거나 master 브렌치를 그대로 사용합니다.
+2. GitHub Desktop에서 새 브랜치를 만들거나 master 브랜치를 그대로 사용합니다.
 3. 수정사항을 commit하세요.
-4. 새 브랜치에 push하세요.
+4. 선택한 브랜치에 push하세요.
 5. Pull request를 보내주세요.
 
 ## 라이센스
