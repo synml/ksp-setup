@@ -373,13 +373,6 @@ namespace KSP_Setup
             return 0;
         }
 
-        //로그를 기록하는 메소드
-        private void WriteLine(string str)
-        {
-            txtbox_log.AppendText(str + "\n");
-            txtbox_log.ScrollToEnd();
-        }
-
         //-----------------------------------------------------------------------------------------
 
         //종료 버튼을 클릭한 경우의 이벤트 메소드
@@ -485,6 +478,13 @@ namespace KSP_Setup
             {
                 WriteLine("잘못된 언어를 선택했습니다.");
             }
+        }
+
+        //로그를 기록하는 메소드
+        private void WriteLine(string str)
+        {
+            txtbox_log.AppendText(str + "\n");
+            txtbox_log.ScrollToEnd();
         }
     }
 }
