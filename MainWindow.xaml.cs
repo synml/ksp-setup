@@ -229,8 +229,11 @@ namespace KSP_Setup
                 //파일을 복사하여 덮어쓴다.
                 File.Copy(sourceFileName, destFileName, true);
 
-                //한글패치 적용을 완료했다고 알린다.
-                WriteLine(name + " 현지화를 완료했습니다.");
+                //언어 파일의 적용을 완료했다고 알린다.
+                if (KspLanguage == "korean")
+                    WriteLine(name + " 한글패치를 완료했습니다.");
+                else if (KspLanguage == "english")
+                    WriteLine(name + " 영문패치를 완료했습니다.");
             }
             catch (Exception e)
             {
