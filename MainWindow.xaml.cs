@@ -182,29 +182,34 @@ namespace KSP_Setup
         {
             try
             {
+                string address = downloadURL[KspLanguage, KspVersion, downloadMode];
+                string fileName;
+
+                switch (downloadMode)
+                {
+                    case 0:
+                        fileName = Path.Combine(DownloadDir, "바닐라.cfg");
+                        break;
+                    case 1:
+                        fileName = Path.Combine(DownloadDir, "Making_History_DLC.cfg");
+                        break;
+                    case 2:
+                        fileName = Path.Combine(DownloadDir, "Breaking_Ground_DLC.cfg");
+                        break;
+                    default:
+                        WriteLine("잘못된 다운로드 모드입니다.");
+                        return 1;
+                }
+
                 using (WebClient webClient = new WebClient())
                 {
-                    switch (downloadMode)
-                    {
-                        case 0:
-                            webClient.DownloadFile(downloadURL[KspLanguage, KspVersion, 0], Path.Combine(DownloadDir, "바닐라.cfg"));
-                            break;
-                        case 1:
-                            webClient.DownloadFile(downloadURL[KspLanguage, KspVersion, 1], Path.Combine(DownloadDir, "Making_History_DLC.cfg"));
-                            break;
-                        case 2:
-                            webClient.DownloadFile(downloadURL[KspLanguage, KspVersion, 2], Path.Combine(DownloadDir, "Breaking_Ground_DLC.cfg"));
-                            break;
-                        default:
-                            WriteLine("잘못된 다운로드 모드입니다.");
-                            return 1;
-                    }
+                    webClient.DownloadFile(address, fileName);
                 }
             }
             catch (Exception e)
             {
                 WriteLine("오류: " + e.Message);
-                return 3;
+                return 2;
             }
 
             return 0;
