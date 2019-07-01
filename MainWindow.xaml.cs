@@ -12,11 +12,9 @@ namespace KSP_Setup
     /// </summary>
     public partial class MainWindow : Window
     {
-        public string CkanDownloadDir { get; set; }     //CKAN의 다운로드 파일이 저장된 디렉토리를 저장한다.
-        public string EnglishDownloadDir { get; set; }  //영문파일이 저정된 디렉토리를 저장한다.
-        public string HangulDownloadDir { get; set; }   //한글파일이 저장된 디렉토리를 저장한다.
-        public string Localization { get; set; }      //지역화 설정을 저장한다.
+        public string DownloadDir { get; set; }    //다운로드한 파일이 저장될 디렉토리를 저장한다.
         public string KspDirectory { get; set; }    //KSP가 설치된 디렉토리를 저장한다.
+        public string KspLanguage { get; set; }    //사용자가 설정한 ksp 언어를 저장한다.
         public int KspVersion { get; set; }    //사용자가 설정한 ksp 버전을 저장한다.
 
         //지역화 파일의 다운로드 URL을 저장하는 2차원 배열을 선언한다. (행: 버전, 열: 항목)
@@ -30,10 +28,8 @@ namespace KSP_Setup
         public MainWindow()
         {
             //필드를 초기화한다.
-            CkanDownloadDir = ".\\CKAN";
-            EnglishDownloadDir = ".\\영문패치";
-            HangulDownloadDir = ".\\한글패치";
-            Localization = "korean";
+            DownloadDir = ".\\Download";
+            KspLanguage = "korean";
             KspDirectory = null;
             KspVersion = 3;
 
@@ -85,7 +81,7 @@ namespace KSP_Setup
                 try
                 {
                     //다운로드 디렉토리를 만든다.
-                    Directory.CreateDirectory(CkanDownloadDir);
+                    Directory.CreateDirectory(DownloadDir);
 
                     //CKAN의 최신버전을 다운로드할 수 있는 URL을 만든다.
                     string url = web.Url.ToString();
@@ -95,19 +91,19 @@ namespace KSP_Setup
                     //파일을 다운로드한다.
                     using (WebClient webClient = new WebClient())
                     {
-                        webClient.DownloadFile(ckanUrl, Path.Combine(CkanDownloadDir, "ckan.exe"));
+                        webClient.DownloadFile(ckanUrl, Path.Combine(DownloadDir, "ckan.exe"));
                     }
                     WriteLine("CKAN 다운로드 완료.");
 
                     //파일을 KSP 디렉토리로 복사한다. (이미 파일이 존재하면 덮어씌운다.)
-                    File.Copy(Path.Combine(CkanDownloadDir, "ckan.exe"), Path.Combine(KspDirectory, "ckan.exe"), true);
+                    File.Copy(Path.Combine(DownloadDir, "ckan.exe"), Path.Combine(KspDirectory, "ckan.exe"), true);
 
                     //CKAN 설치를 완료했다고 알린다.
                     WriteLine("CKAN 설치 완료.");
                     WriteLine("");
 
                     //다운로드 디렉토리를 삭제한다.
-                    Directory.Delete(CkanDownloadDir, true);
+                    Directory.Delete(DownloadDir, true);
                 }
                 catch (Exception e)
                 {
@@ -139,17 +135,17 @@ namespace KSP_Setup
                 {
                     case 0:
                         name = "바닐라";
-                        sourceFileName = Path.Combine(EnglishDownloadDir, "바닐라.cfg");
+                        sourceFileName = Path.Combine(DownloadDir, "바닐라.cfg");
                         destFileName = Path.Combine(KspDirectory, "GameData\\Squad\\Localization\\dictionary.cfg");
                         break;
                     case 1:
                         name = "Making History DLC";
-                        sourceFileName = Path.Combine(EnglishDownloadDir, "Making_History_DLC.cfg");
+                        sourceFileName = Path.Combine(DownloadDir, "Making_History_DLC.cfg");
                         destFileName = Path.Combine(KspDirectory, "GameData\\SquadExpansion\\MakingHistory\\Localization\\dictionary.cfg");
                         break;
                     case 2:
                         name = "Breaking Ground DLC";
-                        sourceFileName = Path.Combine(EnglishDownloadDir, "Breaking_Ground_DLC.cfg");
+                        sourceFileName = Path.Combine(DownloadDir, "Breaking_Ground_DLC.cfg");
                         destFileName = Path.Combine(KspDirectory, "GameData\\SquadExpansion\\Serenity\\Localization\\dictionary.cfg");
                         break;
                     default:
@@ -189,13 +185,13 @@ namespace KSP_Setup
                     switch (downloadMode)
                     {
                         case 0:
-                            webClient.DownloadFile(englishUrl[KspVersion, 0], Path.Combine(EnglishDownloadDir, "바닐라.cfg"));
+                            webClient.DownloadFile(englishUrl[KspVersion, 0], Path.Combine(DownloadDir, "바닐라.cfg"));
                             break;
                         case 1:
-                            webClient.DownloadFile(englishUrl[KspVersion, 1], Path.Combine(EnglishDownloadDir, "Making_History_DLC.cfg"));
+                            webClient.DownloadFile(englishUrl[KspVersion, 1], Path.Combine(DownloadDir, "Making_History_DLC.cfg"));
                             break;
                         case 2:
-                            webClient.DownloadFile(englishUrl[KspVersion, 2], Path.Combine(EnglishDownloadDir, "Breaking_Ground_DLC.cfg"));
+                            webClient.DownloadFile(englishUrl[KspVersion, 2], Path.Combine(DownloadDir, "Breaking_Ground_DLC.cfg"));
                             break;
                         default:
                             WriteLine("잘못된 다운로드 모드입니다.");
@@ -220,7 +216,7 @@ namespace KSP_Setup
             try
             {
                 //다운로드 디렉토리를 만든다.
-                Directory.CreateDirectory(EnglishDownloadDir);
+                Directory.CreateDirectory(DownloadDir);
 
                 //영문패치를 한다.
                 for (int i = 0; i <= 2; i++)
@@ -241,7 +237,7 @@ namespace KSP_Setup
                 }
 
                 //다운로드 디렉토리를 삭제한다.
-                Directory.Delete(EnglishDownloadDir, true);
+                Directory.Delete(DownloadDir, true);
             }
             catch (Exception e)
             {
@@ -264,17 +260,17 @@ namespace KSP_Setup
                 {
                     case 0:
                         name = "바닐라";
-                        sourceFileName = Path.Combine(HangulDownloadDir, "바닐라.cfg");
+                        sourceFileName = Path.Combine(DownloadDir, "바닐라.cfg");
                         destFileName = Path.Combine(KspDirectory, "GameData\\Squad\\Localization\\dictionary.cfg");
                         break;
                     case 1:
                         name = "Making History DLC";
-                        sourceFileName = Path.Combine(HangulDownloadDir, "Making_History_DLC.cfg");
+                        sourceFileName = Path.Combine(DownloadDir, "Making_History_DLC.cfg");
                         destFileName = Path.Combine(KspDirectory, "GameData\\SquadExpansion\\MakingHistory\\Localization\\dictionary.cfg");
                         break;
                     case 2:
                         name = "Breaking Ground DLC";
-                        sourceFileName = Path.Combine(HangulDownloadDir, "Breaking_Ground_DLC.cfg");
+                        sourceFileName = Path.Combine(DownloadDir, "Breaking_Ground_DLC.cfg");
                         destFileName = Path.Combine(KspDirectory, "GameData\\SquadExpansion\\Serenity\\Localization\\dictionary.cfg");
                         break;
                     default:
@@ -314,13 +310,13 @@ namespace KSP_Setup
                     switch (downloadMode)
                     {
                         case 0:
-                            webClient.DownloadFile(hangulUrl[KspVersion, 0], Path.Combine(HangulDownloadDir, "바닐라.cfg"));
+                            webClient.DownloadFile(hangulUrl[KspVersion, 0], Path.Combine(DownloadDir, "바닐라.cfg"));
                             break;
                         case 1:
-                            webClient.DownloadFile(hangulUrl[KspVersion, 1], Path.Combine(HangulDownloadDir, "Making_History_DLC.cfg"));
+                            webClient.DownloadFile(hangulUrl[KspVersion, 1], Path.Combine(DownloadDir, "Making_History_DLC.cfg"));
                             break;
                         case 2:
-                            webClient.DownloadFile(hangulUrl[KspVersion, 2], Path.Combine(HangulDownloadDir, "Breaking_Ground_DLC.cfg"));
+                            webClient.DownloadFile(hangulUrl[KspVersion, 2], Path.Combine(DownloadDir, "Breaking_Ground_DLC.cfg"));
                             break;
                         default:
                             WriteLine("잘못된 다운로드 모드입니다.");
@@ -345,7 +341,7 @@ namespace KSP_Setup
             try
             {
                 //다운로드 디렉토리를 만든다.
-                Directory.CreateDirectory(HangulDownloadDir);
+                Directory.CreateDirectory(DownloadDir);
 
                 //한글패치를 한다.
                 for (int i = 0; i <= 2; i++)
@@ -366,7 +362,7 @@ namespace KSP_Setup
                 }
 
                 //다운로드 디렉토리를 삭제한다.
-                Directory.Delete(HangulDownloadDir, true);
+                Directory.Delete(DownloadDir, true);
             }
             catch (Exception e)
             {
@@ -423,14 +419,14 @@ namespace KSP_Setup
         {
             int retval;
 
-            if (Localization == "korean")
+            if (KspLanguage == "korean")
             {
                 //한글패치를 한다.
                 retval = HangulPatch();
                 if (retval != 0)
                     return;
             }
-            else if (Localization == "english")
+            else if (KspLanguage == "english")
             {
                 //영문패치를 한다.
                 retval = EnglishPatch();
@@ -479,11 +475,11 @@ namespace KSP_Setup
         {
             if (localization_korean.IsSelected == true)
             {
-                Localization = "korean";
+                KspLanguage = "korean";
             }
             else if (localization_english.IsSelected == true)
             {
-                Localization = "english";
+                KspLanguage = "english";
             }
             else
             {
