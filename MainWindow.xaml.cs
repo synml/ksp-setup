@@ -254,50 +254,37 @@ namespace KSP_Setup
                 //다운로드 디렉토리를 만든다.
                 Directory.CreateDirectory(DownloadDir);
 
-                if (KspLanguage == "korean")
+                for (int i = 0; i <= 2; i++)
                 {
-                    //한글패치를 한다.
-                    for (int i = 0; i <= 2; i++)
-                    {
-                        //1.7.0과 1.6.1은 Breaking DLC 한글패치 적용안함.
-                        if ((KspVersion <= 1) && (i == 2))
-                            break;
+                    //1.7.0과 1.6.1은 Breaking DLC 현지화 적용안함.
+                    if ((KspVersion <= 1) && (i == 2))
+                        break;
 
+                    //선택한 언어에 따라 다운로드를 한다.
+                    if (KspLanguage == "korean")
+                    {
                         //한글파일을 다운로드한다.
                         retval = HangulFileDownload(i);
                         if (retval != 0)
                             return 1;
-
-                        //한글파일을 적용한다.
-                        retval = LanguageFileApply(i);
-                        if (retval != 0)
-                            return 1;
                     }
-                }
-                else if (KspLanguage == "english")
-                {
-                    //영문패치를 한다.
-                    for (int i = 0; i <= 2; i++)
+                    else if (KspLanguage == "english")
                     {
-                        //1.7.0과 1.6.1은 Breaking DLC 영문패치 적용안함.
-                        if ((KspVersion <= 1) && (i == 2))
-                            break;
-
                         //영문파일을 다운로드한다.
                         retval = EnglishFileDownload(i);
                         if (retval != 0)
                             return 1;
-
-                        //영문파일을 적용한다.
-                        retval = LanguageFileApply(i);
-                        if (retval != 0)
-                            return 1;
                     }
-                }
-                else
-                {
-                    WriteLine("언어 선택이 잘못되었습니다.");
-                    return 1;
+                    else
+                    {
+                        WriteLine("언어 선택이 잘못되었습니다.");
+                        return 2;
+                    }
+
+                    //언어 파일을 적용한다.
+                    retval = LanguageFileApply(i);
+                    if (retval != 0)
+                        return 3;
                 }
 
                 //다운로드 디렉토리를 삭제한다.
@@ -306,7 +293,7 @@ namespace KSP_Setup
             catch (Exception e)
             {
                 WriteLine("오류: " + e.Message);
-                return 2;
+                return 4;
             }
 
             return 0;
