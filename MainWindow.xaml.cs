@@ -123,72 +123,6 @@ namespace KSP_Setup
             WriteLine("CKAN 다운로드 중. . .");
         }
 
-        //한글파일을 다운로드하는 메소드 (모드 0번: 바닐라, 1번: Making DLC, 2번: Breaking DLC)
-        private int HangulFileDownload(int downloadMode)
-        {
-            try
-            {
-                using (WebClient webClient = new WebClient())
-                {
-                    switch (downloadMode)
-                    {
-                        case 0:
-                            webClient.DownloadFile(hangulUrl[KspVersion, 0], Path.Combine(DownloadDir, "바닐라.cfg"));
-                            break;
-                        case 1:
-                            webClient.DownloadFile(hangulUrl[KspVersion, 1], Path.Combine(DownloadDir, "Making_History_DLC.cfg"));
-                            break;
-                        case 2:
-                            webClient.DownloadFile(hangulUrl[KspVersion, 2], Path.Combine(DownloadDir, "Breaking_Ground_DLC.cfg"));
-                            break;
-                        default:
-                            WriteLine("잘못된 다운로드 모드입니다.");
-                            return 1;
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                WriteLine("오류: " + e.Message);
-                return 2;
-            }
-
-            return 0;
-        }
-
-        //영문파일을 다운로드하는 메소드 (모드 0번: 바닐라, 1번: Making DLC, 2번: Breaking DLC)
-        private int EnglishFileDownload(int downloadMode)
-        {
-            try
-            {
-                using (WebClient webClient = new WebClient())
-                {
-                    switch (downloadMode)
-                    {
-                        case 0:
-                            webClient.DownloadFile(englishUrl[KspVersion, 0], Path.Combine(DownloadDir, "바닐라.cfg"));
-                            break;
-                        case 1:
-                            webClient.DownloadFile(englishUrl[KspVersion, 1], Path.Combine(DownloadDir, "Making_History_DLC.cfg"));
-                            break;
-                        case 2:
-                            webClient.DownloadFile(englishUrl[KspVersion, 2], Path.Combine(DownloadDir, "Breaking_Ground_DLC.cfg"));
-                            break;
-                        default:
-                            WriteLine("잘못된 다운로드 모드입니다.");
-                            return 1;
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                WriteLine("오류: " + e.Message);
-                return 2;
-            }
-
-            return 0;
-        }
-
         //언어 파일을 적용하는 메소드 (모드 0번: 바닐라, 1번: Making DLC, 2번: Breaking DLC)
         private int LanguageFileApply(int applyMode)
         {
@@ -244,6 +178,66 @@ namespace KSP_Setup
             return 0;
         }
 
+        //언어 파일을 다운로드하는 메소드 (모드 0번: 바닐라, 1번: Making DLC, 2번: Breaking DLC)
+        private int LanguageFileDownload(int downloadMode)
+        {
+            try
+            {
+                using (WebClient webClient = new WebClient())
+                {
+                    //선택한 언어에 따라 다운로드를 한다.
+                    if (KspLanguage == "korean")
+                    {
+                        switch (downloadMode)
+                        {
+                            case 0:
+                                webClient.DownloadFile(hangulUrl[KspVersion, 0], Path.Combine(DownloadDir, "바닐라.cfg"));
+                                break;
+                            case 1:
+                                webClient.DownloadFile(hangulUrl[KspVersion, 1], Path.Combine(DownloadDir, "Making_History_DLC.cfg"));
+                                break;
+                            case 2:
+                                webClient.DownloadFile(hangulUrl[KspVersion, 2], Path.Combine(DownloadDir, "Breaking_Ground_DLC.cfg"));
+                                break;
+                            default:
+                                WriteLine("잘못된 다운로드 모드입니다.");
+                                return 1;
+                        }
+                    }
+                    else if (KspLanguage == "english")
+                    {
+                        switch (downloadMode)
+                        {
+                            case 0:
+                                webClient.DownloadFile(englishUrl[KspVersion, 0], Path.Combine(DownloadDir, "바닐라.cfg"));
+                                break;
+                            case 1:
+                                webClient.DownloadFile(englishUrl[KspVersion, 1], Path.Combine(DownloadDir, "Making_History_DLC.cfg"));
+                                break;
+                            case 2:
+                                webClient.DownloadFile(englishUrl[KspVersion, 2], Path.Combine(DownloadDir, "Breaking_Ground_DLC.cfg"));
+                                break;
+                            default:
+                                WriteLine("잘못된 다운로드 모드입니다.");
+                                return 1;
+                        }
+                    }
+                    else
+                    {
+                        WriteLine("언어 선택이 잘못되었습니다.");
+                        return 2;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                WriteLine("오류: " + e.Message);
+                return 3;
+            }
+
+            return 0;
+        }
+
         //현지화를 하는 메소드
         private int Localize()
         {
@@ -260,31 +254,15 @@ namespace KSP_Setup
                     if ((KspVersion <= 1) && (i == 2))
                         break;
 
-                    //선택한 언어에 따라 다운로드를 한다.
-                    if (KspLanguage == "korean")
-                    {
-                        //한글파일을 다운로드한다.
-                        retval = HangulFileDownload(i);
-                        if (retval != 0)
-                            return 1;
-                    }
-                    else if (KspLanguage == "english")
-                    {
-                        //영문파일을 다운로드한다.
-                        retval = EnglishFileDownload(i);
-                        if (retval != 0)
-                            return 1;
-                    }
-                    else
-                    {
-                        WriteLine("언어 선택이 잘못되었습니다.");
-                        return 2;
-                    }
+                    //언어 파일을 다운로드한다.
+                    retval = LanguageFileDownload(i);
+                    if (retval != 0)
+                        return 1;
 
                     //언어 파일을 적용한다.
                     retval = LanguageFileApply(i);
                     if (retval != 0)
-                        return 3;
+                        return 2;
                 }
 
                 //다운로드 디렉토리를 삭제한다.
@@ -293,7 +271,7 @@ namespace KSP_Setup
             catch (Exception e)
             {
                 WriteLine("오류: " + e.Message);
-                return 4;
+                return 3;
             }
 
             return 0;
