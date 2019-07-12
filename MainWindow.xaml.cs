@@ -19,9 +19,9 @@ namespace KSP_Setup
 
         //언어 파일의 다운로드 URL을 저장하는 3차원 배열을 선언한다. (면: 언어, 행: 버전, 열: 항목)
         //0면: 한국어, 1면: 영어
-        //3행: 1.7.2, 2행: 1.7.1, 1행: 1.7.0, 0행: 1.6.1
+        //4행: 1.7.3, 3행: 1.7.2, 2행: 1.7.1, 1행: 1.7.0, 0행: 1.6.1
         //0열: 바닐라, 1열: Making History DLC, 2열: Breaking Ground DLC
-        private readonly string[,,] downloadURL = new string[2, 4, 3];
+        private readonly string[,,] downloadURL = new string[2, 5, 3];
 
 
         //생성자
@@ -33,6 +33,10 @@ namespace KSP_Setup
             KspVersion = 3;
 
             //한글파일 다운로드 링크를 초기화한다.
+            downloadURL[0, 4, 0] = "";
+            downloadURL[0, 4, 1] = "";
+            downloadURL[0, 4, 2] = "";
+
             downloadURL[0, 3, 0] = "http://cfile239.uf.daum.net/attach/998A94355D028BBA0109E9";
             downloadURL[0, 3, 1] = "http://cfile231.uf.daum.net/attach/998AF0355D028BC1011CCB";
             downloadURL[0, 3, 2] = "http://cfile224.uf.daum.net/attach/998AF4355D028BC6012A69";
@@ -49,6 +53,10 @@ namespace KSP_Setup
             //---------------------------------------------------------------------------------
 
             //영문파일 다운로드 링크를 초기화한다.
+            downloadURL[1, 4, 0] = "";
+            downloadURL[1, 4, 1] = "";
+            downloadURL[1, 4, 2] = "";
+
             downloadURL[1, 3, 0] = "http://cfile202.uf.daum.net/attach/99E4A0415D028D3202B879";
             downloadURL[1, 3, 1] = "http://cfile228.uf.daum.net/attach/99E4F3415D028D360221C4";
             downloadURL[1, 3, 2] = "http://cfile201.uf.daum.net/attach/99E55D415D028D3B02F25B";
@@ -329,7 +337,11 @@ namespace KSP_Setup
         private void Ksp_version_selector_DropDownClosed(object sender, EventArgs e)
         {
             //KSP 버전 선택에 따라 필드의 값을 변경한다.
-            if (ksp_version_172.IsSelected == true)
+            if (ksp_version_173.IsSelected == true)
+            {
+                KspVersion = 4;
+            }
+            else if (ksp_version_172.IsSelected == true)
             {
                 KspVersion = 3;
             }
