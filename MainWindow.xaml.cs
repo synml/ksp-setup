@@ -33,9 +33,9 @@ namespace KSP_Setup
             KspVersion = 3;
 
             //한글파일 다운로드 링크를 초기화한다.
-            downloadURL[0, 4, 0] = "";
-            downloadURL[0, 4, 1] = "";
-            downloadURL[0, 4, 2] = "";
+            downloadURL[0, 4, 0] = "http://cfile223.uf.daum.net/attach/9975413D5D2B43C52086BC";
+            downloadURL[0, 4, 1] = "http://cfile207.uf.daum.net/attach/99202A3D5D2B43CB2470BD";
+            downloadURL[0, 4, 2] = "http://cfile230.uf.daum.net/attach/99FBD03D5D2B43D1254F22";
 
             downloadURL[0, 3, 0] = "http://cfile239.uf.daum.net/attach/998A94355D028BBA0109E9";
             downloadURL[0, 3, 1] = "http://cfile231.uf.daum.net/attach/998AF0355D028BC1011CCB";
@@ -53,9 +53,9 @@ namespace KSP_Setup
             //---------------------------------------------------------------------------------
 
             //영문파일 다운로드 링크를 초기화한다.
-            downloadURL[1, 4, 0] = "";
-            downloadURL[1, 4, 1] = "";
-            downloadURL[1, 4, 2] = "";
+            downloadURL[1, 4, 0] = "http://cfile233.uf.daum.net/attach/992B9C3B5D2B43E82E7C5A";
+            downloadURL[1, 4, 1] = "http://cfile211.uf.daum.net/attach/999B023B5D2B43F4340745";
+            downloadURL[1, 4, 2] = "http://cfile235.uf.daum.net/attach/99792C3B5D2B43F92970BB";
 
             downloadURL[1, 3, 0] = "http://cfile202.uf.daum.net/attach/99E4A0415D028D3202B879";
             downloadURL[1, 3, 1] = "http://cfile228.uf.daum.net/attach/99E4F3415D028D360221C4";
