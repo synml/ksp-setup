@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KSP_Setup"
         mc:Ignorable="d"
-        Title="KSP 설정" Height="350" Width="600" Icon="res/icon.ico" ResizeMode="CanResize" MinHeight="350" MinWidth="600">
+        Title="KSP 설정" Height="350" Width="600" Icon="res/icon.ico" ResizeMode="CanResize" MinHeight="350" MinWidth="600" WindowStartupLocation="CenterScreen">
     <Grid>
         <Label Content="KSP 폴더: " HorizontalAlignment="Left" Height="27" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" VerticalContentAlignment="Center" ToolTip="KSP가 설치된 폴더입니다."/>
         <TextBox x:Name="txtbox_kspDir" Margin="95,10,84.6,0" TextWrapping="Wrap" Text="KSP_x64.exe를 선택하세요." IsReadOnly="True" Height="27" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
