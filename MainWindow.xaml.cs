@@ -30,7 +30,7 @@ namespace KSP_Setup
             //필드를 초기화한다.
             DownloadDir = ".\\Download";
             KspLanguage = 0;
-            KspVersion = 3;
+            KspVersion = 4;
 
             //한글파일 다운로드 링크를 초기화한다.
             downloadURL[0, 4, 0] = "http://cfile223.uf.daum.net/attach/9975413D5D2B43C52086BC";
