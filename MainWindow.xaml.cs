@@ -27,11 +27,6 @@ namespace KSP_Setup
         //생성자
         public MainWindow()
         {
-            //필드를 초기화한다.
-            DownloadDir = ".\\Download";
-            KspLanguage = 0;
-            KspVersion = 4;
-
             //한글파일 다운로드 링크를 초기화한다.
             downloadURL[0, 4, 0] = "http://cfile223.uf.daum.net/attach/9975413D5D2B43C52086BC";
             downloadURL[0, 4, 1] = "http://cfile207.uf.daum.net/attach/99202A3D5D2B43CB2470BD";
@@ -354,6 +349,17 @@ namespace KSP_Setup
             {
                 WriteLine("잘못된 버전을 선택했습니다.");
             }
+        }
+
+        //윈도우가 초기화되었을 때의 이벤트 메소드
+        private void Window_Initialized(object sender, EventArgs e)
+        {
+            //다운로드 디렉토리를 초기화한다.
+            DownloadDir = ".\\Download";
+
+            //KSP 언어와 버전을 초기화한다.
+            Ksp_language_selector_DropDownClosed(sender, e);
+            Ksp_version_selector_DropDownClosed(sender, e);
         }
 
         //로그를 기록하는 메소드
