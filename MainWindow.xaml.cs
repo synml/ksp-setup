@@ -224,7 +224,7 @@ namespace KSP_Setup
         }
 
         //현지화를 하는 메소드
-        private int Localize()
+        private void Localize()
         {
             int retval;
 
@@ -242,12 +242,12 @@ namespace KSP_Setup
                     //언어 파일을 다운로드한다.
                     retval = LanguageFileDownload(i);
                     if (retval != 0)
-                        return 1;
+                        return;
 
                     //언어 파일을 적용한다.
                     retval = LanguageFileApply(i);
                     if (retval != 0)
-                        return 2;
+                        return;
                 }
 
                 //다운로드 디렉토리를 삭제한다.
@@ -256,10 +256,7 @@ namespace KSP_Setup
             catch (Exception e)
             {
                 WriteLine("오류: " + e.Message);
-                return 3;
             }
-
-            return 0;
         }
 
 
@@ -299,12 +296,8 @@ namespace KSP_Setup
         //설정 시작 버튼을 클릭한 경우의 이벤트 메소드
         private void Btn_Setup_Click(object sender, RoutedEventArgs e)
         {
-            int retval;
-
             //현지화를 한다.
-            retval = Localize();
-            if (retval != 0)
-                return;
+            Localize();
 
             //칸 띄우기
             WriteLine("");
