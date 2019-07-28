@@ -62,21 +62,11 @@
   3. Visual Studio 2019로 솔루션 파일(.sln)을 여세요.
   4. 코딩 시작~!
 
-## 변경 로그
-
-- 1.1.0
-  - 지역화할 KSP의 버전 선택 가능.
-  - 한글패치, 영어패치 선택 가능.
-  - DLC 유무 자동 감지.
-  - 툴팁 추가.
-- 1.0.0
-  - 첫 정식 릴리즈
-
 ## 개발자 정보와 크레딧
 
 - 개발자
 
-  - Lulin Pollux - [Github 프로필](https://github.com/LulinPollux), kistssy@gmail.com
+  - Lulin Pollux - [Github 프로필](https://github.com/LulinPollux), kistssy+dev@gmail.com
 
 ## 기여 방법
 
