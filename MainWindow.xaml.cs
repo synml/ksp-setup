@@ -173,8 +173,8 @@ namespace KSP_Setup
             //스레드 동기화를 위한 변수를 선언한다.
             bool isFinished = false;
 
-            //이벤트를 등록한다.
-            web.Navigated += delegate
+            //이벤트 로컬 메소드를 생성하고 이벤트를 등록한다.
+            void p(object sender, System.Windows.Navigation.NavigationEventArgs e)
             {
                 BackgroundWorker worker = new BackgroundWorker();
                 worker.DoWork += delegate
@@ -211,17 +211,19 @@ namespace KSP_Setup
                         //다운로드 디렉토리를 삭제한다.
                         Directory.Delete(DownloadDir, true);
                     }
-                    catch (Exception e)
+                    catch (Exception exception)
                     {
-                        WriteLine("오류: " + e);
+                        WriteLine("오류: " + exception);
                     }
                     finally
                     {
+                        web.Navigated -= p;
                         isFinished = true;
                     }
                 };
                 worker.RunWorkerAsync();
-            };
+            }
+            web.Navigated += p;
 
             //CKAN의 최신버전이 릴리즈된 곳으로 이동한다.
             if (Dispatcher.CheckAccess())
