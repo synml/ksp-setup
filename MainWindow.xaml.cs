@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
@@ -12,10 +13,11 @@ namespace KSP_Setup
     /// </summary>
     public partial class MainWindow : Window
     {
-        public string DownloadDir { get; set; }    //다운로드한 파일이 저장될 디렉토리를 저장한다.
+        public string DownloadDir { get; set; }     //다운로드한 파일이 저장될 디렉토리를 저장한다.
         public string KspDirectory { get; set; }    //KSP가 설치된 디렉토리를 저장한다.
-        public int KspLanguage { get; set; }    //사용자가 설정한 ksp 언어를 저장한다.
-        public int KspVersion { get; set; }    //사용자가 설정한 ksp 버전을 저장한다.
+        public int KspLanguage { get; set; }        //사용자가 설정한 ksp 언어를 저장한다.
+        public int KspVersion { get; set; }         //사용자가 설정한 ksp 버전을 저장한다.
+        public bool IsInstallCkan { get; set; }     //CKAN을 설치할 것인지를 저장한다.
 
         //언어 파일의 다운로드 URL을 저장하는 3차원 배열을 선언한다. (면: 언어, 행: 버전, 열: 항목)
         //0면: 한국어, 1면: 영어
@@ -71,62 +73,8 @@ namespace KSP_Setup
             InitializeComponent();
         }
 
-        //CKAN을 설치하는 메소드
-        private void CkanInstall()
-        {
-            //웹 브라우저 객체를 생성한다.
-            WebBrowser web = new WebBrowser();
-
-            //이벤트를 등록한다.
-            web.Navigated += delegate
-            {
-                try
-                {
-                    //다운로드 디렉토리를 만든다.
-                    Directory.CreateDirectory(DownloadDir);
-
-                    //CKAN의 최신버전을 다운로드할 수 있는 URL을 만든다.
-                    string url = web.Url.ToString();
-                    string latestVersion = url.Substring(url.LastIndexOf('/') + 1);
-                    string ckanUrl = "https://github.com/KSP-CKAN/CKAN/releases/download/" + latestVersion + "/ckan.exe";
-
-                    //파일을 다운로드한다.
-                    using (WebClient webClient = new WebClient())
-                    {
-                        webClient.DownloadFile(ckanUrl, Path.Combine(DownloadDir, "ckan.exe"));
-                    }
-                    WriteLine("CKAN 다운로드 완료.");
-
-                    //파일을 KSP 디렉토리로 복사한다. (이미 파일이 존재하면 덮어씌운다.)
-                    File.Copy(Path.Combine(DownloadDir, "ckan.exe"), Path.Combine(KspDirectory, "ckan.exe"), true);
-
-                    //CKAN 설치를 완료했다고 알린다.
-                    WriteLine("CKAN 설치 완료.");
-                    WriteLine("");
-
-                    //다운로드 디렉토리를 삭제한다.
-                    Directory.Delete(DownloadDir, true);
-                }
-                catch (Exception e)
-                {
-                    WriteLine("오류: " + e.Message);
-                }
-                finally
-                {
-                    //웹 브라우저 객체의 리소스를 해제한다.
-                    web.Dispose();
-                }
-            };
-
-            //CKAN의 최신버전이 릴리즈된 곳으로 이동한다.
-            web.Navigate("https://github.com/KSP-CKAN/CKAN/releases/latest");
-
-            //CKAN 설치를 완료했다고 알린다.
-            WriteLine("CKAN 다운로드 중. . .");
-        }
-
         //언어 파일을 적용하는 메소드 (모드 0번: 바닐라, 1번: Making DLC, 2번: Breaking DLC)
-        private int LanguageFileApply(int applyMode)
+        private int ApplyLanguageFile(int applyMode)
         {
             string name, sourceFileName, destFileName;
 
@@ -173,7 +121,7 @@ namespace KSP_Setup
             }
             catch (Exception e)
             {
-                WriteLine("오류: " + e.Message);
+                WriteLine("오류: " + e);
                 return 3;
             }
 
@@ -181,7 +129,7 @@ namespace KSP_Setup
         }
 
         //언어 파일을 다운로드하는 메소드 (모드 0번: 바닐라, 1번: Making DLC, 2번: Breaking DLC)
-        private int LanguageFileDownload(int downloadMode)
+        private int DownloadLanguageFile(int downloadMode)
         {
             try
             {
@@ -211,11 +159,74 @@ namespace KSP_Setup
             }
             catch (Exception e)
             {
-                WriteLine("오류: " + e.Message);
+                WriteLine("오류: " + e);
                 return 2;
             }
 
             return 0;
+        }
+
+        //CKAN을 설치하는 메소드
+        private void InstallCkan()
+        {
+            //이벤트를 등록한다.
+            web.Navigated += delegate
+            {
+                BackgroundWorker worker = new BackgroundWorker();
+                worker.DoWork += delegate
+                {
+                    try
+                    {
+                        //CKAN의 최신버전을 다운로드할 수 있는 URL을 만든다.
+                        string url = string.Empty;
+                        Dispatcher.Invoke(new Action(() =>
+                        {
+                            url = web.Source.ToString();
+                        }));
+                        string latestVersion = url.Substring(url.LastIndexOf('/') + 1);
+                        string ckanUrl = "https://github.com/KSP-CKAN/CKAN/releases/download/" + latestVersion + "/ckan.exe";
+
+                        //다운로드 디렉토리를 만든다.
+                        Directory.CreateDirectory(DownloadDir);
+
+                        //파일을 다운로드한다.
+                        WriteLine("CKAN 다운로드 중. . .");
+                        using (WebClient webClient = new WebClient())
+                        {
+                            webClient.DownloadFile(ckanUrl, Path.Combine(DownloadDir, "ckan.exe"));
+                        }
+                        WriteLine("CKAN 다운로드 완료.");
+
+                        //파일을 KSP 디렉토리로 복사한다. (이미 파일이 존재하면 덮어씌운다.)
+                        File.Copy(Path.Combine(DownloadDir, "ckan.exe"), Path.Combine(KspDirectory, "ckan.exe"), true);
+
+                        //CKAN 설치를 완료했다고 알린다.
+                        WriteLine("CKAN 설치 완료.");
+                        WriteLine("");
+
+                        //다운로드 디렉토리를 삭제한다.
+                        Directory.Delete(DownloadDir, true);
+                    }
+                    catch (Exception e)
+                    {
+                        WriteLine("오류: " + e);
+                    }
+                };
+                worker.RunWorkerAsync();
+            };
+
+            //CKAN의 최신버전이 릴리즈된 곳으로 이동한다.
+            if (Dispatcher.CheckAccess())
+            {
+                web.Navigate("https://github.com/KSP-CKAN/CKAN/releases/latest");
+            }
+            else
+            {
+                Dispatcher.Invoke(new Action(() =>
+                {
+                    web.Navigate("https://github.com/KSP-CKAN/CKAN/releases/latest");
+                }));
+            }
         }
 
         //현지화를 하는 메소드
@@ -235,12 +246,12 @@ namespace KSP_Setup
                         break;
 
                     //언어 파일을 다운로드한다.
-                    retval = LanguageFileDownload(i);
+                    retval = DownloadLanguageFile(i);
                     if (retval != 0)
                         return;
 
                     //언어 파일을 적용한다.
-                    retval = LanguageFileApply(i);
+                    retval = ApplyLanguageFile(i);
                     if (retval != 0)
                         return;
                 }
@@ -250,61 +261,75 @@ namespace KSP_Setup
             }
             catch (Exception e)
             {
-                WriteLine("오류: " + e.Message);
+                WriteLine("오류: " + e);
             }
         }
 
 
         //-----------------------------------------------------------------------------------------
-        //종료 버튼을 클릭한 경우의 이벤트 메소드
+        //프로그램을 종료시키는 이벤트 메소드
         private void Btn_Exit_Click(object sender, RoutedEventArgs e) => Close();
 
-        //KSP가 설치된 디렉터리를 탐색하는 버튼을 클릭한 경우의 이벤트 메소드
+        //KSP가 설치된 디렉토리를 탐색하는 이벤트 메소드
         private void Btn_kspDir_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDlg = new OpenFileDialog
+            using (OpenFileDialog openFileDlg = new OpenFileDialog())
             {
-                Multiselect = false,
-                Filter = "KSP_x64.exe|KSP_x64.exe",
-                Title = "KSP_x64.exe를 선택해주세요."
-            };
-            DialogResult result = openFileDlg.ShowDialog();
-            if (result.ToString() == "OK")
-            {
-                string filePath = openFileDlg.FileName;
-                string directory = filePath.Substring(0, filePath.LastIndexOf("\\", StringComparison.InvariantCulture));
-                KspDirectory = directory;
-                txtbox_kspDir.Text = directory;
+                openFileDlg.Multiselect = false;
+                openFileDlg.Filter = "KSP_x64.exe|KSP_x64.exe";
+                openFileDlg.Title = "KSP_x64.exe를 선택해주세요.";
 
-                btn_Setup.IsEnabled = true;
-                btn_OpenKspDir.IsEnabled = true;
+                DialogResult result = openFileDlg.ShowDialog();
+                if (result.ToString() == "OK")
+                {
+                    string filePath = openFileDlg.FileName;
+                    string directory = filePath.Substring(0, filePath.LastIndexOf("\\", StringComparison.InvariantCulture));
+                    KspDirectory = directory;
+                    txtbox_kspDir.Text = directory;
+
+                    btn_Setup.IsEnabled = true;
+                    btn_OpenKspDir.IsEnabled = true;
+                }
             }
         }
 
-        //KSP 디렉토리를 여는 버튼을 클릭한 경우의 이벤트 메소드
+        //KSP가 설치된 디렉토리를 여는 이벤트 메소드
         private void Btn_OpenKspDir_Click(object sender, RoutedEventArgs e)
         {
             //KSP 디렉토리를 연다.
             Process.Start(KspDirectory);
         }
 
-        //설정 시작 버튼을 클릭한 경우의 이벤트 메소드
+        //설정을 시작하는 이벤트 메소드
         private void Btn_Setup_Click(object sender, RoutedEventArgs e)
         {
-            //현지화를 한다.
-            Localize();
-
-            //칸 띄우기
-            WriteLine("");
-
-            //CKAN 설치에 체크했으면 CKAN을 설치한다.
-            if (chkbox_ckan.IsChecked == true)
+            using (BackgroundWorker worker = new BackgroundWorker())
             {
-                CkanInstall();
+                worker.DoWork += delegate
+                {
+                    //현지화를 한다.
+                    Localize();
+
+                    //칸 띄우기
+                    WriteLine("");
+
+                    //CKAN 설치 유무를 확인한다.
+                    if (IsInstallCkan == true)
+                    {
+                        InstallCkan();
+                    }
+                };
+                worker.RunWorkerAsync();
             }
         }
 
-        //KSP 언어 선택기의 드롭다운을 닫았을 때의 이벤트 메소드
+        //CKAN 설치 체크박스의 체크상태를 저장하는 이벤트 메소드
+        private void Chkbox_ckan_CheckedUnchecked(object sender, RoutedEventArgs e)
+        {
+            IsInstallCkan = (bool)chkbox_ckan.IsChecked;
+        }
+
+        //KSP의 언어를 저장하는 이벤트 메소드
         private void Ksp_language_selector_DropDownClosed(object sender, EventArgs e)
         {
             if (localization_korean.IsSelected == true)
@@ -321,7 +346,7 @@ namespace KSP_Setup
             }
         }
 
-        //KSP 버전 선택기의 드롭다운을 닫았을 때의 이벤트 메소드
+        //KSP의 버전을 저장하는 이벤트 메소드
         private void Ksp_version_selector_DropDownClosed(object sender, EventArgs e)
         {
             //KSP 버전 선택에 따라 필드의 값을 변경한다.
@@ -351,22 +376,34 @@ namespace KSP_Setup
             }
         }
 
-        //윈도우가 초기화되었을 때의 이벤트 메소드
+        //필드를 초기화하는 이벤트 메소드
         private void Window_Initialized(object sender, EventArgs e)
         {
             //다운로드 디렉토리를 초기화한다.
             DownloadDir = ".\\Download";
 
             //KSP 언어와 버전을 초기화한다.
-            Ksp_language_selector_DropDownClosed(sender, e);
-            Ksp_version_selector_DropDownClosed(sender, e);
+            Chkbox_ckan_CheckedUnchecked(sender, null);
+            Ksp_language_selector_DropDownClosed(sender, null);
+            Ksp_version_selector_DropDownClosed(sender, null);
         }
 
         //로그를 기록하는 메소드
         private void WriteLine(string str)
         {
-            txtbox_log.AppendText(str + "\n");
-            txtbox_log.ScrollToEnd();
+            if (Dispatcher.CheckAccess())
+            {
+                txtbox_log.AppendText(str + "\n");
+                txtbox_log.ScrollToEnd();
+            }
+            else
+            {
+                Dispatcher.Invoke(new Action(() =>
+                {
+                    txtbox_log.AppendText(str + "\n");
+                    txtbox_log.ScrollToEnd();
+                }));
+            }
         }
     }
 }
