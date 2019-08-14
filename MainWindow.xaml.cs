@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Threading;
 using System.Windows;
 using System.Windows.Forms;
 
@@ -169,6 +170,9 @@ namespace KSP_Setup
         //CKAN을 설치하는 메소드
         private void InstallCkan()
         {
+            //스레드 동기화를 위한 변수를 선언한다.
+            bool isFinished = false;
+
             //이벤트를 등록한다.
             web.Navigated += delegate
             {
@@ -211,6 +215,10 @@ namespace KSP_Setup
                     {
                         WriteLine("오류: " + e);
                     }
+                    finally
+                    {
+                        isFinished = true;
+                    }
                 };
                 worker.RunWorkerAsync();
             };
@@ -226,6 +234,12 @@ namespace KSP_Setup
                 {
                     web.Navigate("https://github.com/KSP-CKAN/CKAN/releases/latest");
                 }));
+            }
+
+            //CKAN 설치가 완료될 때까지 기다린다.
+            while (isFinished == false)
+            {
+                Thread.Sleep(100);
             }
         }
 
@@ -307,6 +321,9 @@ namespace KSP_Setup
             {
                 worker.DoWork += delegate
                 {
+                    //컨트롤을 비활성화한다.
+                    ControlEnabled(false);
+
                     //현지화를 한다.
                     Localize();
 
@@ -318,6 +335,9 @@ namespace KSP_Setup
                     {
                         InstallCkan();
                     }
+
+                    //컨트롤을 활성화한다.
+                    ControlEnabled(true);
                 };
                 worker.RunWorkerAsync();
             }
@@ -388,19 +408,45 @@ namespace KSP_Setup
             Ksp_version_selector_DropDownClosed(sender, null);
         }
 
-        //로그를 기록하는 메소드
-        private void WriteLine(string str)
+        //컨트롤을 활성화/비활성화하는 메소드
+        private void ControlEnabled(bool status)
         {
             if (Dispatcher.CheckAccess())
             {
-                txtbox_log.AppendText(str + "\n");
+                btn_kspDir.IsEnabled = status;
+                ksp_version_selector.IsEnabled = status;
+                ksp_language_selector.IsEnabled = status;
+                chkbox_ckan.IsEnabled = status;
+                btn_OpenKspDir.IsEnabled = status;
+                btn_Setup.IsEnabled = status;
+            }
+            else
+            {
+                Dispatcher.Invoke(new Action(() =>
+                {
+                    btn_kspDir.IsEnabled = status;
+                    ksp_version_selector.IsEnabled = status;
+                    ksp_language_selector.IsEnabled = status;
+                    chkbox_ckan.IsEnabled = status;
+                    btn_OpenKspDir.IsEnabled = status;
+                    btn_Setup.IsEnabled = status;
+                }));
+            }
+        }
+
+        //로그를 기록하는 메소드
+        private void WriteLine(string message)
+        {
+            if (Dispatcher.CheckAccess())
+            {
+                txtbox_log.AppendText(message + "\n");
                 txtbox_log.ScrollToEnd();
             }
             else
             {
                 Dispatcher.Invoke(new Action(() =>
                 {
-                    txtbox_log.AppendText(str + "\n");
+                    txtbox_log.AppendText(message + "\n");
                     txtbox_log.ScrollToEnd();
                 }));
             }
