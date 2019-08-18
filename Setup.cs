@@ -28,7 +28,7 @@ namespace KSP_Setup
         }
 
         //언어 파일을 적용하는 메소드 (모드 0번: 바닐라, 1번: Making DLC, 2번: Breaking DLC)
-        private int ApplyLanguageFile(int applyMode)
+        private void ApplyLanguageFile(int applyMode)
         {
             string name, sourceFileName, destFileName;
 
@@ -54,14 +54,19 @@ namespace KSP_Setup
                         break;
                     default:
                         MainWindow.WriteLine("잘못된 적용 모드입니다.");
-                        return 1;
+                        return;
                 }
 
                 //파일이 존재하지 않으면 중단한다.
+                if (!File.Exists(sourceFileName))
+                {
+                    MainWindow.WriteLine(name + "의 현지화 파일이 존재하지 않습니다.");
+                    return;
+                }
                 if (!File.Exists(destFileName))
                 {
                     MainWindow.WriteLine(name + "가 존재하지 않습니다.");
-                    return 2;
+                    return;
                 }
 
                 //파일을 복사하여 덮어쓴다.
@@ -69,21 +74,22 @@ namespace KSP_Setup
 
                 //언어 파일의 적용을 완료했다고 알린다.
                 if (KspLanguage == 0)
+                {
                     MainWindow.WriteLine(name + " 한글패치를 완료했습니다.");
+                }
                 else if (KspLanguage == 1)
+                {
                     MainWindow.WriteLine(name + " 영문패치를 완료했습니다.");
+                }
             }
             catch (Exception e)
             {
                 MainWindow.WriteLine("오류: " + e);
-                return 3;
             }
-
-            return 0;
         }
 
         //언어 파일을 다운로드하는 메소드 (모드 0번: 바닐라, 1번: Making DLC, 2번: Breaking DLC)
-        private int DownloadLanguageFile(int downloadMode)
+        private void DownloadLanguageFile(int downloadMode)
         {
             try
             {
@@ -103,7 +109,7 @@ namespace KSP_Setup
                         break;
                     default:
                         MainWindow.WriteLine("잘못된 다운로드 모드입니다.");
-                        return 1;
+                        return;
                 }
 
                 using (WebClient webClient = new WebClient())
@@ -114,10 +120,7 @@ namespace KSP_Setup
             catch (Exception e)
             {
                 MainWindow.WriteLine("오류: " + e);
-                return 2;
             }
-
-            return 0;
         }
 
         //CKAN을 설치하는 메소드
@@ -201,8 +204,6 @@ namespace KSP_Setup
         //현지화를 하는 메소드
         internal void Localize()
         {
-            int retval;
-
             try
             {
                 //다운로드 디렉토리를 만든다.
@@ -215,14 +216,10 @@ namespace KSP_Setup
                         break;
 
                     //언어 파일을 다운로드한다.
-                    retval = DownloadLanguageFile(i);
-                    if (retval != 0)
-                        return;
+                    DownloadLanguageFile(i);
 
                     //언어 파일을 적용한다.
-                    retval = ApplyLanguageFile(i);
-                    if (retval != 0)
-                        return;
+                    ApplyLanguageFile(i);
                 }
 
                 //다운로드 디렉토리를 삭제한다.
