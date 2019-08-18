@@ -17,11 +17,12 @@ namespace KSP_Setup
 
         /* 언어 파일의 다운로드 URL을 저장하는 3차원 배열을 선언한다. (면: 언어, 행: 버전, 열: 항목)
            0면: 한국어, 1면: 영어
-           4행: 1.7.3, 3행: 1.7.2, 2행: 1.7.1, 1행: 1.7.0, 0행: 1.6.1
+           0행: 1.7.1, 1행: 1.7.2, 2행: 1.7.3
            0열: 바닐라, 1열: Making History DLC, 2열: Breaking Ground DLC */
-        internal readonly string[,,] downloadURL = new string[2, 5, 3];
+        internal readonly string[,,] downloadURL = new string[2, 3, 3];
 
 
+        //생성자
         public Setup(MainWindow main)
         {
             MainWindow = main;
@@ -211,10 +212,6 @@ namespace KSP_Setup
 
                 for (int i = 0; i <= 2; i++)
                 {
-                    //1.7.0과 1.6.1은 Breaking DLC 현지화 적용안함.
-                    if ((KspVersion <= 1) && (i == 2))
-                        break;
-
                     //언어 파일을 다운로드한다.
                     DownloadLanguageFile(i);
 

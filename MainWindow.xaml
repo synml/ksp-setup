@@ -21,8 +21,6 @@
             <ComboBoxItem x:Name="ksp_version_173" Content="1.7.3" IsSelected="True"/>
             <ComboBoxItem x:Name="ksp_version_172" Content="1.7.2"/>
             <ComboBoxItem x:Name="ksp_version_171" Content="1.7.1"/>
-            <ComboBoxItem x:Name="ksp_version_170" Content="1.7.0"/>
-            <ComboBoxItem x:Name="ksp_version_161" Content="1.6.1"/>
         </ComboBox>
         <ComboBox x:Name="ksp_language_selector" HorizontalAlignment="Left" Height="24" Margin="180,45,0,0" VerticalAlignment="Top" Width="70" ToolTip="KSP를 어떤 언어로 플레이할지 선택하세요." DropDownClosed="Ksp_language_selector_DropDownClosed">
             <ComboBoxItem x:Name="localization_korean" Content="한국어" IsSelected="True"/>
