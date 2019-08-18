@@ -205,7 +205,7 @@ namespace KSP_Setup
                         File.Copy(Path.Combine(DownloadDir, "ckan.exe"), Path.Combine(KspDirectory, "ckan.exe"), true);
 
                         //CKAN 설치를 완료했다고 알린다.
-                        WriteLine("CKAN 설치 완료.");
+                        WriteLine("CKAN 설치를 완료했습니다.");
                         WriteLine("");
 
                         //다운로드 디렉토리를 삭제한다.
@@ -289,31 +289,45 @@ namespace KSP_Setup
         //KSP가 설치된 디렉토리를 탐색하는 이벤트 메소드
         private void Btn_kspDir_Click(object sender, RoutedEventArgs e)
         {
-            using (OpenFileDialog openFileDlg = new OpenFileDialog())
+            try
             {
-                openFileDlg.Multiselect = false;
-                openFileDlg.Filter = "KSP_x64.exe|KSP_x64.exe";
-                openFileDlg.Title = "KSP_x64.exe를 선택해주세요.";
-
-                DialogResult result = openFileDlg.ShowDialog();
-                if (result.ToString() == "OK")
+                using (OpenFileDialog openFileDlg = new OpenFileDialog())
                 {
-                    string filePath = openFileDlg.FileName;
-                    string directory = filePath.Substring(0, filePath.LastIndexOf("\\", StringComparison.InvariantCulture));
-                    KspDirectory = directory;
-                    txtbox_kspDir.Text = directory;
+                    openFileDlg.Multiselect = false;
+                    openFileDlg.Filter = "KSP_x64.exe|KSP_x64.exe";
+                    openFileDlg.Title = "KSP_x64.exe를 선택해주세요.";
 
-                    btn_Setup.IsEnabled = true;
-                    btn_OpenKspDir.IsEnabled = true;
+                    DialogResult result = openFileDlg.ShowDialog();
+                    if (result.ToString() == "OK")
+                    {
+                        string filePath = openFileDlg.FileName;
+                        string directory = filePath.Substring(0, filePath.LastIndexOf("\\", StringComparison.InvariantCulture));
+                        KspDirectory = directory;
+                        txtbox_kspDir.Text = directory;
+
+                        btn_Setup.IsEnabled = true;
+                        btn_OpenKspDir.IsEnabled = true;
+                    }
                 }
+            }
+            catch (Exception exception)
+            {
+                WriteLine("오류: " + exception);
             }
         }
 
         //KSP가 설치된 디렉토리를 여는 이벤트 메소드
         private void Btn_OpenKspDir_Click(object sender, RoutedEventArgs e)
         {
-            //KSP 디렉토리를 연다.
-            Process.Start(KspDirectory);
+            try
+            {
+                //KSP 디렉토리를 연다.
+                Process.Start(KspDirectory);
+            }
+            catch (Exception exception)
+            {
+                WriteLine("오류: " + exception);
+            }
         }
 
         //설정을 시작하는 이벤트 메소드
