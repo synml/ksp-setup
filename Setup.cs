@@ -19,7 +19,7 @@ namespace KSP_Setup
            0면: 한국어, 1면: 영어
            0행: 1.7.1, 1행: 1.7.2, 2행: 1.7.3
            0열: 바닐라, 1열: Making History DLC, 2열: Breaking Ground DLC */
-        internal readonly string[,,] downloadURL = new string[2, 3, 3];
+        internal readonly string[,,] downloadURL = new string[2, 4, 3];
 
 
         //생성자

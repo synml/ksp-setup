@@ -18,7 +18,8 @@
         <TextBox x:Name="txtbox_log" Margin="10,106,9.6,41.8" TextWrapping="Wrap" Text="" IsReadOnly="True" VerticalScrollBarVisibility="Auto"/>
         <Button x:Name="btn_OpenKspDir" Content="KSP 폴더 열기" Margin="10,0,0,9.8" HorizontalAlignment="Left" Width="90" IsEnabled="False" Click="Btn_OpenKspDir_Click" Height="27" VerticalAlignment="Bottom" ToolTip="KSP가 설치된 폴더를 엽니다."/>
         <ComboBox x:Name="ksp_version_selector" HorizontalAlignment="Left" Height="24" Margin="95,45,0,0" VerticalAlignment="Top" Width="65" ToolTip="현지화를 적용할 KSP의 버전을 선택하세요." DropDownClosed="Ksp_version_selector_DropDownClosed">
-            <ComboBoxItem x:Name="ksp_version_173" Content="1.7.3" IsSelected="True"/>
+            <ComboBoxItem x:Name="ksp_version_180" Content="1.8.0" IsSelected="True"/>
+            <ComboBoxItem x:Name="ksp_version_173" Content="1.7.3"/>
             <ComboBoxItem x:Name="ksp_version_172" Content="1.7.2"/>
             <ComboBoxItem x:Name="ksp_version_171" Content="1.7.1"/>
         </ComboBox>

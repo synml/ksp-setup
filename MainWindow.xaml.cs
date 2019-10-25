@@ -19,6 +19,10 @@ namespace KSP_Setup
             Setup = new Setup(this);
 
             //한글파일 다운로드 링크를 초기화한다.
+            Setup.downloadURL[0, 3, 0] = "https://k.kakaocdn.net/dn/l4DWp/btqziF9SnQ3/ZpGyluTiGCvldIQvdPfTHK/dictionary.cfg?attach=1&knm=tfile.cfg";
+            Setup.downloadURL[0, 3, 1] = "https://k.kakaocdn.net/dn/bESaSu/btqzi3JpPZe/a4pCiosirM533YvkPNsLzK/dictionary.cfg?attach=1&knm=tfile.cfg";
+            Setup.downloadURL[0, 3, 2] = "https://k.kakaocdn.net/dn/kTLyS/btqzi3byopv/6PIPIlsDGEBetMaAHS0HY0/dictionary.cfg?attach=1&knm=tfile.cfg";
+
             Setup.downloadURL[0, 2, 0] = "http://cfile229.uf.daum.net/attach/990B2F4C5D56496C2A2575";
             Setup.downloadURL[0, 2, 1] = "http://cfile201.uf.daum.net/attach/9946C64C5D56497134127D";
             Setup.downloadURL[0, 2, 2] = "http://cfile240.uf.daum.net/attach/9978914C5D56497531CDC3";
@@ -33,6 +37,10 @@ namespace KSP_Setup
             //---------------------------------------------------------------------------------
 
             //영문파일 다운로드 링크를 초기화한다.
+            Setup.downloadURL[1, 3, 0] = "https://k.kakaocdn.net/dn/M10EJ/btqzhg4eWJj/vMG2BmZNWycLU1ShONXTuk/dictionary.cfg?attach=1&knm=tfile.cfg";
+            Setup.downloadURL[1, 3, 1] = "https://k.kakaocdn.net/dn/bk6JaF/btqzhJrmQEb/Ws5pgaUk2EgVtXP1fUuwd1/dictionary.cfg?attach=1&knm=tfile.cfg";
+            Setup.downloadURL[1, 3, 2] = "https://k.kakaocdn.net/dn/bPIQUL/btqzibVut1Z/hD9JKO7q0EPJ7Aw6GVlVok/dictionary.cfg?attach=1&knm=tfile.cfg";
+
             Setup.downloadURL[1, 2, 0] = "http://cfile218.uf.daum.net/attach/99E5E24C5D56497B2C455A";
             Setup.downloadURL[1, 2, 1] = "http://cfile230.uf.daum.net/attach/990C7B4C5D5649802ADB76";
             Setup.downloadURL[1, 2, 2] = "http://cfile203.uf.daum.net/attach/9923D94C5D56498431DF8D";
@@ -153,7 +161,11 @@ namespace KSP_Setup
         private void Ksp_version_selector_DropDownClosed(object sender, EventArgs e)
         {
             //KSP 버전 선택에 따라 필드의 값을 변경한다.
-            if (ksp_version_173.IsSelected == true)
+            if (ksp_version_180.IsSelected == true)
+            {
+                Setup.KspVersion = 3;
+            }
+            else if (ksp_version_173.IsSelected == true)
             {
                 Setup.KspVersion = 2;
             }

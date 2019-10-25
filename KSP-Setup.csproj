@@ -96,8 +96,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="json\englishFile.json" />
-    <None Include="json\koreanFile.json" />
+    <None Include="json\english_file.json" />
+    <None Include="json\korean_file.json" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
