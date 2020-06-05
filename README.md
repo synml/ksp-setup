@@ -20,7 +20,7 @@
 
 ## Build Status
 
-[![GitHub release](https://img.shields.io/github/release/LulinPollux/KSP-Setup.svg?style=popout-square)](https://github.com/LulinPollux/KSP-Setup/releases/latest) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/abf7f34ff7564bb8879b6e9a8c6ffb7a)](https://www.codacy.com/app/Lulin-Pollux/KSP-Setup?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=LulinPollux/KSP-Setup&amp;utm_campaign=Badge_Grade) ![GitHub last commit](https://img.shields.io/github/last-commit/LulinPollux/KSP-Setup.svg?style=popout-square) ![GitHub All Releases](https://img.shields.io/github/downloads/LulinPollux/KSP-Setup/total.svg?style=popout-square) ![GitHub](https://img.shields.io/github/license/LulinPollux/KSP-Setup.svg?style=popout-square) 
+[![GitHub release](https://img.shields.io/github/release/LulinPollux/KSP-Setup.svg?style=popout-square)](https://github.com/LulinPollux/KSP-Setup/releases/latest) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/abf7f34ff7564bb8879b6e9a8c6ffb7a)](https://www.codacy.com/manual/Lulin/KSP-Setup?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=LulinPollux/KSP-Setup&amp;utm_campaign=Badge_Grade) ![GitHub last commit](https://img.shields.io/github/last-commit/LulinPollux/KSP-Setup.svg?style=popout-square) ![GitHub All Releases](https://img.shields.io/github/downloads/LulinPollux/KSP-Setup/total.svg?style=popout-square) ![GitHub](https://img.shields.io/github/license/LulinPollux/KSP-Setup.svg?style=popout-square) 
 
 ## 설치 방법
 
