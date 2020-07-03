@@ -18,34 +18,6 @@ namespace KSP_Setup
         {
             Setup = new Setup(this);
 
-            //한글파일 다운로드 링크를 초기화한다.
-            Setup.downloadURL[0, 2, 0] = "https://k.kakaocdn.net/dn/c5LcD5/btqB1GK0uae/YCX5EZI3RptwMMSYHgk3uk/dictionary.cfg?attach=1&knm=tfile.cfg";
-            Setup.downloadURL[0, 2, 1] = "https://k.kakaocdn.net/dn/cIgAPG/btqBZMrTKu2/sOuIKbyUtzlGUDzxH8r6b0/dictionary.cfg?attach=1&knm=tfile.cfg";
-            Setup.downloadURL[0, 2, 2] = "https://k.kakaocdn.net/dn/biAwcf/btqB1dvM4yf/N7k2bFcOgvYwBU2YvOPXG0/dictionary.cfg?attach=1&knm=tfile.cfg";
-
-            Setup.downloadURL[0, 1, 0] = "https://k.kakaocdn.net/dn/l4DWp/btqziF9SnQ3/ZpGyluTiGCvldIQvdPfTHK/dictionary.cfg?attach=1&knm=tfile.cfg";
-            Setup.downloadURL[0, 1, 1] = "https://k.kakaocdn.net/dn/bESaSu/btqzi3JpPZe/a4pCiosirM533YvkPNsLzK/dictionary.cfg?attach=1&knm=tfile.cfg";
-            Setup.downloadURL[0, 1, 2] = "https://k.kakaocdn.net/dn/kTLyS/btqzi3byopv/6PIPIlsDGEBetMaAHS0HY0/dictionary.cfg?attach=1&knm=tfile.cfg";
-
-            Setup.downloadURL[0, 0, 0] = "https://k.kakaocdn.net/dn/b1IqZR/btqxBQkdeoT/k7iLsYs27mAEohjQT4Ivu1/dictionary.cfg?attach=1&knm=tfile.cfg";
-            Setup.downloadURL[0, 0, 1] = "https://k.kakaocdn.net/dn/lAC54/btqxwD1qwcQ/dUVIYn3hmKk7MasrsnwkXK/dictionary.cfg?attach=1&knm=tfile.cfg";
-            Setup.downloadURL[0, 0, 2] = "https://k.kakaocdn.net/dn/bt6okj/btqxygRJi7l/zDtOTl5k4pN98ee6dBkask/dictionary.cfg?attach=1&knm=tfile.cfg";
-            //---------------------------------------------------------------------------------
-
-            //영문파일 다운로드 링크를 초기화한다.
-            Setup.downloadURL[1, 2, 0] = "https://k.kakaocdn.net/dn/nhVnG/btqBYfhwdlk/X4MEwg6cMnJRzVQQH0AkVk/dictionary.cfg?attach=1&knm=tfile.cfg";
-            Setup.downloadURL[1, 2, 1] = "https://k.kakaocdn.net/dn/De20I/btqB1ZXSv98/NM7UZzw5wUE7TLjKkDOkdK/dictionary.cfg?attach=1&knm=tfile.cfg";
-            Setup.downloadURL[1, 2, 2] = "https://k.kakaocdn.net/dn/ckozS0/btqB1HiQVqa/pKtx35iQGV7Y9BH3Axs1Rk/dictionary.cfg?attach=1&knm=tfile.cfg";
-
-            Setup.downloadURL[1, 1, 0] = "https://k.kakaocdn.net/dn/M10EJ/btqzhg4eWJj/vMG2BmZNWycLU1ShONXTuk/dictionary.cfg?attach=1&knm=tfile.cfg";
-            Setup.downloadURL[1, 1, 1] = "https://k.kakaocdn.net/dn/bk6JaF/btqzhJrmQEb/Ws5pgaUk2EgVtXP1fUuwd1/dictionary.cfg?attach=1&knm=tfile.cfg";
-            Setup.downloadURL[1, 1, 2] = "https://k.kakaocdn.net/dn/bPIQUL/btqzibVut1Z/hD9JKO7q0EPJ7Aw6GVlVok/dictionary.cfg?attach=1&knm=tfile.cfg";
-
-            Setup.downloadURL[1, 0, 0] = "https://k.kakaocdn.net/dn/bTFvoQ/btqxx1ArNTU/fsDXKYgKUkDTVHgDkAEcV0/dictionary.cfg?attach=1&knm=tfile.cfg";
-            Setup.downloadURL[1, 0, 1] = "https://k.kakaocdn.net/dn/xhA70/btqxx1mYepI/UnrCt2nEqwOaOqOkJO8iT0/dictionary.cfg?attach=1&knm=tfile.cfg";
-            Setup.downloadURL[1, 0, 2] = "https://k.kakaocdn.net/dn/P7Y7N/btqxB7zgw34/ZYyd7M5u3DPjx4voKVtIF1/dictionary.cfg?attach=1&knm=tfile.cfg";
-            //---------------------------------------------------------------------------------
-
             //창 띄우기
             InitializeComponent();
         }
@@ -153,7 +125,11 @@ namespace KSP_Setup
         private void Ksp_version_selector_DropDownClosed(object sender, EventArgs e)
         {
             //KSP 버전 선택에 따라 필드의 값을 변경한다.
-            if (ksp_version_190.IsSelected == true)
+            if (ksp_version_1100.IsSelected == true)
+            {
+                Setup.KspVersion = 3;
+            }
+            else if (ksp_version_190.IsSelected == true)
             {
                 Setup.KspVersion = 2;
             }

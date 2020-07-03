@@ -26,6 +26,40 @@ namespace KSP_Setup
         public Setup(MainWindow main)
         {
             MainWindow = main;
+
+            //한글파일 다운로드 링크를 초기화한다.
+            downloadURL[0, 3, 0] = "https://k.kakaocdn.net/dn/bJZelL/btqFgxTy9DH/PgvnyjXhuYtokz0duRTxKK/dictionary.cfg?attach=1&knm=tfile.cfg";
+            downloadURL[0, 3, 1] = "";
+            downloadURL[0, 3, 2] = "https://k.kakaocdn.net/dn/c8O8s4/btqFgHBEzWK/xZnSnqL7yMT2ZZIIME7gQk/dictionary.cfg?attach=1&knm=tfile.cfg";
+
+            downloadURL[0, 2, 0] = "https://k.kakaocdn.net/dn/c5LcD5/btqB1GK0uae/YCX5EZI3RptwMMSYHgk3uk/dictionary.cfg?attach=1&knm=tfile.cfg";
+            downloadURL[0, 2, 1] = "https://k.kakaocdn.net/dn/cIgAPG/btqBZMrTKu2/sOuIKbyUtzlGUDzxH8r6b0/dictionary.cfg?attach=1&knm=tfile.cfg";
+            downloadURL[0, 2, 2] = "https://k.kakaocdn.net/dn/biAwcf/btqB1dvM4yf/N7k2bFcOgvYwBU2YvOPXG0/dictionary.cfg?attach=1&knm=tfile.cfg";
+
+            downloadURL[0, 1, 0] = "https://k.kakaocdn.net/dn/l4DWp/btqziF9SnQ3/ZpGyluTiGCvldIQvdPfTHK/dictionary.cfg?attach=1&knm=tfile.cfg";
+            downloadURL[0, 1, 1] = "https://k.kakaocdn.net/dn/bESaSu/btqzi3JpPZe/a4pCiosirM533YvkPNsLzK/dictionary.cfg?attach=1&knm=tfile.cfg";
+            downloadURL[0, 1, 2] = "https://k.kakaocdn.net/dn/kTLyS/btqzi3byopv/6PIPIlsDGEBetMaAHS0HY0/dictionary.cfg?attach=1&knm=tfile.cfg";
+
+            downloadURL[0, 0, 0] = "https://k.kakaocdn.net/dn/b1IqZR/btqxBQkdeoT/k7iLsYs27mAEohjQT4Ivu1/dictionary.cfg?attach=1&knm=tfile.cfg";
+            downloadURL[0, 0, 1] = "https://k.kakaocdn.net/dn/lAC54/btqxwD1qwcQ/dUVIYn3hmKk7MasrsnwkXK/dictionary.cfg?attach=1&knm=tfile.cfg";
+            downloadURL[0, 0, 2] = "https://k.kakaocdn.net/dn/bt6okj/btqxygRJi7l/zDtOTl5k4pN98ee6dBkask/dictionary.cfg?attach=1&knm=tfile.cfg";
+
+            //영문파일 다운로드 링크를 초기화한다.
+            downloadURL[1, 3, 0] = "https://k.kakaocdn.net/dn/bmcs3Q/btqFjFaO7oG/BjcoqMQLLeyJQobI684K90/dictionary.cfg?attach=1&knm=tfile.cfg";
+            downloadURL[1, 3, 1] = "";
+            downloadURL[1, 3, 2] = "https://k.kakaocdn.net/dn/cokZ2R/btqFhLJ23GP/6o8J8knOnNDm7NKLTXX4BK/dictionary.cfg?attach=1&knm=tfile.cfg";
+
+            downloadURL[1, 2, 0] = "https://k.kakaocdn.net/dn/nhVnG/btqBYfhwdlk/X4MEwg6cMnJRzVQQH0AkVk/dictionary.cfg?attach=1&knm=tfile.cfg";
+            downloadURL[1, 2, 1] = "https://k.kakaocdn.net/dn/De20I/btqB1ZXSv98/NM7UZzw5wUE7TLjKkDOkdK/dictionary.cfg?attach=1&knm=tfile.cfg";
+            downloadURL[1, 2, 2] = "https://k.kakaocdn.net/dn/ckozS0/btqB1HiQVqa/pKtx35iQGV7Y9BH3Axs1Rk/dictionary.cfg?attach=1&knm=tfile.cfg";
+
+            downloadURL[1, 1, 0] = "https://k.kakaocdn.net/dn/M10EJ/btqzhg4eWJj/vMG2BmZNWycLU1ShONXTuk/dictionary.cfg?attach=1&knm=tfile.cfg";
+            downloadURL[1, 1, 1] = "https://k.kakaocdn.net/dn/bk6JaF/btqzhJrmQEb/Ws5pgaUk2EgVtXP1fUuwd1/dictionary.cfg?attach=1&knm=tfile.cfg";
+            downloadURL[1, 1, 2] = "https://k.kakaocdn.net/dn/bPIQUL/btqzibVut1Z/hD9JKO7q0EPJ7Aw6GVlVok/dictionary.cfg?attach=1&knm=tfile.cfg";
+
+            downloadURL[1, 0, 0] = "https://k.kakaocdn.net/dn/bTFvoQ/btqxx1ArNTU/fsDXKYgKUkDTVHgDkAEcV0/dictionary.cfg?attach=1&knm=tfile.cfg";
+            downloadURL[1, 0, 1] = "https://k.kakaocdn.net/dn/xhA70/btqxx1mYepI/UnrCt2nEqwOaOqOkJO8iT0/dictionary.cfg?attach=1&knm=tfile.cfg";
+            downloadURL[1, 0, 2] = "https://k.kakaocdn.net/dn/P7Y7N/btqxB7zgw34/ZYyd7M5u3DPjx4voKVtIF1/dictionary.cfg?attach=1&knm=tfile.cfg";
         }
 
         //언어 파일을 적용하는 메소드 (모드 0번: 바닐라, 1번: Making DLC, 2번: Breaking DLC)
@@ -212,6 +246,9 @@ namespace KSP_Setup
 
                 for (int i = 0; i <= 2; i++)
                 {
+                    if (KspVersion == 3 && i == 1)
+                        continue;
+
                     //언어 파일을 다운로드한다.
                     DownloadLanguageFile(i);
 
