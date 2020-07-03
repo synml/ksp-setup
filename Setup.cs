@@ -247,7 +247,10 @@ namespace KSP_Setup
                 for (int i = 0; i <= 2; i++)
                 {
                     if (KspVersion == 3 && i == 1)
+                    {
+                        MainWindow.WriteLine("*** 1.10부터 Making History DLC의 언어파일이 바닐라 언어파일과 통합되었습니다.");
                         continue;
+                    }
 
                     //언어 파일을 다운로드한다.
                     DownloadLanguageFile(i);
