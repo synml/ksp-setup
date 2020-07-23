@@ -28,9 +28,9 @@ namespace KSP_Setup
             MainWindow = main;
 
             //한글파일 다운로드 링크를 초기화한다.
-            downloadURL[0, 3, 0] = "https://k.kakaocdn.net/dn/bJZelL/btqFgxTy9DH/PgvnyjXhuYtokz0duRTxKK/dictionary.cfg?attach=1&knm=tfile.cfg";
+            downloadURL[0, 3, 0] = "https://blog.kakaocdn.net/dn/bto6Dk/btqFyQJ6Rbt/g4CktLV4RERiptq2Rl9Eyk/dictionary.cfg?attach=1&knm=tfile.cfg";
             downloadURL[0, 3, 1] = "";
-            downloadURL[0, 3, 2] = "https://k.kakaocdn.net/dn/c8O8s4/btqFgHBEzWK/xZnSnqL7yMT2ZZIIME7gQk/dictionary.cfg?attach=1&knm=tfile.cfg";
+            downloadURL[0, 3, 2] = "https://blog.kakaocdn.net/dn/Y3kz6/btqFyqZrQhH/wBq38nkVkGKpeyEupKxtXk/dictionary.cfg?attach=1&knm=tfile.cfg";
 
             downloadURL[0, 2, 0] = "https://k.kakaocdn.net/dn/c5LcD5/btqB1GK0uae/YCX5EZI3RptwMMSYHgk3uk/dictionary.cfg?attach=1&knm=tfile.cfg";
             downloadURL[0, 2, 1] = "https://k.kakaocdn.net/dn/cIgAPG/btqBZMrTKu2/sOuIKbyUtzlGUDzxH8r6b0/dictionary.cfg?attach=1&knm=tfile.cfg";
@@ -45,9 +45,9 @@ namespace KSP_Setup
             downloadURL[0, 0, 2] = "https://k.kakaocdn.net/dn/bt6okj/btqxygRJi7l/zDtOTl5k4pN98ee6dBkask/dictionary.cfg?attach=1&knm=tfile.cfg";
 
             //영문파일 다운로드 링크를 초기화한다.
-            downloadURL[1, 3, 0] = "https://k.kakaocdn.net/dn/bmcs3Q/btqFjFaO7oG/BjcoqMQLLeyJQobI684K90/dictionary.cfg?attach=1&knm=tfile.cfg";
+            downloadURL[1, 3, 0] = "https://blog.kakaocdn.net/dn/cRQNcs/btqFv2rEScQ/M6pPAkBGaJKckkKVz2ZIB0/dictionary.cfg?attach=1&knm=tfile.cfg";
             downloadURL[1, 3, 1] = "";
-            downloadURL[1, 3, 2] = "https://k.kakaocdn.net/dn/cokZ2R/btqFhLJ23GP/6o8J8knOnNDm7NKLTXX4BK/dictionary.cfg?attach=1&knm=tfile.cfg";
+            downloadURL[1, 3, 2] = "https://blog.kakaocdn.net/dn/KYKc0/btqFzb8kvP8/Lz7MemWwmNUF5LyeBYCAoK/dictionary.cfg?attach=1&knm=tfile.cfg";
 
             downloadURL[1, 2, 0] = "https://k.kakaocdn.net/dn/nhVnG/btqBYfhwdlk/X4MEwg6cMnJRzVQQH0AkVk/dictionary.cfg?attach=1&knm=tfile.cfg";
             downloadURL[1, 2, 1] = "https://k.kakaocdn.net/dn/De20I/btqB1ZXSv98/NM7UZzw5wUE7TLjKkDOkdK/dictionary.cfg?attach=1&knm=tfile.cfg";
