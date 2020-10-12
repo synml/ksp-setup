@@ -17,13 +17,13 @@
         <CheckBox x:Name="chkbox_ckan" Content="CKAN 설치" HorizontalAlignment="Left" Height="27" Margin="95,74,0,0" VerticalAlignment="Top" Width="89" IsChecked="True" VerticalContentAlignment="Center" ToolTip="모드 관리자인 CKAN을 설치합니다." Checked="Chkbox_ckan_CheckedUnchecked" Unchecked="Chkbox_ckan_CheckedUnchecked"/>
         <TextBox x:Name="txtbox_log" Margin="10,106,9.6,41.8" TextWrapping="Wrap" Text="" IsReadOnly="True" VerticalScrollBarVisibility="Auto"/>
         <Button x:Name="btn_OpenKspDir" Content="KSP 폴더 열기" Margin="10,0,0,9.8" HorizontalAlignment="Left" Width="90" IsEnabled="False" Click="Btn_OpenKspDir_Click" Height="27" VerticalAlignment="Bottom" ToolTip="KSP가 설치된 폴더를 엽니다."/>
-        <ComboBox x:Name="ksp_version_selector" HorizontalAlignment="Left" Height="24" Margin="95,45,0,0" VerticalAlignment="Top" Width="89" ToolTip="현지화를 적용할 KSP의 버전을 선택하세요." DropDownClosed="Ksp_version_selector_DropDownClosed">
-            <ComboBoxItem x:Name="ksp_version_1100" Content="1.10.0" IsSelected="True" />
+        <ComboBox x:Name="ksp_version_selector" HorizontalAlignment="Left" Height="24" Margin="95,45,0,0" VerticalAlignment="Top" Width="105" ToolTip="현지화를 적용할 KSP의 버전을 선택하세요." DropDownClosed="Ksp_version_selector_DropDownClosed">
+            <ComboBoxItem x:Name="ksp_version_1100" Content="1.10.0 (1.10.1)" IsSelected="True" />
             <ComboBoxItem x:Name="ksp_version_190" Content="1.9.0 (1.9.1)" />
             <ComboBoxItem x:Name="ksp_version_180" Content="1.8.0 (1.8.1)"/>
             <ComboBoxItem x:Name="ksp_version_173" Content="1.7.3"/>
         </ComboBox>
-        <ComboBox x:Name="ksp_language_selector" HorizontalAlignment="Left" Height="24" Margin="200,45,0,0" VerticalAlignment="Top" Width="70" ToolTip="KSP를 어떤 언어로 플레이할지 선택하세요." DropDownClosed="Ksp_language_selector_DropDownClosed">
+        <ComboBox x:Name="ksp_language_selector" HorizontalAlignment="Left" Height="24" Margin="215,45,0,0" VerticalAlignment="Top" Width="70" ToolTip="KSP를 어떤 언어로 플레이할지 선택하세요." DropDownClosed="Ksp_language_selector_DropDownClosed">
             <ComboBoxItem x:Name="localization_korean" Content="한국어" IsSelected="True"/>
             <ComboBoxItem x:Name="localization_english" Content="영어"/>
         </ComboBox>

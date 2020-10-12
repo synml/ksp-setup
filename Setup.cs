@@ -17,7 +17,7 @@ namespace KSP_Setup
 
         /* 언어 파일의 다운로드 URL을 저장하는 3차원 배열을 선언한다. (면: 언어, 행: 버전, 열: 항목)
            0면: 한국어, 1면: 영어
-           0행: 1.7.3, 1행: 1.8.0(1.8.1), 2행: 1.9.0
+           0행: 1.7.3, 1행: 1.8.0(1.8.1), 2행: 1.9.0, 3행 1.10.0
            0열: 바닐라, 1열: Making History DLC, 2열: Breaking Ground DLC */
         internal readonly string[,,] downloadURL = new string[2, 4, 3];
 
@@ -28,9 +28,9 @@ namespace KSP_Setup
             MainWindow = main;
 
             //한글파일 다운로드 링크를 초기화한다.
-            downloadURL[0, 3, 0] = "https://blog.kakaocdn.net/dn/bto6Dk/btqFyQJ6Rbt/g4CktLV4RERiptq2Rl9Eyk/dictionary.cfg?attach=1&knm=tfile.cfg";
+            downloadURL[0, 3, 0] = "https://blog.kakaocdn.net/dn/b0B4Vo/btqJrw2FQ8p/REpBpS02XHjhHwaIlhwaSK/dictionary.cfg?attach=1&knm=tfile.cfg";
             downloadURL[0, 3, 1] = "";
-            downloadURL[0, 3, 2] = "https://blog.kakaocdn.net/dn/Y3kz6/btqFyqZrQhH/wBq38nkVkGKpeyEupKxtXk/dictionary.cfg?attach=1&knm=tfile.cfg";
+            downloadURL[0, 3, 2] = "https://blog.kakaocdn.net/dn/mPXpH/btqJtSDXSH1/n2WuIrMltVm9uvZ5KcKWvk/dictionary.cfg?attach=1&knm=tfile.cfg";
 
             downloadURL[0, 2, 0] = "https://k.kakaocdn.net/dn/c5LcD5/btqB1GK0uae/YCX5EZI3RptwMMSYHgk3uk/dictionary.cfg?attach=1&knm=tfile.cfg";
             downloadURL[0, 2, 1] = "https://k.kakaocdn.net/dn/cIgAPG/btqBZMrTKu2/sOuIKbyUtzlGUDzxH8r6b0/dictionary.cfg?attach=1&knm=tfile.cfg";
