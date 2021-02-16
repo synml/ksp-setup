@@ -20,16 +20,16 @@
 
 ## Build Status
 
-[![GitHub release](https://img.shields.io/github/release/LulinPollux/KSP-Setup.svg?style=popout-square)](https://github.com/LulinPollux/KSP-Setup/releases/latest)  ![GitHub last commit](https://img.shields.io/github/last-commit/LulinPollux/KSP-Setup.svg?style=popout-square) ![GitHub All Releases](https://img.shields.io/github/downloads/LulinPollux/KSP-Setup/total.svg?style=popout-square) ![GitHub](https://img.shields.io/github/license/LulinPollux/KSP-Setup.svg?style=popout-square) 
+[![GitHub release](https://img.shields.io/github/release/clovadev/KSP-Setup.svg?style=popout-square)](https://github.com/clovadev/KSP-Setup/releases/latest)  ![GitHub last commit](https://img.shields.io/github/last-commit/clovadev/KSP-Setup.svg?style=popout-square) ![GitHub All Releases](https://img.shields.io/github/downloads/clovadev/KSP-Setup/total.svg?style=popout-square) ![GitHub](https://img.shields.io/github/license/clovadev/KSP-Setup.svg?style=popout-square) 
 
 ## 설치 방법
 
-1. 위의 Release 뱃지를 클릭하거나 [Release 링크](https://github.com/LulinPollux/KSP-Setup/releases/latest)를 클릭한다.
+1. 위의 Release 뱃지를 클릭하거나 [Release 링크](https://github.com/clovadev/KSP-Setup/releases/latest)를 클릭한다.
 2. 가장 최신 버전을 다운로드한다. (Latest Release)
 
 ## 사용 방법, 예제
 
-![Instruction](https://github.com/LulinPollux/KSP-Setup/blob/master/img/instruction.gif)
+![Instruction](https://github.com/clovadev/KSP-Setup/blob/master/img/instruction.gif)
 
 1. '폴더 탐색' 버튼을 클릭하고 KSP_x64.exe를 선택한다.
 2. 지역화할 KSP 버전과 언어를 선택한다.
