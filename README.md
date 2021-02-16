@@ -20,7 +20,7 @@
 
 ## Build Status
 
-[![GitHub release](https://img.shields.io/github/release/LulinPollux/KSP-Setup.svg?style=popout-square)](https://github.com/LulinPollux/KSP-Setup/releases/latest) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/abf7f34ff7564bb8879b6e9a8c6ffb7a)](https://www.codacy.com/manual/Lulin/KSP-Setup?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=LulinPollux/KSP-Setup&amp;utm_campaign=Badge_Grade) ![GitHub last commit](https://img.shields.io/github/last-commit/LulinPollux/KSP-Setup.svg?style=popout-square) ![GitHub All Releases](https://img.shields.io/github/downloads/LulinPollux/KSP-Setup/total.svg?style=popout-square) ![GitHub](https://img.shields.io/github/license/LulinPollux/KSP-Setup.svg?style=popout-square) 
+[![GitHub release](https://img.shields.io/github/release/LulinPollux/KSP-Setup.svg?style=popout-square)](https://github.com/LulinPollux/KSP-Setup/releases/latest)  ![GitHub last commit](https://img.shields.io/github/last-commit/LulinPollux/KSP-Setup.svg?style=popout-square) ![GitHub All Releases](https://img.shields.io/github/downloads/LulinPollux/KSP-Setup/total.svg?style=popout-square) ![GitHub](https://img.shields.io/github/license/LulinPollux/KSP-Setup.svg?style=popout-square) 
 
 ## 설치 방법
 
@@ -62,15 +62,9 @@
   3. Visual Studio 2019로 솔루션 파일(.sln)을 여세요.
   4. 코딩 시작~!
 
-## 개발자 정보와 크레딧
-
-- 개발자
-
-  - Lulin Pollux - [Github 프로필](https://github.com/LulinPollux), kistssy+dev@gmail.com
-
 ## 기여 방법
 
-1. [이 프로젝트](https://github.com/LulinPollux/KSP-Setup)를 포크합니다.
+1. 이 리포지토리를 포크합니다.
 2. GitHub Desktop에서 새 브랜치를 만들거나 master 브랜치를 그대로 사용합니다.
 3. 수정사항을 commit하세요.
 4. 선택한 브랜치에 push하세요.
@@ -78,6 +72,6 @@
 
 ## 라이센스
 
-MIT License © Lulin Pollux
+MIT License
 
 `LICENSE`에서 자세한 정보를 확인할 수 있습니다.
